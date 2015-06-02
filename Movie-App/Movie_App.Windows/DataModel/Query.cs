@@ -97,10 +97,13 @@ namespace Movie_App.DataModel
                     string replacement = "http://";
                     string rgx = "(http://resizing.flixster.com(.*((54x77)|(54x80)|(54x81)|(51x81)|(53x81))/))";
                     string image = Regex.Replace(imageTemp, rgx, replacement);
+                    string runtime = movie.runtime;
+                    string release = movie.year;
+                    string rating = movie.mpaa_rating;
 
                     // Create a Moviedata object by using movie information and add 
                     // that object to a collection.
-                    results.Add(new MovieData(title, summary, image));
+                    results.Add(new MovieData(title, summary, image, runtime, release, rating));
                  }
              
                 hasExecutedQuery = true;

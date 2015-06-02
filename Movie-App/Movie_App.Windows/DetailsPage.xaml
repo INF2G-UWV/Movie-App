@@ -159,19 +159,61 @@
 				AutomationProperties.ItemType="Navigation Button"/>
 			<TextBlock x:Name="pageTitle" Style="{StaticResource HeaderTextBlockStyle}" Grid.Column="1" 
 				IsHitTestVisible="false" TextWrapping="NoWrap" VerticalAlignment="Bottom" Margin="0,0,30,40" FontFamily="Letter Gothic Std" Text="{Binding Query.Results[0].Title}"/>
-			<Grid x:Name="contentRegion" Grid.ColumnSpan="2" Margin="0,140,0,-940">
-				<Grid.ColumnDefinitions>
-					<ColumnDefinition Width="27*"/>
-					<ColumnDefinition Width="450"/>
-					<ColumnDefinition Width="481*"/>
-				</Grid.ColumnDefinitions>
-				<Grid.RowDefinitions>
-					<RowDefinition Height="100"/>
-					<RowDefinition Height="562*"/>
-					<RowDefinition Height="100*"/>
-				</Grid.RowDefinitions>
-				<Image HorizontalAlignment="Left" Height="500" VerticalAlignment="Top" Width="430" Margin="10.143,10,0,0" Grid.Row="1" Source="{Binding Query.Results[0].Image}" Stretch="Fill" Grid.Column="1"/>
-			</Grid>
 		</Grid>
+		<Grid x:Name="LargeImage" HorizontalAlignment="Left" Height="940" VerticalAlignment="Top" Width="640" Grid.Row="1">
+			<Grid.ColumnDefinitions>
+				<ColumnDefinition Width="110"/>
+				<ColumnDefinition Width="420"/>
+				<ColumnDefinition Width="110"/>
+			</Grid.ColumnDefinitions>
+			<Grid.RowDefinitions>
+				<RowDefinition Height="100"/>
+				<RowDefinition Height="725"/>
+				<RowDefinition Height="50"/>
+			</Grid.RowDefinitions>
+			<Image HorizontalAlignment="Left" Height="705" VerticalAlignment="Top" Width="400" Grid.Column="1" Margin="10,10,0,0" Grid.Row="1" Stretch="Fill" Source="{Binding Query.Results[0].Image}"/>
+		</Grid>
+		<Grid x:Name="Details" HorizontalAlignment="Left" Height="940" VerticalAlignment="Top" Width="640" Margin="640,0,0,0" Grid.Row="1">
+			<Grid.ColumnDefinitions>
+				<ColumnDefinition Width="21*"/>
+				<ColumnDefinition Width="43*"/>
+			</Grid.ColumnDefinitions>
+			<Grid.RowDefinitions>
+				<RowDefinition Height="140"/>
+				<RowDefinition Height="65"/>
+				<RowDefinition Height="65"/>
+				<RowDefinition Height="65"/>
+				<RowDefinition Height="65"/>
+				<RowDefinition Height="425"/>
+			</Grid.RowDefinitions>
+			<TextBlock x:Name="Header" HorizontalAlignment="Left" TextWrapping="Wrap" Text="Details:" VerticalAlignment="Top" FontFamily="Century Gothic" FontSize="48" Margin="10,10,0,0" Height="59" Width="190"/>
+			<TextBlock x:Name="Title" HorizontalAlignment="Left" TextWrapping="Wrap" VerticalAlignment="Top" FontFamily="Century Gothic" FontSize="26.667" FontWeight="Bold" Margin="10,10,0,0" Height="35" Grid.Row="1" Width="190">
+				<Run Text="Title:"/>
+				<LineBreak/>
+				<Run/>
+			</TextBlock>
+			<TextBlock x:Name="Genres" HorizontalAlignment="Left" TextWrapping="Wrap" VerticalAlignment="Top" FontFamily="Century Gothic" FontSize="26.667" FontWeight="Bold" Margin="10,10,0,0" Height="35" Grid.Row="2" Width="190" Text="Rating:"/>
+			<TextBlock x:Name="Runtime" HorizontalAlignment="Left" TextWrapping="Wrap" VerticalAlignment="Top" FontFamily="Century Gothic" FontSize="26.667" FontWeight="Bold" Margin="10,10,0,0" Height="35" Grid.Row="3" Width="190">
+				<Run Text="Runtime:"/>
+				<LineBreak/>
+				<Run/>
+				<LineBreak/>
+				<Run/>
+			</TextBlock>
+			<TextBlock x:Name="Release" HorizontalAlignment="Left" TextWrapping="Wrap" VerticalAlignment="Top" FontFamily="Century Gothic" FontSize="26.667" FontWeight="Bold" Margin="10,10,0,0" Height="35" Text="Release Date:" Grid.Row="4" Width="190"/>
+			<TextBlock x:Name="Summary" HorizontalAlignment="Left" TextWrapping="Wrap" VerticalAlignment="Top" FontFamily="Century Gothic" FontSize="26.667" FontWeight="Bold" Margin="10,10,0,0" Height="35" Grid.Row="5" Width="190">
+				<Run Text="Summary"/>
+				<Run Text=":"/>
+			</TextBlock>
+			<TextBlock HorizontalAlignment="Left" TextWrapping="Wrap" Text="{Binding Query.Results[0].Title}" VerticalAlignment="Top" Grid.Column="1" Margin="10,10,0,0" Grid.Row="1" FontFamily="Century Gothic" FontSize="26.667" FontWeight="Bold" Width="410"/>
+			<TextBlock HorizontalAlignment="Left" TextWrapping="Wrap" Text="{Binding Query.Results[0].Rating}" VerticalAlignment="Top" Grid.Column="1" Margin="10,10,0,0" Grid.Row="2" FontFamily="Century Gothic" FontSize="26.667" FontWeight="Bold" Width="410"/>
+			<TextBlock HorizontalAlignment="Left" TextWrapping="Wrap" Text="{Binding Query.Results[0].Runtime}" VerticalAlignment="Top" Grid.Column="1" Margin="10,10,0,0" Grid.Row="3" FontFamily="Century Gothic" FontSize="26.667" FontWeight="Bold" Width="410"/>
+			<TextBlock HorizontalAlignment="Left" TextWrapping="Wrap" Text="{Binding Query.Results[0].Release}" VerticalAlignment="Top" Grid.Column="1" Margin="10,10,0,0" Grid.Row="4" FontFamily="Century Gothic" FontSize="26.667" FontWeight="Bold" Width="410"/>
+			<TextBlock HorizontalAlignment="Left" TextWrapping="Wrap" Text="{Binding Query.Results[0].Summary}" VerticalAlignment="Top" Margin="10,50,0,0" Grid.Row="5" FontFamily="Century Gothic" FontSize="26.667" FontWeight="Bold" Width="620" Grid.ColumnSpan="2" Height="365"/>
+			
+		</Grid>
+		<Grid x:Name="Actors" HorizontalAlignment="Left" Height="940" VerticalAlignment="Top" Width="640" Margin="1280,0,0,0" Grid.Row="1"/>
+
+		<!-- Back button and page title -->
 	</Grid>
 </Page>

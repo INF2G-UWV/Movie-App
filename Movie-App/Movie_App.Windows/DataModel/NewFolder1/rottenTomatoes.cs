@@ -16,9 +16,7 @@ namespace Movie_App.DataModel.NewFolder1
 
         public class Ratings
         {
-            public string critics_rating { get; set; }
             public int critics_score { get; set; }
-            public string audience_rating { get; set; }
             public int audience_score { get; set; }
         }
 
@@ -34,12 +32,6 @@ namespace Movie_App.DataModel.NewFolder1
         {
             public string name { get; set; }
             public string id { get; set; }
-            public List<string> characters { get; set; }
-        }
-
-        public class AbridgedDirector
-        {
-            public string name { get; set; }
         }
 
         public class AlternateIds
@@ -56,30 +48,45 @@ namespace Movie_App.DataModel.NewFolder1
             public string similar { get; set; }
         }
 
-        public class RootObject
+        public class Movie
         {
-            public int id { get; set; }
+            public string id { get; set; }
             public string title { get; set; }
             public int year { get; set; }
-            public List<string> genres { get; set; }
             public string mpaa_rating { get; set; }
             public int runtime { get; set; }
-            public string critics_consensus { get; set; }
             public ReleaseDates release_dates { get; set; }
             public Ratings ratings { get; set; }
             public string synopsis { get; set; }
             public Posters posters { get; set; }
             public List<AbridgedCast> abridged_cast { get; set; }
-            public List<AbridgedDirector> abridged_directors { get; set; }
-            public string studio { get; set; }
             public AlternateIds alternate_ids { get; set; }
             public Links links { get; set; }
         }
 
-        public List<RootObject> movies { get; set; }
+        public class Links2
+        {
+            public string self { get; set; }
+            public string next { get; set; }
+        }
+
+        public class RootObject
+        {
+            public int total { get; set; }
+            public List<Movie> movies { get; set; }
+            public Links2 links { get; set; }
+            public string link_template { get; set; }
+
+            public string title { get; set; }
+            public string runtime { get; set; }
+            public string year { get; set; }
+            public string synopsis { get; set; }
+        }
+
+        public IEnumerable<RootObject> movies { get; set; }
         public string Title { get; set; }
         public string Runtime { get; set; }
-        public string Release { get; set; }
+        public string Year { get; set; }
         public string Synopsis { get; set; }
     }
 }

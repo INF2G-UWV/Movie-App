@@ -13,7 +13,7 @@ namespace Movie_App.DataModel.NewFolder1
     {
         private const string apiKey = "xjndv3dfyfn2bzxvwmuqj8gz";
         private const string baseURL = "http://api.rottentomatoes.com/api/public/v1.0";
-        private const string movieSearch = baseURL + "/lists/movies/box_office.json?apikey=" + apiKey;
+        private const string movieSearch = baseURL + "/movies.json?apikey=" + apiKey + "&q=San&page_limit=1";
         private const string API_CALL = movieSearch;
 
         public MoviesDataSource()
@@ -32,7 +32,7 @@ namespace Movie_App.DataModel.NewFolder1
                 rottenTomatoes temp = new rottenTomatoes();
                 temp.Title = m.title;
                 temp.Runtime = m.runtime.ToString();
-                temp.Release = m.year.ToString();
+                temp.Year = m.year.ToString();
                 temp.Synopsis = m.synopsis;
                 this.Add(temp);
             }

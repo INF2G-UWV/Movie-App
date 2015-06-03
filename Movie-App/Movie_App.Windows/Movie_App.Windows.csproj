@@ -108,6 +108,8 @@
     <Compile Include="Common\RelayCommand.cs" />
     <Compile Include="Common\SuspensionManager.cs" />
     <Compile Include="DataModel\MovieData.cs" />
+    <Compile Include="DataModel\NewFolder1\MoviesDataSource.cs" />
+    <Compile Include="DataModel\NewFolder1\rottenTomatoes.cs" />
     <Compile Include="DataModel\Query.cs" />
     <Compile Include="DataModel\ViewModel.cs" />
     <Compile Include="DetailsPage.xaml.cs">

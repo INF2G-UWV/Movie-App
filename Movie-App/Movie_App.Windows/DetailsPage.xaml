@@ -6,6 +6,7 @@
     xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
     xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
     xmlns:DataModel="using:Movie_App.DataModel"
+    xmlns:NewFolder1="using:Movie_App.DataModel.NewFolder1"
     x:Name="pageRoot"
     x:Class="Movie_App.DetailsPage"
     DataContext="{Binding DefaultViewModel, RelativeSource={RelativeSource Mode=Self}}"
@@ -140,7 +141,7 @@
 		<Grid.DataContext>
 			<DataModel:ViewModel/>
 		</Grid.DataContext>
-<!--
+		<!--
             TODO: Content should be placed within the following grid 
                   to show details for the current item
         -->
@@ -186,6 +187,9 @@
 				<RowDefinition Height="65"/>
 				<RowDefinition Height="425"/>
 			</Grid.RowDefinitions>
+			<Grid.DataContext>
+				<NewFolder1:MoviesDataSource/>
+			</Grid.DataContext>
 			<TextBlock x:Name="Header" HorizontalAlignment="Left" TextWrapping="Wrap" Text="Details:" VerticalAlignment="Top" FontFamily="Century Gothic" FontSize="48" Margin="10,10,0,0" Height="59" Width="190"/>
 			<TextBlock x:Name="Title" HorizontalAlignment="Left" TextWrapping="Wrap" VerticalAlignment="Top" FontFamily="Century Gothic" FontSize="26.667" FontWeight="Bold" Margin="10,10,0,0" Height="35" Grid.Row="1" Width="190">
 				<Run Text="Title:"/>
@@ -205,11 +209,31 @@
 				<Run Text="Summary"/>
 				<Run Text=":"/>
 			</TextBlock>
-			<TextBlock HorizontalAlignment="Left" TextWrapping="Wrap" Text="{Binding Query.Results[0].Title}" VerticalAlignment="Top" Grid.Column="1" Margin="10,10,0,0" Grid.Row="1" FontFamily="Century Gothic" FontSize="26.667" FontWeight="Bold" Width="410"/>
-			<TextBlock HorizontalAlignment="Left" TextWrapping="Wrap" Text="{Binding Query.Results[0].Rating}" VerticalAlignment="Top" Grid.Column="1" Margin="10,10,0,0" Grid.Row="2" FontFamily="Century Gothic" FontSize="26.667" FontWeight="Bold" Width="410"/>
-			<TextBlock HorizontalAlignment="Left" TextWrapping="Wrap" Text="{Binding Query.Results[0].Runtime}" VerticalAlignment="Top" Grid.Column="1" Margin="10,10,0,0" Grid.Row="3" FontFamily="Century Gothic" FontSize="26.667" FontWeight="Bold" Width="410"/>
-			<TextBlock HorizontalAlignment="Left" TextWrapping="Wrap" Text="{Binding Query.Results[0].Release}" VerticalAlignment="Top" Grid.Column="1" Margin="10,10,0,0" Grid.Row="4" FontFamily="Century Gothic" FontSize="26.667" FontWeight="Bold" Width="410"/>
-			<TextBlock HorizontalAlignment="Left" TextWrapping="Wrap" Text="{Binding Query.Results[0].Summary}" VerticalAlignment="Top" Margin="10,50,0,0" Grid.Row="5" FontFamily="Century Gothic" FontSize="26.667" FontWeight="Bold" Width="620" Grid.ColumnSpan="2" Height="365"/>
+			<TextBlock HorizontalAlignment="Left" TextWrapping="Wrap" Text="{Binding [0].Synopsis}" VerticalAlignment="Top" FontFamily="Century Gothic" FontSize="26.667" FontWeight="Bold" Grid.Column="1" Margin="10,10,0,0" Grid.Row="1" Width="410" Height="45">
+				<TextBlock.DataContext>
+					<NewFolder1:MoviesDataSource/>
+				</TextBlock.DataContext>
+			</TextBlock>
+			<TextBlock HorizontalAlignment="Left" TextWrapping="Wrap" Text="{Binding [0].Synopsis}" VerticalAlignment="Top" FontFamily="Century Gothic" FontSize="26.667" FontWeight="Bold" Grid.Column="1" Margin="10,10,0,0" Grid.Row="2" Width="410" Height="45">
+				<TextBlock.DataContext>
+					<NewFolder1:MoviesDataSource/>
+				</TextBlock.DataContext>
+			</TextBlock>
+			<TextBlock HorizontalAlignment="Left" TextWrapping="Wrap" Text="{Binding [0].Synopsis}" VerticalAlignment="Top" FontFamily="Century Gothic" FontSize="26.667" FontWeight="Bold" Grid.Column="1" Margin="10,10,0,0" Grid.Row="3" Width="410" Height="45">
+				<TextBlock.DataContext>
+					<NewFolder1:MoviesDataSource/>
+				</TextBlock.DataContext>
+			</TextBlock>
+			<TextBlock HorizontalAlignment="Left" TextWrapping="Wrap" Text="{Binding [0].Synopsis}" VerticalAlignment="Top" FontFamily="Century Gothic" FontSize="26.667" FontWeight="Bold" Grid.Column="1" Margin="10,10,0,0" Grid.Row="4" Width="410" Height="45">
+				<TextBlock.DataContext>
+					<NewFolder1:MoviesDataSource/>
+				</TextBlock.DataContext>
+			</TextBlock>
+			<TextBlock HorizontalAlignment="Left" TextWrapping="Wrap" Text="{Binding [0].Synopsis}" VerticalAlignment="Top" FontFamily="Century Gothic" FontSize="26.667" FontWeight="Bold" Margin="10,50,0,0" Grid.Row="5" Width="620" Height="365" Grid.ColumnSpan="2">
+				<TextBlock.DataContext>
+					<NewFolder1:MoviesDataSource/>
+				</TextBlock.DataContext>
+			</TextBlock>
 			
 		</Grid>
 		<Grid x:Name="Actors" HorizontalAlignment="Left" Height="940" VerticalAlignment="Top" Width="640" Margin="1280,0,0,0" Grid.Row="1"/>

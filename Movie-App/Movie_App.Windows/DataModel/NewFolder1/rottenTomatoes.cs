@@ -6,12 +6,8 @@ using System.Threading.Tasks;
 
 namespace Movie_App.DataModel.NewFolder1
 {
-    class rottenTomatoes
+    public class rottenTomatoes
     {
-        public List<RTMovie> movies { get; set; }
-        public Links2 links { get; set; }
-        public string link_template { get; set; }
-
         public class ReleaseDates
         {
             public string theater { get; set; }
@@ -41,6 +37,11 @@ namespace Movie_App.DataModel.NewFolder1
             public List<string> characters { get; set; }
         }
 
+        public class AbridgedDirector
+        {
+            public string name { get; set; }
+        }
+
         public class AlternateIds
         {
             public string imdb { get; set; }
@@ -51,16 +52,16 @@ namespace Movie_App.DataModel.NewFolder1
             public string self { get; set; }
             public string alternate { get; set; }
             public string cast { get; set; }
-            public string clips { get; set; }
             public string reviews { get; set; }
             public string similar { get; set; }
         }
 
-        public class RTMovie
+        public class RootObject
         {
-            public string id { get; set; }
+            public int id { get; set; }
             public string title { get; set; }
             public int year { get; set; }
+            public List<string> genres { get; set; }
             public string mpaa_rating { get; set; }
             public int runtime { get; set; }
             public string critics_consensus { get; set; }
@@ -69,22 +70,16 @@ namespace Movie_App.DataModel.NewFolder1
             public string synopsis { get; set; }
             public Posters posters { get; set; }
             public List<AbridgedCast> abridged_cast { get; set; }
+            public List<AbridgedDirector> abridged_directors { get; set; }
+            public string studio { get; set; }
             public AlternateIds alternate_ids { get; set; }
             public Links links { get; set; }
         }
 
-        public class Links2
-        {
-            public string self { get; set; }
-            public string alternate { get; set; }
-        }
-
+        public List<RootObject> movies { get; set; }
         public string Title { get; set; }
-
-        public string Rating { get; set; }
-
-        public string Year { get; set; }
-
+        public string Runtime { get; set; }
+        public string Release { get; set; }
         public string Synopsis { get; set; }
     }
 }

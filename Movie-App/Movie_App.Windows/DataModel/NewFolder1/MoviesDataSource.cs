@@ -11,7 +11,10 @@ namespace Movie_App.DataModel.NewFolder1
 {
     class MoviesDataSource : ObservableCollection<rottenTomatoes>
     {
-        private const string API_CALL = "http://api.rottentomatoes.com/api/public/v1.0/movies.json?apikey=xjndv3dfyfn2bzxvwmuqj8gz&q=san%20andreas&page_limit=1";
+        private const string apiKey = "xjndv3dfyfn2bzxvwmuqj8gz";
+        private const string baseURL = "http://api.rottentomatoes.com/api/public/v1.0";
+        private const string movieSearch = baseURL + "/lists/movies/box_office.json?apikey=" + apiKey;
+        private const string API_CALL = movieSearch;
 
         public MoviesDataSource()
         {
@@ -24,12 +27,12 @@ namespace Movie_App.DataModel.NewFolder1
             string response = await wc.GetStringAsync(API_CALL);
 
             rottenTomatoes rt = (rottenTomatoes)JsonConvert.DeserializeObject<rottenTomatoes>(response);
-            foreach (rottenTomatoes.RTMovie m in rt.movies)
+            foreach (rottenTomatoes.RootObject m in rt.movies)
             {
                 rottenTomatoes temp = new rottenTomatoes();
                 temp.Title = m.title;
-                temp.Rating = m.mpaa_rating;
-                temp.Year = m.year.ToString();
+                temp.Runtime = m.runtime.ToString();
+                temp.Release = m.year.ToString();
                 temp.Synopsis = m.synopsis;
                 this.Add(temp);
             }

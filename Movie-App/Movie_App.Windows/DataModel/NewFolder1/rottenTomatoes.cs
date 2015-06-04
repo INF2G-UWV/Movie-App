@@ -83,10 +83,15 @@ namespace Movie_App.DataModel.NewFolder1
             public string synopsis { get; set; }
         }
 
-        public IEnumerable<RootObject> movies { get; set; }
+
+
+        public IEnumerable<Movie> movies { get; set; }
+        public string PosterOriginal { get; set; }
         public string Title { get; set; }
         public string Runtime { get; set; }
         public string Year { get; set; }
         public string Synopsis { get; set; }
+        public string RatingsAudience { get; set; }
+        public string ReleaseDatesTheater { get; set; }
     }
 }

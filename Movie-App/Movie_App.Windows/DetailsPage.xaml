@@ -191,7 +191,11 @@
 				<RowDefinition Height="725"/>
 				<RowDefinition Height="50"/>
 			</Grid.RowDefinitions>
-			<Image HorizontalAlignment="Left" Height="705" VerticalAlignment="Top" Width="400" Grid.Column="1" Margin="10,10,0,0" Grid.Row="1" Stretch="Fill" Source="{Binding Query.Results[0].Image}"/>
+			<Image HorizontalAlignment="Left" Height="705" VerticalAlignment="Top" Width="400" Grid.Column="1" Margin="10,10,0,0" Grid.Row="1" Stretch="Fill" Source="{Binding [0].PosterOriginal}">
+				<Image.DataContext>
+					<NewFolder1:MoviesDataSource/>
+				</Image.DataContext>
+			</Image>
 		</Grid>
 		<Grid x:Name="Details" HorizontalAlignment="Left" Height="940" VerticalAlignment="Top" Width="640" Margin="640,0,0,0" Grid.Row="1">
 			<Grid.ColumnDefinitions>
@@ -229,9 +233,9 @@
 				<Run Text=":"/>
 			</TextBlock>
 			<TextBlock HorizontalAlignment="Left" TextWrapping="Wrap" Text="{Binding [0].Title}" VerticalAlignment="Top" FontFamily="Century Gothic" FontSize="26.667" Grid.Column="1" Margin="10,10,0,0" Grid.Row="1" Width="410" Height="45"/>
-			<TextBlock HorizontalAlignment="Left" TextWrapping="Wrap" Text="{Binding [0].movies}" VerticalAlignment="Top" FontFamily="Century Gothic" FontSize="26.667" FontWeight="Bold" Grid.Column="1" Margin="10,10,0,0" Grid.Row="2" Width="410" Height="45"/>
+			<TextBlock HorizontalAlignment="Left" TextWrapping="Wrap" Text="{Binding [0].RatingsAudience}" VerticalAlignment="Top" FontFamily="Century Gothic" FontSize="26.667" FontWeight="Bold" Grid.Column="1" Margin="10,10,0,0" Grid.Row="2" Width="410" Height="45"/>
 			<TextBlock HorizontalAlignment="Left" TextWrapping="Wrap" Text="{Binding [0].Runtime}" VerticalAlignment="Top" FontFamily="Century Gothic" FontSize="26.667" Grid.Column="1" Margin="10,10,0,0" Grid.Row="3" Width="410" Height="45"/>
-			<TextBlock HorizontalAlignment="Left" TextWrapping="Wrap" Text="{Binding [0].Year}" VerticalAlignment="Top" FontFamily="Century Gothic" FontSize="26.667" Grid.Column="1" Margin="10,10,0,0" Grid.Row="4" Width="410" Height="45"/>
+			<TextBlock HorizontalAlignment="Left" TextWrapping="Wrap" Text="{Binding [0].ReleaseDatesTheater}" VerticalAlignment="Top" FontFamily="Century Gothic" FontSize="26.667" Grid.Column="1" Margin="10,10,0,0" Grid.Row="4" Width="410" Height="45"/>
 			<TextBlock HorizontalAlignment="Left" TextWrapping="Wrap" Text="{Binding [0].Synopsis}" VerticalAlignment="Top" FontFamily="Century Gothic" FontSize="26.667" Margin="10,50,0,0" Grid.Row="5" Width="620" Height="365" Grid.ColumnSpan="2" TextAlignment="Justify"/>
 			
 			

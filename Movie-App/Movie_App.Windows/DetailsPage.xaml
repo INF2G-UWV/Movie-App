@@ -237,6 +237,31 @@
 				</StackPanel>
 			</Grid>
 		</DataTemplate>
+		<DataTemplate x:Key="rottenTomatoesTemplate8">
+			<Grid Height="110" Width="480" Margin="10" >
+				<Grid.ColumnDefinitions>
+					<ColumnDefinition Width="Auto"/>
+					<ColumnDefinition Width="*"/>
+				</Grid.ColumnDefinitions>
+				<Border Background="{StaticResource ListViewItemPlaceholderBackgroundThemeBrush}" Width="110" Height="110">
+					<Image Height="110" Width="110"/>
+				</Border>
+				<StackPanel Grid.Column="1" Margin="10,0,-126,-531">
+					<TextBlock Style="{StaticResource TitleTextBlockStyle}" Height="636" FontFamily="Century Gothic" FontSize="26.667" Margin="0,0,-126,0">
+						<Run Text="Dwayne &quot;The Rock&quot; Johnson"/>
+						<LineBreak/>
+						<Run Text="&#xA;Carla Gugino"/>
+						<LineBreak/>
+						<Run Text="&#xA;Alexandra Daddario"/>
+						<LineBreak/>
+						<Run Text="&#xA;Paul Giamatti"/>
+						<LineBreak/>
+						<Run Text="&#xA;Ioan Gruffudd&#xA;"/>
+					</TextBlock>
+					<TextBlock Text="Subtitle" Style="{StaticResource CaptionTextBlockStyle}" TextWrapping="NoWrap"/>
+				</StackPanel>
+			</Grid>
+		</DataTemplate>
 	</Page.Resources>
 
     <!--
@@ -290,16 +315,16 @@
 				<NewFolder1:MoviesDataSource/>
 			</Grid.DataContext>
 			<Grid.ColumnDefinitions>
-				<ColumnDefinition Width="110"/>
-				<ColumnDefinition Width="420"/>
-				<ColumnDefinition Width="110"/>
+				<ColumnDefinition Width="70"/>
+				<ColumnDefinition Width="480"/>
+				<ColumnDefinition Width="70"/>
 			</Grid.ColumnDefinitions>
 			<Grid.RowDefinitions>
 				<RowDefinition Height="100"/>
 				<RowDefinition Height="725"/>
 				<RowDefinition Height="50"/>
 			</Grid.RowDefinitions>
-			<Image HorizontalAlignment="Left" Height="705" VerticalAlignment="Top" Width="400" Grid.Column="1" Margin="10,10,0,0" Grid.Row="1" Stretch="Fill" Source="{Binding [0].PosterOriginal}">
+			<Image HorizontalAlignment="Left" Height="705" VerticalAlignment="Top" Width="460" Grid.Column="1" Margin="10,10,0,0" Grid.Row="1" Stretch="Fill" Source="{Binding [0].PosterOriginal}">
 				<Image.DataContext>
 					<NewFolder1:MoviesDataSource/>
 				</Image.DataContext>
@@ -327,7 +352,7 @@
 				<LineBreak/>
 				<Run/>
 			</TextBlock>
-			<TextBlock x:Name="Genres" HorizontalAlignment="Left" TextWrapping="Wrap" VerticalAlignment="Top" FontFamily="Century Gothic" FontSize="26.667" FontWeight="Bold" Margin="10,10,0,0" Height="35" Grid.Row="2" Width="190" Text="Rating:"/>
+			<TextBlock x:Name="Genres" HorizontalAlignment="Left" TextWrapping="Wrap" VerticalAlignment="Top" FontFamily="Century Gothic" FontSize="26.667" FontWeight="Bold" Margin="10,10,0,0" Height="35" Grid.Row="2" Width="190" Text="Score Rating:"/>
 			<TextBlock x:Name="Runtime" HorizontalAlignment="Left" TextWrapping="Wrap" VerticalAlignment="Top" FontFamily="Century Gothic" FontSize="26.667" FontWeight="Bold" Margin="10,10,0,0" Height="35" Grid.Row="3" Width="190">
 				<Run Text="Runtime:"/>
 				<LineBreak/>
@@ -344,17 +369,21 @@
 			<TextBlock HorizontalAlignment="Left" TextWrapping="Wrap" Text="{Binding [0].RatingsAudience}" VerticalAlignment="Top" FontFamily="Century Gothic" FontSize="26.667" Grid.Column="1" Margin="10,10,0,0" Grid.Row="2" Width="410" Height="45"/>
 			<TextBlock HorizontalAlignment="Left" TextWrapping="Wrap" Text="{Binding [0].Runtime}" VerticalAlignment="Top" FontFamily="Century Gothic" FontSize="26.667" Grid.Column="1" Margin="10,10,0,0" Grid.Row="3" Width="410" Height="45"/>
 			<TextBlock HorizontalAlignment="Left" TextWrapping="Wrap" Text="{Binding [0].ReleaseDatesTheater}" VerticalAlignment="Top" FontFamily="Century Gothic" FontSize="26.667" Grid.Column="1" Margin="10,10,0,0" Grid.Row="4" Width="410" Height="45"/>
-			<TextBlock HorizontalAlignment="Left" TextWrapping="Wrap" Text="{Binding [0].Synopsis}" VerticalAlignment="Top" FontFamily="Century Gothic" FontSize="26.667" Margin="10,50,0,0" Grid.Row="5" Width="575" Height="365" Grid.ColumnSpan="2" TextAlignment="Justify"/>
+			<TextBlock HorizontalAlignment="Left" TextWrapping="Wrap" Text="{Binding [0].Synopsis}" VerticalAlignment="Top" FontFamily="Century Gothic" FontSize="26.667" Margin="10,50,0,0" Grid.Row="5" Width="620" Height="365" Grid.ColumnSpan="2" TextAlignment="Justify"/>
 			
 			
 		</Grid>
-		<Grid x:Name="Actors" HorizontalAlignment="Left" Height="940" VerticalAlignment="Top" Width="640" Margin="1280,0,0,0" Grid.Row="1">
+		<Grid x:Name="Actors" HorizontalAlignment="Left" Height="940" VerticalAlignment="Top" Width="640" Margin="1362,0,-82,0" Grid.Row="1">
+			<Grid.RowDefinitions>
+				<RowDefinition Height="175"/>
+				<RowDefinition/>
+			</Grid.RowDefinitions>
 			<Grid.DataContext>
 				<NewFolder1:MoviesDataSource/>
 			</Grid.DataContext>
-			<GridView HorizontalAlignment="Left" VerticalAlignment="Top" Width="620" Margin="10,185,0,0" Height="665" ItemTemplate="{StaticResource rottenTomatoesTemplate7}" ItemsSource="{Binding}" IsSwipeEnabled="False" SelectionMode="Single"/>
 
 			<TextBlock x:Name="Header1" HorizontalAlignment="Left" TextWrapping="Wrap" Text="Actors:" VerticalAlignment="Top" FontFamily="Century Gothic" FontSize="48" Margin="10,101,0,0" Height="59" Width="190"/>
+			<TextBlock HorizontalAlignment="Left" TextWrapping="Wrap" Text="{Binding [0].NameActor}" VerticalAlignment="Top" Height="660" Width="620" Margin="10,10,0,0" FontFamily="Century Gothic" FontSize="26.667" Grid.Row="1"/>
 		</Grid>
 
 		<!-- Back button and page title -->

@@ -36,6 +36,7 @@ namespace Movie_App.DataModel.NewFolder1
                 temp.ReleaseDatesTheater = m.release_dates.theater;
                 temp.Synopsis = m.synopsis;
                 temp.RatingsAudience = m.ratings.audience_score.ToString();
+                //temp.NameActor = m.abridged_cast.name; (kan geen 'name' vinden)
                 
                 // using a temponary variable to store the image source of hte api, so it could be manipulated with regex
                 string imageTemp = m.posters.original;
@@ -46,8 +47,5 @@ namespace Movie_App.DataModel.NewFolder1
                 this.Add(temp);
             }
         }
-
-        
-
     }
 }

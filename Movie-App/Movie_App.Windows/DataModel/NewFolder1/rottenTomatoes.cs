@@ -1,6 +1,7 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Linq;
+using System.Runtime.Serialization;
 using System.Text;
 using System.Threading.Tasks;
 
@@ -83,8 +84,6 @@ namespace Movie_App.DataModel.NewFolder1
             public string synopsis { get; set; }
         }
 
-
-
         public IEnumerable<Movie> movies { get; set; }
         public string PosterOriginal { get; set; }
         public string Title { get; set; }
@@ -93,5 +92,6 @@ namespace Movie_App.DataModel.NewFolder1
         public string Synopsis { get; set; }
         public string RatingsAudience { get; set; }
         public string ReleaseDatesTheater { get; set; }
+        //public string NameActor { get; set; }
     }
 }

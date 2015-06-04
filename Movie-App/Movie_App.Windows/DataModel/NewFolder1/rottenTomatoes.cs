@@ -85,6 +85,7 @@ namespace Movie_App.DataModel.NewFolder1
         }
 
         public IEnumerable<Movie> movies { get; set; }
+        public IEnumerable<AbridgedCast> abridgedCast { get; set; }
         public string PosterOriginal { get; set; }
         public string Title { get; set; }
         public string Runtime { get; set; }
@@ -92,6 +93,6 @@ namespace Movie_App.DataModel.NewFolder1
         public string Synopsis { get; set; }
         public string RatingsAudience { get; set; }
         public string ReleaseDatesTheater { get; set; }
-        //public string NameActor { get; set; }
+        public string NameActor { get; set; }
     }
 }

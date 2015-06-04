@@ -37,7 +37,10 @@ namespace Movie_App.DataModel.NewFolder1
                 temp.Synopsis = m.synopsis;
                 temp.RatingsAudience = m.ratings.audience_score.ToString();
                 //temp.NameActor = m.abridged_cast.name; (kan geen 'name' vinden)
-                
+                for (int i = 0; i < m.abridged_cast.Count; i++)
+                {
+                    temp.NameActor += m.abridged_cast[i].name + " ";
+                }
                 // using a temponary variable to store the image source of hte api, so it could be manipulated with regex
                 string imageTemp = m.posters.original;
                 string replacement = "http://";

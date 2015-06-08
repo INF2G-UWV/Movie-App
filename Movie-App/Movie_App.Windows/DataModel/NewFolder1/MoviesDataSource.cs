@@ -15,11 +15,12 @@ namespace Movie_App.DataModel.NewFolder1
 
         private const string apiKey = "xjndv3dfyfn2bzxvwmuqj8gz";
         private const string baseURL = "http://api.rottentomatoes.com/api/public/v1.0";
-        private const string movieSearch = baseURL + "/movies.json?apikey=" + apiKey + "&q=san&page_limit=1";
-        private const string API_CALL = movieSearch;
+        private string API_CALL;
+       // private const string API_CALL = movieSearch;
 
         public MoviesDataSource()
         {
+            API_CALL = baseURL + "/movies.json?apikey=" + apiKey + "&q="+NameStorage.MovieTitle+"&page_limit=1";
             loadData();
         }
 

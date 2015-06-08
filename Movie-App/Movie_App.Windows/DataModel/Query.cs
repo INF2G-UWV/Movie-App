@@ -95,7 +95,7 @@ namespace Movie_App.DataModel
                     string summary = movie.synopsis;
                     string imageTemp = movie.posters.profile;
                     string replacement = "http://";
-                    string rgx = "(http://resizing.flixster.com(.*((54x77)|(54x80)|(54x81)|(51x81)|(53x81))/))";
+                    string rgx = "(http://resizing.flixster.com(.*((54x77)|(54x80)|(54x81)|(52x81)|(51x81)|(53x81))/))";
                     string image = Regex.Replace(imageTemp, rgx, replacement);
                     string runtime = movie.runtime;
                     string release = movie.year;

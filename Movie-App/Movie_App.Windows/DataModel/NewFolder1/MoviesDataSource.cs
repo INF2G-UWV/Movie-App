@@ -46,7 +46,7 @@ namespace Movie_App.DataModel.NewFolder1
                 // using a temponary variable to store the image source of hte api, so it could be manipulated with regex
                 string imageTemp = m.posters.original;
                 string replacement = "http://";
-                string rgx = "(http://resizing.flixster.com(.*((54x77)|(54x80)|(54x81)|(51x81)|(53x81))/))";
+                string rgx = "(http://resizing.flixster.com(.*((54x77)|(54x80)|(54x81)|(52x81)|(51x81)|(53x81))/))";
                 temp.PosterOriginal = Regex.Replace(imageTemp, rgx, replacement);
 
                 this.Add(temp);

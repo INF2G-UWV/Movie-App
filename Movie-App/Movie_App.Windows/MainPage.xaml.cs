@@ -27,6 +27,7 @@ namespace Movie_App
     /// </summary>
     public sealed partial class MainPage : Page
     {
+        
         public MainPage()
         {
             this.InitializeComponent();
@@ -36,6 +37,21 @@ namespace Movie_App
         {
             var buttonData = ((Button) e.OriginalSource).DataContext;
             NameStorage.MovieTitle = ((MovieData) buttonData).Title;
+        }
+
+        private void movieListview_SelectionChanged(object sender, Windows.UI.Xaml.Controls.SelectionChangedEventArgs e)
+        {
+            MoviesView.SelectedIndex = movieListview.SelectedIndex;
+        }
+
+        private void SearchBox_SizeChanged(object sender, Windows.UI.Xaml.SizeChangedEventArgs e)
+        {
+            Info.Text = SearchBox.QueryText;
+        }
+
+        private void MoviesView_SelectionChanged(object sender, Windows.UI.Xaml.Controls.SelectionChangedEventArgs e)
+        {
+            movieListview.SelectedIndex = MoviesView.SelectedIndex;
         }
     }
 }

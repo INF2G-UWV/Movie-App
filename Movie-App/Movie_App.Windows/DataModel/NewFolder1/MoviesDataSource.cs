@@ -12,9 +12,10 @@ namespace Movie_App.DataModel.NewFolder1
 {
     class MoviesDataSource : ObservableCollection<rottenTomatoes>
     {
+
         private const string apiKey = "xjndv3dfyfn2bzxvwmuqj8gz";
         private const string baseURL = "http://api.rottentomatoes.com/api/public/v1.0";
-        private const string movieSearch = baseURL + "/movies.json?apikey=" + apiKey + "&q=San&page_limit=1";
+        private const string movieSearch = baseURL + "/movies.json?apikey=" + apiKey + "&q=san&page_limit=1";
         private const string API_CALL = movieSearch;
 
         public MoviesDataSource()

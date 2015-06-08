@@ -26,6 +26,7 @@ namespace Movie_App
     {
         private NavigationHelper navigationHelper;
         private ObservableDictionary defaultViewModel = new ObservableDictionary();
+        private string movieTitle;
 
         /// <summary>
         /// This can be changed to a strongly typed view model.
@@ -49,6 +50,7 @@ namespace Movie_App
             this.InitializeComponent();
             this.navigationHelper = new NavigationHelper(this);
             this.navigationHelper.LoadState += navigationHelper_LoadState;
+            movieTitle = "";
         }
 
         /// <summary>
@@ -69,10 +71,16 @@ namespace Movie_App
             {
                 navigationParameter = e.PageState["SelectedItem"];
             }
+            movieTitle = e.NavigationParameter.ToString(); 
 
             // TODO: Assign a bindable group to this.DefaultViewModel["Group"]
             // TODO: Assign a collection of bindable items to this.DefaultViewModel["Items"]
             // TODO: Assign the selected item to this.flipView.SelectedItem
+        }
+
+        public string getMoveTitle()
+        {
+            return movieTitle;
         }
         
         #region NavigationHelper registration

@@ -107,10 +107,11 @@
     <Compile Include="Common\ObservableDictionary.cs" />
     <Compile Include="Common\RelayCommand.cs" />
     <Compile Include="Common\SuspensionManager.cs" />
+    <Compile Include="DataModel\HTMLScraper.cs" />
     <Compile Include="DataModel\MovieData.cs" />
     <Compile Include="DataModel\NameStorage.cs" />
-    <Compile Include="DataModel\NewFolder1\MoviesDataSource.cs" />
-    <Compile Include="DataModel\NewFolder1\rottenTomatoes.cs" />
+    <Compile Include="DataModel\RottenTomatoes\MoviesDataSource.cs" />
+    <Compile Include="DataModel\RottenTomatoes\RottenTomatoes.cs" />
     <Compile Include="DataModel\Query.cs" />
     <Compile Include="DataModel\ViewModel.cs" />
     <Compile Include="DetailsPage.xaml.cs">
@@ -162,6 +163,10 @@
     <SDKReference Include="BehaviorsXamlSDKManaged, Version=12.0" />
   </ItemGroup>
   <ItemGroup>
+    <Reference Include="HtmlAgilityPack, Version=1.4.8.0, Culture=neutral, processorArchitecture=MSIL">
+      <HintPath>..\..\packages\HtmlAgilityPack.1.4.9\lib\NetCore45\HtmlAgilityPack.dll</HintPath>
+      <Private>True</Private>
+    </Reference>
     <Reference Include="Newtonsoft.Json, Version=6.0.0.0, Culture=neutral, PublicKeyToken=30ad4fe6b2a6aeed, processorArchitecture=MSIL">
       <HintPath>..\..\packages\Newtonsoft.Json.6.0.8\lib\netcore45\Newtonsoft.Json.dll</HintPath>
       <Private>True</Private>

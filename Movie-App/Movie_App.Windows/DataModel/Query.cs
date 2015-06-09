@@ -1,34 +1,27 @@
 ﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
-using System.IO;
-using System.Runtime.InteropServices.WindowsRuntime;
-using Windows.Foundation;
-using Windows.Foundation.Collections;
 using System.Collections.ObjectModel;
-using System.Net;
-using System.Net.Http;
-using Newtonsoft.Json;
+using System.IO;
 using System.IO.Compression;
+using System.Linq;
+using System.Net.Http;
 using System.Text.RegularExpressions;
-using Windows.Media.Core;
+using Windows.UI.Popups;
+using Newtonsoft.Json;
 
 namespace Movie_App.DataModel
 {
     public class Query
     {
-        protected Uri Uri { get; private set; }
+        private bool hasExecutedQuery;
         // A collection class used to store a list of MovieData objects.
         public ObservableCollection<MovieData> results = new ObservableCollection<MovieData>();
-        private bool hasExecutedQuery;
 
         public Query(Uri uri)
         {
-            this.Uri = uri;
+            Uri = uri;
         }
 
+        protected Uri Uri { get; private set; }
         // Executes a query to obtain information about movies.
         // This property also stores the movies in a collection class.
         public ObservableCollection<MovieData> Results
@@ -37,10 +30,10 @@ namespace Movie_App.DataModel
             {
                 if (!hasExecutedQuery)
                 {
-                    this.ExecuteQuery();
+                    ExecuteQuery();
                 }
 
-                return this.results;
+                return results;
             }
         }
 
@@ -49,18 +42,18 @@ namespace Movie_App.DataModel
         private async void ExecuteQuery()
         {
             try
-            {          
-                HttpClient httpClient = new HttpClient();
+            {
+                var httpClient = new HttpClient();
 
-                var response = await httpClient.GetAsync(this.Uri);
+                var response = await httpClient.GetAsync(Uri);
 
-                string responseText = "";
+                var responseText = "";
 
-                IEnumerable<string> headerValues = Enumerable.Empty<string>();
+                var headerValues = Enumerable.Empty<string>();
 
                 if (response.Content.Headers.TryGetValues("Content-Encoding", out headerValues))
                 {
-                    foreach (string headerValue in response.Content.Headers.GetValues("Content-Encoding"))
+                    foreach (var headerValue in response.Content.Headers.GetValues("Content-Encoding"))
                     {
                         if (headerValue == "gzip")
                         {
@@ -71,7 +64,7 @@ namespace Movie_App.DataModel
                                 responseText = streamReader.ReadToEnd();
                             }
                         }
-                    }   
+                    }
                 }
                 if (responseText == "")
                 {
@@ -80,7 +73,7 @@ namespace Movie_App.DataModel
                     responseText = streamReader.ReadToEnd();
                 }
 
-            
+
                 // Convert the stream to JSON so that it is easier to iterate through
                 // each item in the stream.
                 dynamic myObj = JsonConvert.DeserializeObject(responseText);
@@ -89,14 +82,14 @@ namespace Movie_App.DataModel
 
                 // Iterate through the collection of JSON objects to obtain information
                 // each movie in the collection.
-                foreach (dynamic movie in movies)
+                foreach (var movie in movies)
                 {
                     string title = movie.title;
                     string summary = movie.synopsis;
                     string imageTemp = movie.posters.profile;
-                    string replacement = "http://";
-                    string rgx = "(http://resizing.flixster.com(.*((54x77)|(54x80)|(54x81)|(52x81)|(51x81)|(53x81))/))";
-                    string image = Regex.Replace(imageTemp, rgx, replacement);
+                    var replacement = "http://";
+                    var rgx = "(http://resizing.flixster.com(.*((54x77)|(54x80)|(54x81)|(52x81)|(51x81)|(53x81))/))";
+                    var image = Regex.Replace(imageTemp, rgx, replacement);
                     string runtime = movie.runtime;
                     string release = movie.year;
                     string rating = movie.mpaa_rating;
@@ -104,8 +97,8 @@ namespace Movie_App.DataModel
                     // Create a Moviedata object by using movie information and add 
                     // that object to a collection.
                     results.Add(new MovieData(title, summary, image, runtime, release, rating));
-                 }
-             
+                }
+
                 hasExecutedQuery = true;
             }
             catch (Exception)
@@ -114,14 +107,15 @@ namespace Movie_App.DataModel
                 showErrorMessage();
             }
         }
+
         private async void showErrorMessage()
         {
-            var msg = new Windows.UI.Popups.MessageDialog
+            var msg = new MessageDialog
                 ("The service is unavailable or there was a problem with the service.");
 
-            msg.Commands.Add(new Windows.UI.Popups.UICommand("Try again?"));
+            msg.Commands.Add(new UICommand("Try again?"));
 
-            msg.Commands.Add(new Windows.UI.Popups.UICommand("I'll try again later."));
+            msg.Commands.Add(new UICommand("I'll try again later."));
 
             msg.DefaultCommandIndex = 0;
             msg.CancelCommandIndex = 1;
@@ -131,12 +125,12 @@ namespace Movie_App.DataModel
             if (results.Label == "I'll try again later.")
             {
                 hasExecutedQuery = true;
-                this.Results.Clear();
+                Results.Clear();
             }
             else
             {
                 hasExecutedQuery = false;
-                this.Results.Clear();
+                Results.Clear();
             }
         }
     }

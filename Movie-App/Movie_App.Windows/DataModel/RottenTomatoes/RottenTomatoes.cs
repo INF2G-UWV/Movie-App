@@ -1,14 +1,20 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Runtime.Serialization;
-using System.Text;
-using System.Threading.Tasks;
+﻿using System.Collections.Generic;
 
-namespace Movie_App.DataModel.NewFolder1
+namespace Movie_App.DataModel.RottenTomatoes
 {
-    public class rottenTomatoes
+    public class RottenTomatoes
     {
+        public IEnumerable<Movie> movies { get; set; }
+        public IEnumerable<AbridgedCast> abridgedCast { get; set; }
+        public string PosterOriginal { get; set; }
+        public string Title { get; set; }
+        public string Runtime { get; set; }
+        public string Year { get; set; }
+        public string Synopsis { get; set; }
+        public string RatingsAudience { get; set; }
+        public string ReleaseDatesTheater { get; set; }
+        public string NameActor { get; set; }
+
         public class ReleaseDates
         {
             public string theater { get; set; }
@@ -77,22 +83,10 @@ namespace Movie_App.DataModel.NewFolder1
             public List<Movie> movies { get; set; }
             public Links2 links { get; set; }
             public string link_template { get; set; }
-
             public string title { get; set; }
             public string runtime { get; set; }
             public string year { get; set; }
             public string synopsis { get; set; }
         }
-
-        public IEnumerable<Movie> movies { get; set; }
-        public IEnumerable<AbridgedCast> abridgedCast { get; set; }
-        public string PosterOriginal { get; set; }
-        public string Title { get; set; }
-        public string Runtime { get; set; }
-        public string Year { get; set; }
-        public string Synopsis { get; set; }
-        public string RatingsAudience { get; set; }
-        public string ReleaseDatesTheater { get; set; }
-        public string NameActor { get; set; }
     }
 }

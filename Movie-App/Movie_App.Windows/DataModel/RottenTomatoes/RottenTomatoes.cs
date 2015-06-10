@@ -4,6 +4,7 @@ namespace Movie_App.DataModel.RottenTomatoes
 {
     public class RottenTomatoes
     {
+
         public IEnumerable<Movie> movies { get; set; }
         public IEnumerable<AbridgedCast> abridgedCast { get; set; }
         public string PosterOriginal { get; set; }
@@ -14,6 +15,7 @@ namespace Movie_App.DataModel.RottenTomatoes
         public string RatingsAudience { get; set; }
         public string ReleaseDatesTheater { get; set; }
         public string NameActor { get; set; }
+        public string MovieId { get; set; }
 
         public class ReleaseDates
         {
@@ -77,6 +79,9 @@ namespace Movie_App.DataModel.RottenTomatoes
             public string next { get; set; }
         }
 
+        /// <summary>
+        /// Serialize from JSON2CSHARP.com
+        /// </summary>
         public class RootObject
         {
             public int total { get; set; }

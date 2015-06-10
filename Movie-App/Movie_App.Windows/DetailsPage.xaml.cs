@@ -2,6 +2,8 @@
 using Windows.UI.Xaml.Controls;
 using Windows.UI.Xaml.Navigation;
 using Movie_App.Common;
+using Movie_App.DataModel;
+using Movie_App.DataModel.RottenTomatoes;
 
 // The Item Detail Page item template is documented at http://go.microsoft.com/fwlink/?LinkId=234232
 
@@ -90,6 +92,12 @@ namespace Movie_App
         protected override void OnNavigatedFrom(NavigationEventArgs e)
         {
             NavigationHelper.OnNavigatedFrom(e);
+        }
+
+        private void Button_Click(object sender, Windows.UI.Xaml.RoutedEventArgs e)
+        {
+        	var buttonIdData = ((Button) e.OriginalSource).DataContext;
+            NameStorage.MovieTitle = ((RottenTomatoes) buttonIdData).Title;
         }
 
         #endregion

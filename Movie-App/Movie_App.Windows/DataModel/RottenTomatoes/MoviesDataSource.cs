@@ -7,11 +7,16 @@ namespace Movie_App.DataModel.RottenTomatoes
 {
     internal class MoviesDataSource : ObservableCollection<RottenTomatoes>
     {
+        /// <summary>
+        /// Constant fields
+        /// </summary>
         private const string apiKey = "xjndv3dfyfn2bzxvwmuqj8gz";
         private const string baseURL = "http://api.rottentomatoes.com/api/public/v1.0";
         private readonly string API_CALL;
-        // private const string API_CALL = movieSearch;
 
+        /// <summary>
+        /// Constructor to set a dynamic variable in de link
+        /// </summary>
         public MoviesDataSource()
         {
             if (NameStorage.MovieTitle != null)
@@ -24,7 +29,10 @@ namespace Movie_App.DataModel.RottenTomatoes
             }
             LoadData();
         }
-
+        /// <summary>
+        /// This function loads data from the calling RottenTomatoes database, It serialize the to an object.
+        /// So it could be used on the page.
+        /// </summary>
         private async void LoadData()
         {
             var wc = new HttpClient();
@@ -39,6 +47,7 @@ namespace Movie_App.DataModel.RottenTomatoes
                 temp.ReleaseDatesTheater = m.release_dates.theater;
                 temp.Synopsis = m.synopsis;
                 temp.RatingsAudience = m.ratings.audience_score.ToString();
+                temp.MovieId = m.id;
                 //temp.NameActor = m.abridged_cast.name; (kan geen 'name' vinden)
                 for (var i = 0; i < m.abridged_cast.Count; i++)
                 {

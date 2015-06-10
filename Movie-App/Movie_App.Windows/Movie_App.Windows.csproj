@@ -110,12 +110,17 @@
     <Compile Include="DataModel\HTMLScraper.cs" />
     <Compile Include="DataModel\MovieData.cs" />
     <Compile Include="DataModel\NameStorage.cs" />
+    <Compile Include="DataModel\RottenTomatoesClips\MoviesClipsSource.cs" />
+    <Compile Include="DataModel\RottenTomatoesClips\RottenTomatoesClips.cs" />
     <Compile Include="DataModel\RottenTomatoes\MoviesDataSource.cs" />
     <Compile Include="DataModel\RottenTomatoes\RottenTomatoes.cs" />
     <Compile Include="DataModel\Query.cs" />
     <Compile Include="DataModel\ViewModel.cs" />
     <Compile Include="DetailsPage.xaml.cs">
       <DependentUpon>DetailsPage.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="InTheathers.xaml.cs">
+      <DependentUpon>InTheathers.xaml</DependentUpon>
     </Compile>
     <Compile Include="MainPage.xaml.cs">
       <DependentUpon>MainPage.xaml</DependentUpon>
@@ -147,6 +152,10 @@
   </ItemGroup>
   <ItemGroup>
     <Page Include="DetailsPage.xaml">
+      <Generator>MSBuild:Compile</Generator>
+      <SubType>Designer</SubType>
+    </Page>
+    <Page Include="InTheathers.xaml">
       <Generator>MSBuild:Compile</Generator>
       <SubType>Designer</SubType>
     </Page>

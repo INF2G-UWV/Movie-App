@@ -173,6 +173,7 @@
   </ItemGroup>
   <ItemGroup>
     <None Include="Common\ReadMe.txt" />
+    <None Include="Design\projectGuides.guides" />
     <None Include="packages.config" />
   </ItemGroup>
   <ItemGroup>

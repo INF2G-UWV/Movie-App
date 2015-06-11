@@ -21,7 +21,7 @@ namespace Movie_App.DataModel.RottenTomatoes
         {
             if (NameStorage.MovieTitle != null)
             {
-                API_CALL = baseURL + "/movies.json?apikey=" + apiKey + "&q=" + NameStorage.MovieTitle + "&page_limit=2";
+                API_CALL = baseURL + "/movies.json?apikey=" + apiKey + "&q=" + NameStorage.MovieTitle + "&page_limit=6";
             }
             //else if(NameStorage.QuerySearch != null)
             //{

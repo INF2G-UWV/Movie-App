@@ -53,7 +53,7 @@
 					<ImageBrush Stretch="UniformToFill" />
 				</HubSection.Background>
 			</HubSection>
-			<HubSection Width="500" Header="{Binding [0].Title}">
+			<HubSection Width="500" Header="">
 				<HubSection.DataContext>
 					<RottenTomatoes:MoviesDataSource/>
 				</HubSection.DataContext>
@@ -66,16 +66,11 @@
 							<RowDefinition Height="*" />
 						</Grid.RowDefinitions>
 						<Image Stretch="Fill" Width="420" Height="280" Source="{Binding [0].PosterOriginal}"/>
-						<TextBlock Style="{StaticResource SubheaderTextBlockStyle}" Grid.Row="1" Margin="0,10,0,0" TextWrapping="Wrap" 
-							Text="{Binding [0].ReleaseDatesTheater}"/>
-						<TextBlock Style="{StaticResource TitleTextBlockStyle}" Grid.Row="2" Margin="0,10,0,0"
-							Text="Description text:"/>
-						<TextBlock Style="{StaticResource BodyTextBlockStyle}" Grid.Row="3" 
-							Text="{Binding [0].Synopsis}"/>
+						<Image Stretch="Fill" Width="420" Height="280" Source="{Binding [1].PosterOriginal}" Margin="0,50,0,-330" Grid.Row="3"/>
 					</Grid>
 				</DataTemplate>
 			</HubSection>
-			<HubSection Width="520" Header="{Binding [0].Title}">
+			<HubSection Width="520" Header="">
 				<HubSection.DataContext>
 					<RottenTomatoes:MoviesDataSource/>
 				</HubSection.DataContext>
@@ -87,16 +82,13 @@
 							<RowDefinition Height="Auto" />
 							<RowDefinition Height="*" />
 						</Grid.RowDefinitions>
-						<TextBlock Style="{StaticResource SubtitleTextBlockStyle}" Grid.Row="2" Margin="0,20,0,0"
-							Text="Description"/>
-						<TextBlock Style="{StaticResource BodyTextBlockStyle}" Grid.Row="3" 
-							Text="{Binding [0].Synopsis}"/>
-						<Image HorizontalAlignment="Left" Height="286" VerticalAlignment="Top" Width="424" Margin="0,100,0,-326" Grid.Row="3" Stretch="Fill" Source="{Binding [0].PosterOriginal}"/>
+						<Image HorizontalAlignment="Left" Height="255" VerticalAlignment="Top" Width="424" Margin="0,321,0,-516" Grid.Row="3" Stretch="Fill" Source="{Binding [2].PosterOriginal}" RenderTransformOrigin="0.5,0.5"/>
+						<Image HorizontalAlignment="Left" Height="255" VerticalAlignment="Top" Width="424" Margin="0,-9,0,-186" Grid.Row="3" Stretch="Fill" Source="{Binding [3].PosterOriginal}" RenderTransformOrigin="0.5,0.5"/>
 					</Grid>
 				</DataTemplate>
 			</HubSection>
 
-			<HubSection Header="{Binding [0].Title}">
+			<HubSection Header="">
 				<HubSection.DataContext>
 					<RottenTomatoes:MoviesDataSource/>
 				</HubSection.DataContext>
@@ -117,11 +109,8 @@
 								<RowDefinition Height="Auto" />
 								<RowDefinition Height="*" />
 							</Grid.RowDefinitions>
-							<TextBlock Style="{StaticResource TitleTextBlockStyle}" Grid.Row="2" Grid.ColumnSpan="5" Margin="0,15,0,0"
-								Text="Description Text:"/>
-							<Image HorizontalAlignment="Left" Height="365" VerticalAlignment="Top" Width="390" Grid.ColumnSpan="5" Grid.RowSpan="2" Stretch="Fill" Source="{Binding [0].PosterOriginal}"/>
-							<TextBlock Style="{StaticResource BodyTextBlockStyle}" Grid.Row="3" Grid.ColumnSpan="5" 
-								Text="{Binding [0].Synopsis}"/>
+							<Image HorizontalAlignment="Left" Height="260" VerticalAlignment="Top" Width="278" Grid.ColumnSpan="5" Stretch="Fill" Source="{Binding [4].PosterOriginal}" Margin="56,0,0,0"/>
+							<Image HorizontalAlignment="Left" Height="260" VerticalAlignment="Top" Width="278" Grid.ColumnSpan="5" Stretch="Fill" Source="{Binding [5].PosterOriginal}" Margin="56,60,0,-225" Grid.RowSpan="3" Grid.Row="1"/>
 						</Grid>
 					</StackPanel>
 				</DataTemplate>

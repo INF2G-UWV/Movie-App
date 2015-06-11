@@ -75,7 +75,10 @@
 					</Grid>
 				</DataTemplate>
 			</HubSection>
-			<HubSection Width="520" Header="Section 2">
+			<HubSection Width="520" Header="{Binding [0].Title}">
+				<HubSection.DataContext>
+					<RottenTomatoes:MoviesDataSource/>
+				</HubSection.DataContext>
 				<DataTemplate>
 					<Grid>
 						<Grid.RowDefinitions>
@@ -84,19 +87,19 @@
 							<RowDefinition Height="Auto" />
 							<RowDefinition Height="*" />
 						</Grid.RowDefinitions>
-						<TextBlock Style="{StaticResource TitleTextBlockStyle}" Margin="0,0,0,10"
-							Text="Item Title" />
-						<TextBlock Style="{StaticResource SubheaderTextBlockStyle}" Grid.Row="1" 
-							Text="Quisque in porta lorem dolor amet sed consectetuer ising elit, sed diam non my nibh uis mod wisi quip."/>
 						<TextBlock Style="{StaticResource SubtitleTextBlockStyle}" Grid.Row="2" Margin="0,20,0,0"
-							Text="Item Sub Title"/>
+							Text="Description"/>
 						<TextBlock Style="{StaticResource BodyTextBlockStyle}" Grid.Row="3" 
-							Text="Lorem ipsum dolor sit amet, consectetuer ising elit, sed diam nonummy nibh uismod tincidunt ut laoreet suscipit lobortis ni ut wisi quipexerci quis consequat minim veniam, quis nostrud exerci tation ullam corper. Lorem ipsum dolor sit amet, consectetuer ising elit, sed diam nonummy nibh uismod tincidunt ut laoreet suscipit lobortis ni ut wisi quipexerci quis consequat minim veniam, quis nostrud exerci tation ullam corper."/>
+							Text="{Binding [0].Synopsis}"/>
+						<Image HorizontalAlignment="Left" Height="286" VerticalAlignment="Top" Width="424" Margin="0,100,0,-326" Grid.Row="3" Stretch="Fill" Source="{Binding [0].PosterOriginal}"/>
 					</Grid>
 				</DataTemplate>
 			</HubSection>
 
-			<HubSection Header="Section 3">
+			<HubSection Header="{Binding [0].Title}">
+				<HubSection.DataContext>
+					<RottenTomatoes:MoviesDataSource/>
+				</HubSection.DataContext>
 				<DataTemplate>
 					<!-- width of 400 -->
 					<StackPanel Orientation="Vertical">
@@ -114,14 +117,11 @@
 								<RowDefinition Height="Auto" />
 								<RowDefinition Height="*" />
 							</Grid.RowDefinitions>
-							<Image Grid.ColumnSpan="5" Stretch="Fill" Margin="0,0,0,10"/>
-							<Image Grid.Row="1" Stretch="Fill"/>
-							<Image Grid.Row="1" Grid.Column="2" Stretch="Fill"/>
-							<Image Grid.Row="1" Grid.Column="4" Stretch="Fill"/>
 							<TextBlock Style="{StaticResource TitleTextBlockStyle}" Grid.Row="2" Grid.ColumnSpan="5" Margin="0,15,0,0"
 								Text="Description Text:"/>
+							<Image HorizontalAlignment="Left" Height="365" VerticalAlignment="Top" Width="390" Grid.ColumnSpan="5" Grid.RowSpan="2" Stretch="Fill" Source="{Binding [0].PosterOriginal}"/>
 							<TextBlock Style="{StaticResource BodyTextBlockStyle}" Grid.Row="3" Grid.ColumnSpan="5" 
-								Text="Lorem ipsum dolor sit amet, consectetuer ising elit, sed diam nonummy nibh uismod tincidunt ut laoreet suscipit lobortis ni ut wisi quipexerci quis consequat minim veniam, quis nostrud exerci tation ullam corper. Lorem ipsum dolor sit amet, consectetuer ising elit, sed diam nonummy nibh uismod tincidunt ut laoreet suscipit lobortis ni ut wisi quipexerci quis consequat minim veniam, quis nostrud exerci tation ullam corper."/>
+								Text="{Binding [0].Synopsis}"/>
 						</Grid>
 					</StackPanel>
 				</DataTemplate>

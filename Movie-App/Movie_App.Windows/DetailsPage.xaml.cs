@@ -100,6 +100,12 @@ namespace Movie_App
             NameStorage.MovieId = ((RottenTomatoes) buttonIdData).MovieId;
         }
 
+        private void SearchBox_QuerySubmitted(Windows.UI.Xaml.Controls.SearchBox sender, Windows.UI.Xaml.Controls.SearchBoxQuerySubmittedEventArgs args)
+        {
+        	NameStorage.QuerySearch = args.QueryText;
+        	this.Frame.Navigate(typeof(BasicPage2), args.QueryText);
+        }
+
         #endregion
     }
 }

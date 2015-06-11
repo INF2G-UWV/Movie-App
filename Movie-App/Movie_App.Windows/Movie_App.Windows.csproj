@@ -103,11 +103,9 @@
     <Prefer32Bit>true</Prefer32Bit>
   </PropertyGroup>
   <ItemGroup>
-    <Compile Include="BasicPage1.xaml.cs">
-      <DependentUpon>BasicPage1.xaml</DependentUpon>
+    <Compile Include="BasicPage2.xaml.cs">
+      <DependentUpon>BasicPage2.xaml</DependentUpon>
     </Compile>
-    <Compile Include="Common\BooleanNegationConverter.cs" />
-    <Compile Include="Common\BooleanToVisibilityConverter.cs" />
     <Compile Include="Common\NavigationHelper.cs" />
     <Compile Include="Common\ObservableDictionary.cs" />
     <Compile Include="Common\RelayCommand.cs" />
@@ -115,11 +113,14 @@
     <Compile Include="DataModel\HTMLScraper.cs" />
     <Compile Include="DataModel\MovieData.cs" />
     <Compile Include="DataModel\NameStorage.cs" />
+    <Compile Include="DataModel\RottenTomatoesSearch\MoviesDataSourceSearch.cs" />
+    <Compile Include="DataModel\RottenTomatoesSearch\GetSearchData.cs" />
     <Compile Include="DataModel\RottenTomatoesClips\MoviesClipsSource.cs" />
     <Compile Include="DataModel\RottenTomatoesClips\RottenTomatoesClips.cs" />
+    <Compile Include="DataModel\Query.cs" />
+    <Compile Include="DataModel\RottenTomatoesSearch\SearchModel.cs" />
     <Compile Include="DataModel\RottenTomatoes\MoviesDataSource.cs" />
     <Compile Include="DataModel\RottenTomatoes\RottenTomatoes.cs" />
-    <Compile Include="DataModel\Query.cs" />
     <Compile Include="DataModel\ViewModel.cs" />
     <Compile Include="DetailsPage.xaml.cs">
       <DependentUpon>DetailsPage.xaml</DependentUpon>
@@ -156,7 +157,7 @@
     <Content Include="Assets\StoreLogo.scale-100.png" />
   </ItemGroup>
   <ItemGroup>
-    <Page Include="BasicPage1.xaml">
+    <Page Include="BasicPage2.xaml">
       <Generator>MSBuild:Compile</Generator>
       <SubType>Designer</SubType>
     </Page>
@@ -189,6 +190,9 @@
       <HintPath>..\..\packages\Newtonsoft.Json.6.0.8\lib\netcore45\Newtonsoft.Json.dll</HintPath>
       <Private>True</Private>
     </Reference>
+  </ItemGroup>
+  <ItemGroup>
+    <Folder Include="DataModel\RottenTomatoesDetails\" />
   </ItemGroup>
   <PropertyGroup Condition=" '$(VisualStudioVersion)' == '' or '$(VisualStudioVersion)' &lt; '12.0' ">
     <VisualStudioVersion>12.0</VisualStudioVersion>

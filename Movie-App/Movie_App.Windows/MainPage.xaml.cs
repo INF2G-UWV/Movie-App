@@ -51,7 +51,7 @@ namespace Movie_App
         private void searchBoxTemp_QuerySubmitted(Windows.UI.Xaml.Controls.SearchBox sender, Windows.UI.Xaml.Controls.SearchBoxQuerySubmittedEventArgs args)
         {
             NameStorage.MovieTitle = args.QueryText;
-        	this.Frame.Navigate(typeof(SearchResultsPage1), args.QueryText);
+        	this.Frame.Navigate(typeof(BasicPage1), args.QueryText);
         }
     }
 }

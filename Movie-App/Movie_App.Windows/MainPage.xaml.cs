@@ -29,12 +29,29 @@ namespace Movie_App
 
         private void SearchBox_SizeChanged(object sender, SizeChangedEventArgs e)
         {
-            Info.Text = SearchBox.QueryText;
+            
         }
 
         private void MoviesView_SelectionChanged(object sender, SelectionChangedEventArgs e)
         {
             movieListview.SelectedIndex = MoviesView.SelectedIndex;
+        }
+
+        private void SearchBox_QueryChanged(Windows.UI.Xaml.Controls.SearchBox sender, Windows.UI.Xaml.Controls.SearchBoxQueryChangedEventArgs args)
+        {
+            
+        }
+
+        private void SearchBox_QueryChanged_1(Windows.UI.Xaml.Controls.SearchBox sender, Windows.UI.Xaml.Controls.SearchBoxQueryChangedEventArgs args)
+        {
+           
+            
+        }
+
+        private void searchBoxTemp_QuerySubmitted(Windows.UI.Xaml.Controls.SearchBox sender, Windows.UI.Xaml.Controls.SearchBoxQuerySubmittedEventArgs args)
+        {
+            NameStorage.MovieTitle = args.QueryText;
+        	this.Frame.Navigate(typeof(SearchResultsPage1), args.QueryText);
         }
     }
 }

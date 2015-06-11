@@ -97,7 +97,7 @@ namespace Movie_App
         private void Button_Click(object sender, Windows.UI.Xaml.RoutedEventArgs e)
         {
         	var buttonIdData = ((Button) e.OriginalSource).DataContext;
-            NameStorage.MovieTitle = ((RottenTomatoes) buttonIdData).Title;
+            NameStorage.MovieId = ((RottenTomatoes) buttonIdData).MovieId;
         }
 
         #endregion

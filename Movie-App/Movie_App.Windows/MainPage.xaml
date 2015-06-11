@@ -293,12 +293,13 @@
 		<Image x:Name="LogoImage" Source="Assets/images/logo_app.png" Stretch="Fill" HorizontalAlignment="Left" VerticalAlignment="Top" Margin="10,10,0,0" Height="305" Width="277"/>
 		<TextBlock x:Name="Titel" HorizontalAlignment="Left" TextWrapping="Wrap" Text="MOVIE-APP" VerticalAlignment="Top" Margin="360,84,0,0" FontSize="96" FontFamily="Letter Gothic Std" Height="93"/>
 		<TextBlock x:Name="Slogan" HorizontalAlignment="Left" TextWrapping="Wrap" Text="Your source for Movies!" VerticalAlignment="Top" FontSize="42.667" Margin="326,182,0,0" FontFamily="Letter Gothic Std"/>
-		<SearchBox x:Name="SearchBox" HorizontalAlignment="Left" VerticalAlignment="Top" Margin="1526,99,0,0" FontFamily="Letter Gothic Std" Width="249" SizeChanged="SearchBox_SizeChanged"/>
+		<SearchBox x:Name="SearchBox" HorizontalAlignment="Left" VerticalAlignment="Top" Margin="1526,99,0,0" FontFamily="Letter Gothic Std" Width="249" SizeChanged="SearchBox_SizeChanged" QueryChanged="SearchBox_QueryChanged"/>
 		<FlipView x:Name="MoviesView" HorizontalAlignment="Left" VerticalAlignment="Top" Height="749" Margin="408,317,0,0" Width="1504" ItemTemplate="{StaticResource MovieDataTemplate5}" ItemsSource="{Binding Query.Results}" Background="{x:Null}" Foreground="White" SelectionChanged="MoviesView_SelectionChanged"/>
 		<TextBlock x:Name="Info" HorizontalAlignment="Center" TextWrapping="Wrap" VerticalAlignment="Top" FontSize="21.333" Margin="617,321,615,0" FontFamily="Letter Gothic Std">
 			<Run Text="Use the slider "/>
 			<Run Text="to browse through the movies"/>
 		</TextBlock>
 		<ListView x:Name="movieListview" ScrollViewer.HorizontalScrollBarVisibility="Disabled" HorizontalAlignment="Left" Height="744" VerticalAlignment="Top" Width="397" Margin="10,320,0,0" ItemTemplate="{StaticResource MovieDataTemplate17}" ItemsSource="{Binding Query.Results}" SelectionChanged="movieListview_SelectionChanged"/>
+		<SearchBox x:Name="searchBoxTemp" HorizontalAlignment="Left" Margin="946,131,0,0" VerticalAlignment="Top" Height="46" Width="429" QueryChanged="SearchBox_QueryChanged_1" QuerySubmitted="searchBoxTemp_QuerySubmitted"/>
 	</Grid>
 </Page>

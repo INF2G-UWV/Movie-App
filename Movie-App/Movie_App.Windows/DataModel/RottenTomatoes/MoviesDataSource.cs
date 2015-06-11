@@ -21,8 +21,12 @@ namespace Movie_App.DataModel.RottenTomatoes
         {
             if (NameStorage.MovieTitle != null)
             {
-                API_CALL = baseURL + "/movies.json?apikey=" + apiKey + "&q=" + NameStorage.MovieTitle + "&page_limit=1";
+                API_CALL = baseURL + "/movies.json?apikey=" + apiKey + "&q=" + NameStorage.MovieTitle + "&page_limit=2";
             }
+            //else if(NameStorage.QuerySearch != null)
+            //{
+            //    API_CALL = baseURL + "/movies.json?apikey=" + apiKey + "&q=" + NameStorage.QuerySearch + "&page_limit=1";
+            //}
             else
             {
                 API_CALL = baseURL + "/movies.json?apikey=" + apiKey + "&q=terminator&page_limit=1";
@@ -48,6 +52,7 @@ namespace Movie_App.DataModel.RottenTomatoes
                 temp.Synopsis = m.synopsis;
                 temp.RatingsAudience = m.ratings.audience_score.ToString();
                 temp.MovieId = m.id;
+
                 //temp.NameActor = m.abridged_cast.name; (kan geen 'name' vinden)
                 for (var i = 0; i < m.abridged_cast.Count; i++)
                 {

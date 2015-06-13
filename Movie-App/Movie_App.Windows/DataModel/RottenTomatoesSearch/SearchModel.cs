@@ -9,15 +9,15 @@ namespace Movie_App.DataModel.RottenTomatoesSearch
         // A Rotten Tomatoes API key is required
         private static readonly string apikey = "xjndv3dfyfn2bzxvwmuqj8gz";
         private static readonly string baseUrl = "http://api.rottentomatoes.com/api/public/v1.0";
-        private static readonly string moviesSearchUrl = baseUrl + "/movies.json?apikey=" + apikey + "&q=" + NameStorage.QuerySearch;
-        //private static readonly string moviesSearchUrl = baseUrl + "/movies.json?apikey=" + apikey + "&q=toy";
-
-        private static readonly Uri uri = new Uri(moviesSearchUrl);
-        private readonly MoviesDataSourceSearch search = new MoviesDataSourceSearch(uri);
+        private readonly MoviesDataSourceSearch search = new MoviesDataSourceSearch();
         // Property that returns a collection of MovieData objects. 
         public MoviesDataSourceSearch Search
         {
-            get { return search; }
+            get
+            {
+                search.Uri = new Uri(baseUrl + "/movies.json?apikey=" + apikey + "&q=" + NameStorage.QuerySearch);
+                return search;
+            }
         }
     }
 }

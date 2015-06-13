@@ -87,13 +87,13 @@ namespace Movie_App.DataModel
                     string title = movie.title;
                     string summary = movie.synopsis;
                     string imageTemp = movie.posters.profile;
-                    var replacement = "http://";
-                    var rgx = "(http://resizing.flixster.com(.*((54x77)|(54x80)|(54x81)|(52x81)|(51x81)|(53x81))/))";
+                    const string replacement = "http://";
+                    const string rgx = "(http://resizing.flixster.com(.*((54x77)|(54x80)|(54x81)|(52x81)|(51x81)|(53x81))/))";
                     var image = Regex.Replace(imageTemp, rgx, replacement);
                     string runtime = movie.runtime;
                     string year = movie.year;
                     string rating = movie.mpaa_rating;
-                    
+                   
 
                     // Create a Moviedata object by using movie information and add 
                     // that object to a collection.

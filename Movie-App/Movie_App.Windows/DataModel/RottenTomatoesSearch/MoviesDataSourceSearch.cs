@@ -1,33 +1,24 @@
-﻿using System.Collections.ObjectModel;
-using System.Net.Http;
-using System.Text.RegularExpressions;
-using Newtonsoft.Json;
-using System;
-using Windows.UI.Popups;
-using System.Linq;
+﻿using System;
+using System.Collections.ObjectModel;
 using System.IO;
 using System.IO.Compression;
+using System.Linq;
+using System.Net.Http;
+using System.Text.RegularExpressions;
+using Windows.UI.Popups;
+using Newtonsoft.Json;
 
 namespace Movie_App.DataModel.RottenTomatoesSearch
 {
-    public class MoviesDataSourceSearch 
+    public class MoviesDataSourceSearch
     {
         /// <summary>
-        /// Constant fields
+        ///     Constant fields
         /// </summary>
         private bool hasExecutedQuery;
+
         public ObservableCollection<GetSearchData> results = new ObservableCollection<GetSearchData>();
-
-        /// <summary>
-        /// Constructor to set a dynamic variable in de link
-        /// </summary>
-        public MoviesDataSourceSearch(Uri uri)
-        {
-            Uri = uri;
-        }
-
-        protected Uri Uri { get; set; }
-
+        public Uri Uri { get; set; }
         // Executes a query to obtain information about movies.
         // This property also stores the movies in a collection class.
         public ObservableCollection<GetSearchData> Results
@@ -42,13 +33,14 @@ namespace Movie_App.DataModel.RottenTomatoesSearch
                 return results;
             }
         }
+
         /// <summary>
-        /// This function loads data from the calling RottenTomatoes database, It serialize the to an object.
-        /// So it could be used on the page.
+        ///     This function loads data from the calling RottenTomatoes database, It serialize the to an object.
+        ///     So it could be used on the page.
         /// </summary>
         private async void LoadData()
         {
-            try 
+            try
             {
                 var httpClient = new HttpClient();
                 var response = await httpClient.GetAsync(Uri);
@@ -92,8 +84,9 @@ namespace Movie_App.DataModel.RottenTomatoesSearch
                     string title = movie.title;
                     string imageTemp = movie.posters.profile;
                     string year = movie.year;
-                    var replacement = "http://";
-                    var rgx = "(http://resizing.flixster.com(.*((54x77)|(54x80)|(54x81)|(52x81)|(51x81)|(53x81))/))";
+                    const string replacement = "http://";
+                    const string rgx =
+                        "(http://resizing.flixster.com(.*((54x77)|(54x80)|(54x81)|(52x81)|(51x81)|(53x81))/))";
                     var image = Regex.Replace(imageTemp, rgx, replacement);
 
 
@@ -104,13 +97,12 @@ namespace Movie_App.DataModel.RottenTomatoesSearch
 
                 hasExecutedQuery = true;
             }
-            catch(Exception)
+            catch (Exception)
             {
                 hasExecutedQuery = false;
                 showErrorMessage();
             }
         }
-
 
         private async void showErrorMessage()
         {

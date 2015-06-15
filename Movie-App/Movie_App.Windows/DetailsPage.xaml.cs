@@ -96,8 +96,15 @@ namespace Movie_App
 
         private void Button_Click(object sender, Windows.UI.Xaml.RoutedEventArgs e)
         {
-        	var buttonIdData = ((Button) e.OriginalSource).DataContext;
-            NameStorage.MovieId = ((RottenTomatoes) buttonIdData).MovieId;
+
+            var buttonIdData = ((Button) e.OriginalSource).DataContext;
+
+            foreach (var obj in (MoviesDataSource) buttonIdData)
+            {
+                NameStorage.MovieId = (((RottenTomatoes)obj)).MovieId;
+            }
+
+            
         }
 
         private void SearchBox_QuerySubmitted(Windows.UI.Xaml.Controls.SearchBox sender, Windows.UI.Xaml.Controls.SearchBoxQuerySubmittedEventArgs args)

@@ -1,6 +1,6 @@
 ﻿using System.Collections.ObjectModel;
 using System.Net.Http;
-using System.Text.RegularExpressions;
+using Movie_App.DataModel.RottenTomatoesClips;
 using Newtonsoft.Json;
 
 namespace Movie_App.DataModel.RottenTomatoes
@@ -10,11 +10,12 @@ namespace Movie_App.DataModel.RottenTomatoes
         private const string apiKey = "xjndv3dfyfn2bzxvwmuqj8gz";
         private const string baseURL = "http://api.rottentomatoes.com/api/public/v1.0";
         private readonly string API_CALL;
+        private readonly TheaterScraper scraper = new TheaterScraper();
         // private const string API_CALL = movieSearch;
 
         public MoviesClipsSource()
         {
-            if (NameStorage.MovieTitle != null)
+            if (NameStorage.MovieId != null)
             {
                 API_CALL = baseURL + "/movies/" + NameStorage.MovieId + "/clips.json?apikey=" + apiKey;
             }
@@ -31,13 +32,14 @@ namespace Movie_App.DataModel.RottenTomatoes
             var response = await wc.GetStringAsync(API_CALL);
 
             var rt = JsonConvert.DeserializeObject<RottenTomatoesClips>(response);
-            foreach (var m in rt.rootObj)
+            foreach (var m in rt.clips)
             {
                 var temp = new RottenTomatoesClips();
-                temp.title = m.clips[0].title;
-                temp.duration = m.clips[0].duration;
-                temp.alternateClip = m.clips[0].links.alternate;
-                temp.thumbnail = m.clips[0].thumbnail;
+                temp.clips.Add(m);
+                //temp.title = m.clips[0].title;
+                //temp.duration = m.clips[0].duration;
+                //temp.alternateClip = m.clips[0].links.alternate;
+                //temp.thumbnail = m.clips[0].thumbnail;
                 //temp.Title = m.title;
                 //temp.Runtime = m.runtime.ToString();
                 //temp.ReleaseDatesTheater = m.release_dates.theater;
@@ -57,6 +59,8 @@ namespace Movie_App.DataModel.RottenTomatoes
 
                 Add(temp);
             }
+
+            scraper.Scrape(Items[0].clips[0].title, "Emmen", 0);
         }
     }
 }

@@ -1,4 +1,6 @@
 ﻿using Movie_App.Common;
+using Movie_App.DataModel;
+using Movie_App.DataModel.RottenTomatoesSearch;
 using System;
 using System.Collections.Generic;
 using System.IO;
@@ -99,6 +101,12 @@ namespace Movie_App
         protected override void OnNavigatedFrom(NavigationEventArgs e)
         {
             navigationHelper.OnNavigatedFrom(e);
+        }
+
+        private void searchButton_Click(object sender, Windows.UI.Xaml.RoutedEventArgs e)
+        {
+            var buttonData = ((Button)e.OriginalSource).DataContext;
+            NameStorage.MovieTitle = ((GetSearchData)buttonData).Title;
         }
 
         #endregion

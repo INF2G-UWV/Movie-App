@@ -6,6 +6,7 @@
     xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
     xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
     xmlns:RottenTomatoesSearch="using:Movie_App.DataModel.RottenTomatoesSearch"
+    xmlns:Interactivity="using:Microsoft.Xaml.Interactivity" xmlns:Core="using:Microsoft.Xaml.Interactions.Core"
     x:Name="pageRoot"
     x:Class="Movie_App.BasicPage2"
     DataContext="{Binding DefaultViewModel, RelativeSource={RelativeSource Mode=Self}}"
@@ -27,6 +28,13 @@
         			<TextBlock Text="{Binding Title}" Style="{StaticResource TitleTextBlockStyle}"/>
         			<TextBlock Text="{Binding Year}" Style="{StaticResource CaptionTextBlockStyle}" TextWrapping="NoWrap"/>
         		</StackPanel>
+        		<Button x:Name="searchButton" Content="{Binding Title}" HorizontalAlignment="Left" VerticalAlignment="Top" Grid.ColumnSpan="2" Height="103" Width="473" Click="searchButton_Click" Opacity="0">
+        			<Interactivity:Interaction.Behaviors>
+        				<Core:EventTriggerBehavior EventName="Click">
+        					<Core:NavigateToPageAction Parameter="{Binding Title}" TargetPage="Movie_App.DetailsPage"/>
+        				</Core:EventTriggerBehavior>
+        			</Interactivity:Interaction.Behaviors>
+        		</Button>
         	</Grid>
         </DataTemplate>
     </Page.Resources>
@@ -70,6 +78,6 @@
 				<Run/>
 			</TextBlock>
 		</Grid>
-		<GridView ItemTemplate="{StaticResource GetSearchDataTemplate}" ItemsSource="{Binding Search.Results}" IsSwipeEnabled="False" Grid.Row="1" SelectionMode="Single"/>
+		<GridView x:Name="searchGridView" ItemTemplate="{StaticResource GetSearchDataTemplate}" ItemsSource="{Binding Search.Results}" IsSwipeEnabled="False" Grid.Row="1" SelectionMode="Single"/>
 	</Grid>
 </Page>

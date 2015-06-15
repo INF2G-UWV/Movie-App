@@ -299,6 +299,6 @@
 			<Run Text="to browse through the movies"/>
 		</TextBlock>
 		<ListView x:Name="movieListview" ScrollViewer.HorizontalScrollBarVisibility="Disabled" ScrollViewer.VerticalScrollBarVisibility="Hidden" HorizontalAlignment="Left" Height="744" VerticalAlignment="Top" Width="397" Margin="10,320,0,0" ItemTemplate="{StaticResource MovieDataTemplate17}" ItemsSource="{Binding Query.Results}" SelectionChanged="movieListview_SelectionChanged"/>
-		<SearchBox x:Name="searchBoxTemp" HorizontalAlignment="Left" VerticalAlignment="Top" Margin="1581,10,0,0" Height="45" Width="329" QueryChanged="SearchBox_QueryChanged_1" QuerySubmitted="searchBoxTemp_QuerySubmitted"/>
+		<SearchBox x:Name="searchBoxTemp" FocusOnKeyboardInput="True" HorizontalAlignment="Left" VerticalAlignment="Top" Margin="1581,60,0,0" Height="45" Width="329" QueryChanged="SearchBox_QueryChanged_1" QuerySubmitted="searchBoxTemp_QuerySubmitted"/>
 	</Grid>
 </Page>

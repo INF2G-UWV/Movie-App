@@ -318,7 +318,7 @@
 				<ColumnDefinition Width="120" />
 				<ColumnDefinition Width="*" />
 			</Grid.ColumnDefinitions>
-			<SearchBox HorizontalAlignment="Left" VerticalAlignment="Top" Margin="1461,10,0,0" Height="45" Width="329" QuerySubmitted="SearchBox_QuerySubmitted" Grid.Column="1"/>
+			<SearchBox HorizontalAlignment="Left" FocusOnKeyboardInput="True" VerticalAlignment="Top" Margin="1461,60,0,0" Height="45" Width="329" QuerySubmitted="SearchBox_QuerySubmitted" Grid.Column="1"/>
 
 			<Button x:Name="backButton" Margin="39,59,39,0"
 				Command="{Binding NavigationHelper.GoBackCommand, ElementName=pageRoot}"

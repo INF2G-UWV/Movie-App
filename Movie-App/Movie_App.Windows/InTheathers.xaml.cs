@@ -98,6 +98,11 @@ namespace Movie_App
         {
             navigationHelper.OnNavigatedFrom(e);
         }
+		
+		private void ComboBox_SelectionChanged(object sender, SelectionChangedEventArgs e)
+		{
+			// Add code to perform some action here.
+		}
 
         #endregion
     }

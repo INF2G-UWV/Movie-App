@@ -7,6 +7,8 @@
     xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
     xmlns:RottenTomatoes="using:Movie_App.DataModel.RottenTomatoes"
     xmlns:DataModel="using:Movie_App.DataModel"
+    xmlns:RottenTomatoesSearch="using:Movie_App.DataModel.RottenTomatoesSearch"
+    xmlns:Interactivity="using:Microsoft.Xaml.Interactivity" xmlns:Core="using:Microsoft.Xaml.Interactions.Core"
     x:Name="pageRoot"
     x:Class="Movie_App.InTheathers"
     DataContext="{Binding DefaultViewModel, RelativeSource={RelativeSource Mode=Self}}"
@@ -19,7 +21,7 @@
     -->
 	<Grid Width="1920" Height="1080">
 		<Grid.DataContext>
-			<DataModel:ViewModel/>
+			<RottenTomatoesSearch:SearchModel/>
 		</Grid.DataContext>
 		<Grid.Background>
 			<ImageBrush Stretch="Fill" ImageSource="Assets/images/background.png"/>
@@ -38,9 +40,54 @@
             TODO: Content should be placed within the following grid 
                   to show details for the current item
         -->
-		<Grid Grid.Row="1" x:Name="contentRegion"/>
+		<Grid Grid.Row="1" x:Name="contentRegion" Margin="0,0,1050,0">
+			<Grid.RowDefinitions>
+				<RowDefinition Height="100"/>
+				<RowDefinition Height="240"/>
+				<RowDefinition Height="65"/>
+				<RowDefinition Height="65"/>
+				<RowDefinition Height="65"/>
+				<RowDefinition Height="65"/>
+				<RowDefinition Height="225"/>
+				<RowDefinition Height="100"/>
+			</Grid.RowDefinitions>
+			<Grid.ColumnDefinitions>
+				<ColumnDefinition Width="80"/>
+				<ColumnDefinition Width="235"/>
+				<ColumnDefinition Width="485"/>
+				<ColumnDefinition/>
+			</Grid.ColumnDefinitions>
+			<TextBlock x:Name="Place" HorizontalAlignment="Left" TextWrapping="Wrap" VerticalAlignment="Top"
+				FontFamily="Century Gothic" FontSize="26.667" FontWeight="Bold" Margin="10,10,0,0" Height="35"
+				Grid.Row="2" Width="215" Text="Place:" Grid.Column="1"/>
+			<TextBlock x:Name="Cinema" HorizontalAlignment="Left" TextWrapping="Wrap" VerticalAlignment="Top"
+				FontFamily="Century Gothic" FontSize="26.667" FontWeight="Bold" Margin="10,10,0,0" Height="35"
+				Grid.Row="3" Width="215" Text="Cinema:" Grid.Column="1"/>
+			<TextBlock x:Name="Address" HorizontalAlignment="Left" TextWrapping="Wrap" VerticalAlignment="Top"
+				FontFamily="Century Gothic" FontSize="26.667" FontWeight="Bold" Margin="10,10,0,0" Height="35"
+				Grid.Row="4" Width="215" Grid.Column="1">
+				<Run Text="Ad"/>
+				<Run Text="d"/>
+				<Run Text="ress:"/>
+			</TextBlock>
+			<TextBlock x:Name="Times" HorizontalAlignment="Left" TextWrapping="Wrap" VerticalAlignment="Top"
+				FontFamily="Century Gothic" FontSize="26.667" FontWeight="Bold" Margin="10,10,0,0" Height="35"
+				Grid.Row="5" Width="215" Text="Times:" Grid.Column="1"/>
+			<ComboBox x:Name="CinameDropDown" ItemsSource="{Binding}" SelectionChanged="ComboBox_SelectionChanged" HorizontalAlignment="Left" VerticalAlignment="Top" Width="465" Grid.Column="2" Margin="10,10,0,0" Grid.Row="3" Height="35">
+				<x:String>Emmen</x:String>
+				<x:String>Klazienaveen</x:String>
+			</ComboBox>
+			<TextBlock x:Name="PlaceBinding" HorizontalAlignment="Left" TextWrapping="Wrap" VerticalAlignment="Top"
+				FontFamily="Century Gothic" FontSize="26.667" Margin="10,10,0,0" Height="35"
+				Grid.Row="2" Width="465" Grid.Column="2"/>
+			<TextBlock x:Name="AddressBinding" HorizontalAlignment="Left" TextWrapping="Wrap" VerticalAlignment="Top"
+				FontFamily="Century Gothic" FontSize="26.667" Margin="10,10,0,0" Height="35"
+				Grid.Row="4" Width="465" Grid.Column="2"/>
+			<TextBlock x:Name="TimesBinding" HorizontalAlignment="Left" TextWrapping="Wrap" VerticalAlignment="Top"
+				FontFamily="Century Gothic" FontSize="26.667" Margin="10,10,0,0" Height="35"
+				Grid.Row="5" Width="465" Grid.Column="2"/>
+		</Grid>
 
-		<!-- Back button and page title -->
 		<Grid>
 			<Grid.DataContext>
 				<RottenTomatoes:RottenTomatoesClips/>
@@ -55,12 +102,22 @@
 				AutomationProperties.Name="Back"
 				AutomationProperties.AutomationId="BackButton"
 				AutomationProperties.ItemType="Navigation Button"/>
-			<TextBlock x:Name="pageTitle" Text="{Binding [0].title}" Style="{StaticResource HeaderTextBlockStyle}" Grid.Column="1" 
+			<TextBlock x:Name="pageTitle" Text="Cinema Times" Style="{StaticResource HeaderTextBlockStyle}" Grid.Column="1" 
 				IsHitTestVisible="false" TextWrapping="NoWrap" VerticalAlignment="Bottom" Margin="0,0,30,40">
 				<TextBlock.DataContext>
 					<RottenTomatoes:MoviesClipsSource/>
 				</TextBlock.DataContext>
 			</TextBlock>
+			<Button Content="Return to Home" HorizontalAlignment="Right" VerticalAlignment="Top" Grid.Column="1" Margin="959,47,100,0" Height="46" Width="236" FontFamily="Letter Gothic Std" FontSize="16">
+				<Interactivity:Interaction.Behaviors>
+					<Core:EventTriggerBehavior EventName="Click">
+						<Core:NavigateToPageAction TargetPage="Movie_App.MainPage"/>
+					</Core:EventTriggerBehavior>
+				</Interactivity:Interaction.Behaviors>
+			</Button>
+		</Grid>
+		<Grid x:Name="YouTube_Video" HorizontalAlignment="Left" Height="940" VerticalAlignment="Top" Width="1050" Margin="870,0,0,0" Grid.Row="1">
+			
 		</Grid>
 	</Grid>
 </Page>

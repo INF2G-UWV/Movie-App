@@ -15,7 +15,14 @@ namespace Movie_App.DataModel.RottenTomatoesSearch
         {
             get
             {
-                search.Uri = new Uri(baseUrl + "/movies.json?apikey=" + apikey + "&q=" + NameStorage.QuerySearch);
+                if (NameStorage.QuerySearch != null)
+                {
+                    search.Uri = new Uri(baseUrl + "/movies.json?apikey=" + apikey + "&q=" + NameStorage.QuerySearch);
+                }
+                else
+                {
+                    search.Uri = new Uri(baseUrl + "/movies.json?apikey=" + apikey + "&q=jurassic");
+                }
                 return search;
             }
         }

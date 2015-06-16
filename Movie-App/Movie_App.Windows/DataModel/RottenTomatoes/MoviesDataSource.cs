@@ -42,7 +42,7 @@ namespace Movie_App.DataModel.RottenTomatoes
             var wc = new HttpClient();
             var response = await wc.GetStringAsync(API_CALL);
 
-            var rt = JsonConvert.DeserializeObject<RottenTomatoes>(response);
+            dynamic rt = JsonConvert.DeserializeObject(response);
             foreach (var m in rt.movies)
             {
                 var temp = new RottenTomatoes();
@@ -62,7 +62,7 @@ namespace Movie_App.DataModel.RottenTomatoes
                 var imageTemp = m.posters.original;
                 var replacement = "http://";
                 var rgx = "(http://resizing.flixster.com(.*((54x77)|(54x80)|(54x81)|(52x81)|(51x81)|(53x81))/))";
-                temp.PosterOriginal = Regex.Replace(imageTemp, rgx, replacement);
+                temp.PosterOriginal = Regex.Replace((string) imageTemp, (string) rgx, (string) replacement);
 
                 Add(temp);
             }

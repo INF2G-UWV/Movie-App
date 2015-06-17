@@ -81,7 +81,7 @@ namespace Movie_App
 
         private void loadIframe()
         {
-            string str = string.Format(@"<iframe width='1040' height='910' src='http://www.videodetective.com/embed/video/?publishedid=613340&amp;options=false&amp;autostart=false&amp;playlist=none&amp;width=1040&amp;height=910' runat='server' frameborder='0' scrolling='no'></iframe>");
+            string str = string.Format(@"<body bgcolor='#000000'><iframe width='960' height='540' src='http://www.videodetective.com/embed/video/?publishedid=613340&amp;options=false&amp;autostart=false&amp;playlist=none&amp;width=960&amp;height=540' runat='server' frameborder='0' scrolling='no'></iframe>");
             videoView.NavigateToString(str);
         }
         

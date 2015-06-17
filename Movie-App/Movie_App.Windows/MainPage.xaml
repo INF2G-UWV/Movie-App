@@ -7,7 +7,7 @@
     xmlns:DataModel="using:Movie_App.DataModel"
     xmlns:Interactivity="using:Microsoft.Xaml.Interactivity" xmlns:Core="using:Microsoft.Xaml.Interactions.Core"
     x:Class="Movie_App.MainPage"
-    mc:Ignorable="d" Width="1920" Height="1080">
+    mc:Ignorable="d" Width="Auto" Height="Auto">
 	<Page.Resources>
 		<DataTemplate x:Key="MovieDataTemplate">
 			<Grid Height="110" Width="480" Margin="10" >
@@ -283,18 +283,21 @@
 		</DataTemplate>
 	</Page.Resources>
 
-	<Grid>
-		<Grid.Background>
-			<ImageBrush Stretch="Fill" ImageSource="Assets/images/background.png"/>
-		</Grid.Background>
-		<Grid.DataContext>
-			<DataModel:ViewModel/>
-		</Grid.DataContext>
-		<Image x:Name="LogoImage" Source="Assets/images/logo_app.png" Stretch="Fill" HorizontalAlignment="Left" VerticalAlignment="Top" Margin="10,10,0,0" Height="305" Width="277"/>
-		<TextBlock x:Name="Titel" HorizontalAlignment="Left" TextWrapping="Wrap" Text="MOVIE-APP" VerticalAlignment="Top" Margin="360,84,0,0" FontSize="96" FontFamily="Letter Gothic Std" Height="93"/>
-		<TextBlock x:Name="Slogan" HorizontalAlignment="Left" TextWrapping="Wrap" Text="Your source for Movies!" VerticalAlignment="Top" FontSize="42.667" Margin="326,182,0,0" FontFamily="Letter Gothic Std"/>
-		<FlipView x:Name="MoviesView" HorizontalAlignment="Left" VerticalAlignment="Top" Height="749" Margin="408,317,0,0" Width="1504" ItemTemplate="{StaticResource MovieDataTemplate5}" ItemsSource="{Binding Query.Results}" Background="{x:Null}" Foreground="White" SelectionChanged="MoviesView_SelectionChanged"/>
-		<ListView x:Name="movieListview" ScrollViewer.HorizontalScrollBarVisibility="Disabled" ScrollViewer.VerticalScrollBarVisibility="Hidden" HorizontalAlignment="Left" Height="744" VerticalAlignment="Top" Width="397" Margin="10,320,0,0" ItemTemplate="{StaticResource MovieDataTemplate17}" ItemsSource="{Binding Query.Results}" SelectionChanged="movieListview_SelectionChanged"/>
-		<SearchBox x:Name="searchBoxTemp" FocusOnKeyboardInput="True" HorizontalAlignment="Left" VerticalAlignment="Top" Margin="1581,60,0,0" Height="45" Width="329" QueryChanged="SearchBox_QueryChanged_1" QuerySubmitted="searchBoxTemp_QuerySubmitted"/>
-	</Grid>
+	<Viewbox HorizontalAlignment="Left" VerticalAlignment="Top" Stretch="Fill">
+
+		<Grid Height="1080" Width="1920">
+			<Grid.Background>
+				<ImageBrush Stretch="Fill" ImageSource="Assets/images/background.png"/>
+			</Grid.Background>
+			<Grid.DataContext>
+				<DataModel:ViewModel/>
+			</Grid.DataContext>
+			<Image x:Name="LogoImage" Source="Assets/images/logo_app.png" Stretch="Fill" HorizontalAlignment="Left" VerticalAlignment="Top" Margin="10,10,0,0" Height="305" Width="277"/>
+			<TextBlock x:Name="Titel" HorizontalAlignment="Left" TextWrapping="Wrap" Text="MOVIE-APP" VerticalAlignment="Top" Margin="360,84,0,0" FontSize="96" FontFamily="Letter Gothic Std" Height="93"/>
+			<TextBlock x:Name="Slogan" HorizontalAlignment="Left" TextWrapping="Wrap" Text="Your source for Movies!" VerticalAlignment="Top" FontSize="42.667" Margin="326,182,0,0" FontFamily="Letter Gothic Std"/>
+			<FlipView x:Name="MoviesView" HorizontalAlignment="Left" VerticalAlignment="Top" Height="749" Margin="408,317,0,0" Width="1504" ItemTemplate="{StaticResource MovieDataTemplate5}" ItemsSource="{Binding Query.Results}" Background="{x:Null}" Foreground="White" SelectionChanged="MoviesView_SelectionChanged"/>
+			<ListView x:Name="movieListview" ScrollViewer.HorizontalScrollBarVisibility="Disabled" ScrollViewer.VerticalScrollBarVisibility="Hidden" HorizontalAlignment="Left" Height="744" VerticalAlignment="Top" Width="397" Margin="10,320,0,0" ItemTemplate="{StaticResource MovieDataTemplate17}" ItemsSource="{Binding Query.Results}" SelectionChanged="movieListview_SelectionChanged"/>
+			<SearchBox x:Name="searchBoxTemp" FocusOnKeyboardInput="True" HorizontalAlignment="Left" VerticalAlignment="Top" Margin="1581,60,0,0" Height="45" Width="329" QueryChanged="SearchBox_QueryChanged_1" QuerySubmitted="searchBoxTemp_QuerySubmitted"/>
+		</Grid>
+	</Viewbox>
 </Page>

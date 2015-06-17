@@ -23,11 +23,11 @@ namespace Movie_App.DataModel.RottenTomatoesClips
         /// </summary>
         private bool hasExecutedQuery;
 
-        public ObservableCollection<RottenTomatoesClips> results = new ObservableCollection<RottenTomatoesClips>();
+        public ObservableCollection<TheaterItem> results = new ObservableCollection<TheaterItem>();
         public Uri Uri { get; set; }
         // Executes a query to obtain information about movies.
         // This property also stores the movies in a collection class.
-        public ObservableCollection<RottenTomatoesClips> Results
+        public ObservableCollection<TheaterItem> Results
         {
             get
             {

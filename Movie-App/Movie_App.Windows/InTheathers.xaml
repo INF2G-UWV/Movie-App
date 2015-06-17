@@ -84,9 +84,7 @@
 				<TextBlock x:Name="Times" HorizontalAlignment="Left" TextWrapping="Wrap" VerticalAlignment="Top"
 					FontFamily="Century Gothic" FontSize="26.667" FontWeight="Bold" Margin="10,10,0,0" Height="35"
 					Grid.Row="5" Width="215" Text="Times:" Grid.Column="1"/>
-				<ComboBox x:Name="CinameDropDown" ItemsSource="{Binding [0].ScrapeList[0].Name}" SelectionChanged="ComboBox_SelectionChanged" HorizontalAlignment="Left" VerticalAlignment="Top" Width="465" Grid.Column="2" Margin="10,10,0,0" Grid.Row="3" Height="35" DataContext="{Binding [0].ScrapeList[0].Name}">
-				
-				</ComboBox>
+				<ComboBox x:Name="CinameDropDown" SelectionChanged="ComboBox_SelectionChanged" HorizontalAlignment="Left" VerticalAlignment="Top" Width="465" Grid.Column="2" Margin="10,10,0,0" Grid.Row="3" Height="35" DataContext="{Binding ClipsSource[0].ScrapeList[0].Name}"/>
 				<TextBlock x:Name="PlaceBinding" HorizontalAlignment="Left" TextWrapping="Wrap" VerticalAlignment="Top"
 					FontFamily="Century Gothic" FontSize="26.667" Margin="10,10,0,0" Height="35"
 					Grid.Row="2" Width="465" Grid.Column="2" Text="{Binding ClipsSource[0].ClipList[0].clips[0].title}">
@@ -97,7 +95,7 @@
 				</TextBlock>
 				<TextBlock x:Name="AddressBinding" HorizontalAlignment="Left" TextWrapping="Wrap" VerticalAlignment="Top"
 					FontFamily="Century Gothic" FontSize="26.667" Margin="10,10,0,0" Height="35"
-					Grid.Row="4" Width="465" Grid.Column="2">
+					Grid.Row="4" Width="465" Grid.Column="2" Text="{Binding ClipsSource[0].ScrapeList[0].Address}">
 					<TextBlock.DataContext>
 						<RottenTomatoesClips:ClipsModel/>
 					</TextBlock.DataContext>

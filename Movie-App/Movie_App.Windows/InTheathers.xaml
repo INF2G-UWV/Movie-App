@@ -12,7 +12,7 @@
     xmlns:RottenTomatoesClips="using:Movie_App.DataModel.RottenTomatoesClips"
     x:Name="pageRoot"
     x:Class="Movie_App.InTheathers"
-    mc:Ignorable="d" d:DataContext="{d:DesignInstance RottenTomatoesClips:MoviesClipsSource}">
+    mc:Ignorable="d">
 
     <!--
         This grid acts as a root panel for the page that defines two rows:

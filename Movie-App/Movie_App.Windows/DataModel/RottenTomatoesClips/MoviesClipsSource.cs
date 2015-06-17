@@ -6,30 +6,39 @@ using System.Linq;
 using System.Net.Http;
 using System.Text;
 using Newtonsoft.Json;
+using System.IO;
+using System.IO.Compression;
+using Windows.UI.Popups;
 
 namespace Movie_App.DataModel.RottenTomatoesClips
 {
-    internal class MoviesClipsSource : ObservableCollection<TheaterItem>
+    public class MoviesClipsSource : ObservableCollection<TheaterItem>
     {
-        private const string apiKey = "xjndv3dfyfn2bzxvwmuqj8gz";
-        private const string baseURL = "http://api.rottentomatoes.com/api/public/v1.0";
-        private readonly string API_CALL;
         private readonly TheaterScraper scraper = new TheaterScraper();
         private List<ScrapeItem> scrapeItems = new List<ScrapeItem>();
         private List<RottenTomatoesClips> rottenTomatoesClipItems = new List<RottenTomatoesClips>();
         // private const string API_CALL = movieSearch;
+        /// <summary>
+        ///     Constant fields
+        /// </summary>
+        private bool hasExecutedQuery;
 
-        public MoviesClipsSource()
+        public ObservableCollection<RottenTomatoesClips> results = new ObservableCollection<RottenTomatoesClips>();
+        public Uri Uri { get; set; }
+        // Executes a query to obtain information about movies.
+        // This property also stores the movies in a collection class.
+        public ObservableCollection<RottenTomatoesClips> Results
         {
-            if (NameStorage.MovieId != null)
+            get
             {
-                API_CALL = baseURL + "/movies/" + NameStorage.MovieId + "/clips.json?apikey=" + apiKey;
+                if (!hasExecutedQuery)
+                {
+                    GetClipData();
+                    
+                }
+
+                return results;
             }
-            else
-            {
-                API_CALL = baseURL + "/movies/770687943/clips.json?apikey=" + apiKey;
-            }
-            GetClipData();
         }
 
 
@@ -72,41 +81,80 @@ namespace Movie_App.DataModel.RottenTomatoesClips
 
         private async void GetClipData()
         {
-            var wc = new HttpClient();
-            var response = await wc.GetStringAsync(API_CALL);
-
-            var rt = JsonConvert.DeserializeObject<RottenTomatoesClips>(response);
-            foreach (var m in rt.clips)
+            try
             {
-                
-                var temp = new RottenTomatoesClips();
-                temp.clips.Add(m);
-                //temp.title = m.clips[0].title;
-                //temp.duration = m.clips[0].duration;
-                //temp.alternateClip = m.clips[0].links.alternate;
-                //temp.thumbnail = m.clips[0].thumbnail;
-                //temp.Title = m.title;
-                //temp.Runtime = m.runtime.ToString();
-                //temp.ReleaseDatesTheater = m.release_dates.theater;
-                //temp.Synopsis = m.synopsis;
-                //temp.RatingsAudience = m.ratings.audience_score.ToString();
-                //temp.movieId = m.id;
-                ////temp.NameActor = m.abridged_cast.name; (kan geen 'name' vinden)
-                //for (var i = 0; i < m.abridged_cast.Count; i++)
-                //{
-                //    temp.NameActor += m.abridged_cast[i].name + "\n\n";
-                //}
-                //// using a temponary variable to store the image source of hte api, so it could be manipulated with regex
-                //var imageTemp = m.posters.original;
-                //var replacement = "http://";
-                //var rgx = "(http://resizing.flixster.com(.*((54x77)|(54x80)|(54x81)|(52x81)|(51x81)|(53x81))/))";
-                //temp.PosterOriginal = Regex.Replace(imageTemp, rgx, replacement);
-               
-                rottenTomatoesClipItems.Add(temp);
-            }
+                var wc = new HttpClient();
+                var response = await wc.GetStringAsync(Uri);
 
-            //scraper.Scrape(Items[0].clips[0].title, "Emmen", 0);
-            GetScrapeData(rottenTomatoesClipItems[0].clips[0].title,"Emmen",0);
+                var responseText = "";
+
+                var headerValues = Enumerable.Empty<string>();
+
+                if (response.Content.Headers.TryGetValues("Content-Encoding", out headerValues))
+                {
+                    foreach (var headerValue in response.Content.Headers.GetValues("Content-Encoding"))
+                    {
+                        if (headerValue == "gzip")
+                        {
+                            using (var responseStream = await response.Content.ReadAsStreamAsync())
+                            using (var decompressedStream = new GZipStream(responseStream, CompressionMode.Decompress))
+                            using (var streamReader = new StreamReader(decompressedStream))
+                            {
+                                responseText = streamReader.ReadToEnd();
+                            }
+                        }
+                    }
+                }
+                if (responseText == "")
+                {
+                    var stream = await response.Content.ReadAsStreamAsync();
+                    var streamReader = new StreamReader(stream);
+                    responseText = streamReader.ReadToEnd();
+                }
+
+                // Convert the stream to JSON so that it is easier to iterate through
+                // each item in the stream.
+                dynamic myObj = JsonConvert.DeserializeObject(responseText);
+                dynamic movies = myObj.movies;
+                dynamic total = myObj.total;
+                foreach (var m in movies.clips)
+                {
+
+                    var temp = new RottenTomatoesClips();
+                    temp.clips.Add(m);
+                    //temp.title = m.clips[0].title;
+                    //temp.duration = m.clips[0].duration;
+                    //temp.alternateClip = m.clips[0].links.alternate;
+                    //temp.thumbnail = m.clips[0].thumbnail;
+                    //temp.Title = m.title;
+                    //temp.Runtime = m.runtime.ToString();
+                    //temp.ReleaseDatesTheater = m.release_dates.theater;
+                    //temp.Synopsis = m.synopsis;
+                    //temp.RatingsAudience = m.ratings.audience_score.ToString();
+                    //temp.movieId = m.id;
+                    ////temp.NameActor = m.abridged_cast.name; (kan geen 'name' vinden)
+                    //for (var i = 0; i < m.abridged_cast.Count; i++)
+                    //{
+                    //    temp.NameActor += m.abridged_cast[i].name + "\n\n";
+                    //}
+                    //// using a temponary variable to store the image source of hte api, so it could be manipulated with regex
+                    //var imageTemp = m.posters.original;
+                    //var replacement = "http://";
+                    //var rgx = "(http://resizing.flixster.com(.*((54x77)|(54x80)|(54x81)|(52x81)|(51x81)|(53x81))/))";
+                    //temp.PosterOriginal = Regex.Replace(imageTemp, rgx, replacement);
+
+                    rottenTomatoesClipItems.Add(temp);
+                }
+
+                //scraper.Scrape(Items[0].clips[0].title, "Emmen", 0);
+                GetScrapeData(rottenTomatoesClipItems[0].clips[0].title, "Emmen", 0);
+                hasExecutedQuery = true;
+            }
+            catch(Exception)
+            {
+                hasExecutedQuery = false;
+                showErrorMessage();
+            }
         }
 
         private void Merge()
@@ -124,6 +172,32 @@ namespace Movie_App.DataModel.RottenTomatoesClips
             }
             this.Add(temp);
 
+        }
+
+        private async void showErrorMessage()
+        {
+            var msg = new MessageDialog
+                ("The service is unavailable or there was a problem with the service.");
+
+            msg.Commands.Add(new UICommand("Try again?"));
+
+            msg.Commands.Add(new UICommand("I'll try again later."));
+
+            msg.DefaultCommandIndex = 0;
+            msg.CancelCommandIndex = 1;
+
+            var results = await msg.ShowAsync();
+
+            if (results.Label == "I'll try again later.")
+            {
+                hasExecutedQuery = true;
+                Results.Clear();
+            }
+            else
+            {
+                hasExecutedQuery = false;
+                Results.Clear();
+            }
         }
 
         /// <summary>

@@ -84,7 +84,7 @@ namespace Movie_App.DataModel.RottenTomatoesClips
             try
             {
                 var wc = new HttpClient();
-                var response = await wc.GetStringAsync(Uri);
+                var response = await wc.GetAsync(Uri);
 
                 var responseText = "";
 

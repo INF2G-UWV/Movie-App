@@ -6,7 +6,7 @@ using System.Threading.Tasks;
 
 namespace Movie_App.DataModel.RottenTomatoesClips
 {
-    class TheaterItem
+    public class TheaterItem
     {
         private List<RottenTomatoesClips> clipList = new List<RottenTomatoesClips>(); 
         private List<ScrapeItem> scrapeList = new List<ScrapeItem>();

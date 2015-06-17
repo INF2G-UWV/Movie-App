@@ -2,7 +2,7 @@
 
 namespace Movie_App.DataModel.RottenTomatoesClips
 {
-    internal class ScrapeItem
+   public class ScrapeItem
     {
         /// <summary>
         ///     Constructor

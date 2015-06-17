@@ -57,6 +57,13 @@ namespace Movie_App.DataModel.RottenTomatoesClips
                         biosItem.Name = (string)m.name;
                         biosItem.Address = (string)m.address;
                         //biosItem.times = m.times;
+                        biosItem.timeTable = (string)m.times;
+                        //for (int i = 0; i < biosItem.Time.Count; i++)
+                        //{
+                            
+                        //}
+                        //biosItem.timeTable += FormatTime((string)m.times) + "\n\n";
+                        
                         biosItem.Time = FormatTime((string)m.times);
                         scrapeItems.Add(biosItem);
                     }

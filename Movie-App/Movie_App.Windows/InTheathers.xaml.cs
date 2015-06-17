@@ -50,6 +50,7 @@ namespace Movie_App
             this.InitializeComponent();
             this.navigationHelper = new NavigationHelper(this);
             this.navigationHelper.LoadState += navigationHelper_LoadState;
+            loadIframe();
         }
 
         /// <summary>
@@ -76,6 +77,12 @@ namespace Movie_App
             // TODO: Assign a bindable group to this.DefaultViewModel["Group"]
             // TODO: Assign a collection of bindable items to this.DefaultViewModel["Items"]
             // TODO: Assign the selected item to this.flipView.SelectedItem
+        }
+
+        private void loadIframe()
+        {
+            string str = string.Format(@"<iframe width='1040' height='910' src='http://www.videodetective.com/embed/video/?publishedid=613340&amp;options=false&amp;autostart=false&amp;playlist=none&amp;width=1040&amp;height=910' runat='server' frameborder='0' scrolling='no'></iframe>");
+            videoView.NavigateToString(str);
         }
         
         #region NavigationHelper registration

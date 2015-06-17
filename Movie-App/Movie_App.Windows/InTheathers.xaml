@@ -20,9 +20,7 @@
         * Row 1 contains the rest of the page layout
     -->
 	<Grid Width="1920" Height="1080">
-		<Grid.DataContext>
-			<RottenTomatoesSearch:SearchModel/>
-		</Grid.DataContext>
+		
 		<Grid.Background>
 			<ImageBrush Stretch="Fill" ImageSource="Assets/images/background.png"/>
 		</Grid.Background>
@@ -89,9 +87,7 @@
 		</Grid>
 
 		<Grid>
-			<Grid.DataContext>
-				<RottenTomatoes:RottenTomatoesClips/>
-			</Grid.DataContext>
+		
 			<Grid.ColumnDefinitions>
 				<ColumnDefinition Width="120"/>
 				<ColumnDefinition Width="*"/>
@@ -104,9 +100,7 @@
 				AutomationProperties.ItemType="Navigation Button"/>
 			<TextBlock x:Name="pageTitle" Text="Cinema Times" Style="{StaticResource HeaderTextBlockStyle}" Grid.Column="1" 
 				IsHitTestVisible="false" TextWrapping="NoWrap" VerticalAlignment="Bottom" Margin="0,0,30,40">
-				<TextBlock.DataContext>
-					<RottenTomatoes:MoviesClipsSource/>
-				</TextBlock.DataContext>
+				
 			</TextBlock>
 			<Button Content="Return to Home" HorizontalAlignment="Right" VerticalAlignment="Top" Grid.Column="1" Margin="959,47,100,0" Height="46" Width="236" FontFamily="Letter Gothic Std" FontSize="16">
 				<Interactivity:Interaction.Behaviors>
@@ -117,6 +111,7 @@
 			</Button>
 		</Grid>
 		<Grid x:Name="YouTube_Video" HorizontalAlignment="Left" Height="940" VerticalAlignment="Top" Width="1050" Margin="870,0,0,0" Grid.Row="1">
+			<WebView x:Name="videoView" HorizontalAlignment="Left" Height="910" Margin="10,10,0,0" VerticalAlignment="Top" Width="1040"/>
 			
 		</Grid>
 	</Grid>

@@ -7,5 +7,6 @@
         public static string MovieId { get; set; }
 
         public static string QuerySearch { get; set; }
+        public static string PublishId { get; set; }
     }
 }

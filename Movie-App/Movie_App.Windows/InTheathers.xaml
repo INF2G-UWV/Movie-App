@@ -26,7 +26,7 @@
         * Row 0 contains the back button and page title
         * Row 1 contains the rest of the page layout
     -->
-		<Grid Width="1920" Height="1080">
+		<Grid Width="1920" Height="1080" Loaded="Grid_Loaded">
 		
 			<Grid.Background>
 				<ImageBrush Stretch="Fill" ImageSource="Assets/images/background.png"/>
@@ -82,11 +82,15 @@
 				
 				</ComboBox>
 				<TextBlock x:Name="PlaceBinding" HorizontalAlignment="Left" TextWrapping="Wrap" VerticalAlignment="Top"
-					FontFamily="Century Gothic" FontSize="26.667" Margin="10,10,0,0" Height="35"
-					Grid.Row="2" Width="465" Grid.Column="2"/>
+					FontFamily="Century Gothic" FontSize="26.667" Margin="10,10,0,0" Height="65"
+					Grid.Row="2" Width="545" Grid.Column="2" Text="{Binding [0].ClipList[0].clips[0].thumbnail}" Grid.ColumnSpan="2" Grid.RowSpan="2">
+					<TextBlock.DataContext>
+						<RottenTomatoesClips:MoviesClipsSource/>
+					</TextBlock.DataContext>
+				</TextBlock>
 				<TextBlock x:Name="AddressBinding" HorizontalAlignment="Left" TextWrapping="Wrap" VerticalAlignment="Top"
 					FontFamily="Century Gothic" FontSize="26.667" Margin="10,10,0,0" Height="35"
-					Grid.Row="4" Width="465" Grid.Column="2"/>
+					Grid.Row="4" Width="465" Grid.Column="2" Text="{Binding [0].ScrapeList[0].Time[0]}"/>
 				<TextBlock x:Name="TimesBinding" HorizontalAlignment="Left" TextWrapping="Wrap" VerticalAlignment="Top"
 					FontFamily="Century Gothic" FontSize="26.667" Margin="10,10,0,0" Height="35"
 					Grid.Row="5" Width="465" Grid.Column="2"/>
@@ -115,9 +119,10 @@
 				</Button>
 			</Grid>
 			<Grid x:Name="YouTube_Video" HorizontalAlignment="Left" Height="940" VerticalAlignment="Top" Width="1050" Margin="870,0,0,0" Grid.Row="1">
-				<WebView x:Name="videoView" HorizontalAlignment="Center" Height="580" Margin="10,10,0,0" VerticalAlignment="Center" Width="1000" ScrollViewer.VerticalScrollBarVisibility="Disabled" ScrollViewer.HorizontalScrollBarVisibility="Disabled" DataContext="{Binding [0].clips.Capacity}"/>
+				<WebView x:Name="videoView" HorizontalAlignment="Center" Height="580" Margin="10,10,0,0" VerticalAlignment="Center" Width="1000" ScrollViewer.VerticalScrollBarVisibility="Disabled" ScrollViewer.HorizontalScrollBarVisibility="Disabled" DataContext="{Binding [0].clips.Capacity}" ContentLoading="videoView_ContentLoading" KeyDown="videoView_KeyDown"/>
 			
 			</Grid>
+			<Button Content="Click here to play the trailer" HorizontalAlignment="Left" Margin="897,195,0,0" VerticalAlignment="Top" Click="Button_Click" Height="568" Width="1016" Grid.Row="1" Opacity="0"/>
 		</Grid>
 	</Viewbox>
 </Page>

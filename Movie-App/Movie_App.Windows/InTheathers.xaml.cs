@@ -14,6 +14,8 @@ using Windows.UI.Xaml.Input;
 using Windows.UI.Xaml.Media;
 using Windows.UI.Xaml.Navigation;
 using Movie_App.Common;
+using Movie_App.DataModel.RottenTomatoesClips;
+using Movie_App.DataModel;
 
 
 
@@ -53,7 +55,6 @@ namespace Movie_App
             this.InitializeComponent();
             this.navigationHelper = new NavigationHelper(this);
             this.navigationHelper.LoadState += navigationHelper_LoadState;
-            loadIframe();
         }
 
         /// <summary>
@@ -84,7 +85,7 @@ namespace Movie_App
 
         private void loadIframe()
         {
-            var str = string.Format(@"<body style='background-image:url(http://movies.waveshapes.nl/bg.jpg)'><iframe width='960' height='540' src='http://www.videodetective.com/embed/video/?publishedid=613340&amp;options=false&amp;autostart=true&amp;playlist=none&amp;width=960&amp;height=540' runat='server' frameborder='0' scrolling='no'></iframe>");
+            var str = string.Format(@"<body style='background-image:url(http://movies.waveshapes.nl/bg.jpg)'><iframe width='960' height='540' src='http://www.videodetective.com/embed/video/?publishedid=" + NameStorage.PublishId + "&amp;options=false&amp;autostart=true&amp;playlist=none&amp;width=960&amp;height=540' runat='server' frameborder='0' scrolling='no'></iframe>");
             videoView.NavigateToString(str);
         }
         
@@ -112,6 +113,26 @@ namespace Movie_App
 		private void ComboBox_SelectionChanged(object sender, SelectionChangedEventArgs e)
 		{
 			// Add code to perform some action here.
+		}
+
+		private void Grid_Loaded(object sender, Windows.UI.Xaml.RoutedEventArgs e)
+		{
+            //loadIframe();
+		}
+
+		private void Button_Click(object sender, Windows.UI.Xaml.RoutedEventArgs e)
+		{
+			loadIframe();
+		}
+
+		private void videoView_ContentLoading(Windows.UI.Xaml.Controls.WebView sender, Windows.UI.Xaml.Controls.WebViewContentLoadingEventArgs args)
+		{
+			// TODO: Add event handler implementation here.
+		}
+
+		private void videoView_KeyDown(object sender, Windows.UI.Xaml.Input.KeyRoutedEventArgs e)
+		{
+			loadIframe();
 		}
 
         #endregion

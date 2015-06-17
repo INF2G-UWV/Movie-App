@@ -6,6 +6,7 @@ using System.Linq;
 using System.Net.Http;
 using System.Text;
 using Newtonsoft.Json;
+using System.Text.RegularExpressions;
 
 namespace Movie_App.DataModel.RottenTomatoesClips
 {
@@ -78,26 +79,20 @@ namespace Movie_App.DataModel.RottenTomatoesClips
             var rt = JsonConvert.DeserializeObject<RottenTomatoesClips>(response);
             foreach (var m in rt.clips)
             {
-                
                 var temp = new RottenTomatoesClips();
+                var imageTemp ="";
                 temp.clips.Add(m);
-                //temp.title = m.clips[0].title;
-                //temp.duration = m.clips[0].duration;
-                //temp.alternateClip = m.clips[0].links.alternate;
-                //temp.thumbnail = m.clips[0].thumbnail;
-                //temp.Title = m.title;
-                //temp.Runtime = m.runtime.ToString();
-                //temp.ReleaseDatesTheater = m.release_dates.theater;
-                //temp.Synopsis = m.synopsis;
-                //temp.RatingsAudience = m.ratings.audience_score.ToString();
-                //temp.movieId = m.id;
-                ////temp.NameActor = m.abridged_cast.name; (kan geen 'name' vinden)
-                //for (var i = 0; i < m.abridged_cast.Count; i++)
-                //{
-                //    temp.NameActor += m.abridged_cast[i].name + "\n\n";
-                //}
+                for (int i = 0; i < temp.clips.Count; i++)
+                {
+                    imageTemp = temp.clips[i].thumbnail;
+                }
+                var replacement = "";
+                var rgx = "(http://content.internetvideoarchive.com/content/photos/.*/)";
+                NameStorage.PublishId = sep(Regex.Replace(imageTemp, rgx, replacement));
+
+                
                 //// using a temponary variable to store the image source of hte api, so it could be manipulated with regex
-                //var imageTemp = m.posters.original;
+                //
                 //var replacement = "http://";
                 //var rgx = "(http://resizing.flixster.com(.*((54x77)|(54x80)|(54x81)|(52x81)|(51x81)|(53x81))/))";
                 //temp.PosterOriginal = Regex.Replace(imageTemp, rgx, replacement);
@@ -107,6 +102,17 @@ namespace Movie_App.DataModel.RottenTomatoesClips
 
             //scraper.Scrape(Items[0].clips[0].title, "Emmen", 0);
             GetScrapeData(rottenTomatoesClipItems[0].clips[0].title,"Emmen",0);
+        }
+
+        public static string sep(string s)
+        {
+            int l = s.IndexOf("_");
+            if (l > 0)
+            {
+                return s.Substring(0, l);
+            }
+            return "";
+
         }
 
         private void Merge()

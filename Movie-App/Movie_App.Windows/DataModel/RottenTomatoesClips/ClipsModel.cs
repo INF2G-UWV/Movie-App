@@ -17,11 +17,11 @@ namespace Movie_App.DataModel.RottenTomatoesClips
             {
                 if (NameStorage.MovieId != null)
                 {
-                    clipsSource.Uri = new Uri(baseUrl + "/movies.json?apikey=" + apikey + "&q=" + NameStorage.MovieId);
+                    clipsSource.Uri = new Uri(baseUrl + "/movies/770672122/clips.json?apikey=" + apikey);
                 }
                 else
                 {
-                    clipsSource.Uri = new Uri(baseUrl + "/movies.json?apikey=" + apikey + "&q=jurassic");
+                    clipsSource.Uri = new Uri(baseUrl + "/movies/770672122/clips.json?apikey=" + apikey);
                 }
                 return clipsSource;
             }

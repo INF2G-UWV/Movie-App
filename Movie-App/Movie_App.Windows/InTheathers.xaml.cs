@@ -132,8 +132,7 @@ namespace Movie_App
 
 		private void videoView_KeyDown(object sender, Windows.UI.Xaml.Input.KeyRoutedEventArgs e)
 		{
-			loadIframe();
-            butto
+			//loadIframe();
 		}
 
         #endregion

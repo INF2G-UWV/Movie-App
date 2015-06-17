@@ -83,7 +83,7 @@
 				</ComboBox>
 				<TextBlock x:Name="PlaceBinding" HorizontalAlignment="Left" TextWrapping="Wrap" VerticalAlignment="Top"
 					FontFamily="Century Gothic" FontSize="26.667" Margin="10,10,0,0" Height="65"
-					Grid.Row="2" Width="545" Grid.Column="2" Text="{Binding [0].ScrapeList[0].Title}" Grid.ColumnSpan="2" Grid.RowSpan="2">
+					Grid.Row="2" Width="545" Grid.Column="2" Text="{Binding [0].ScrapeList[0].Name}" Grid.ColumnSpan="2" Grid.RowSpan="2">
 					<TextBlock.DataContext>
 						<RottenTomatoesClips:MoviesClipsSource/>
 					</TextBlock.DataContext>

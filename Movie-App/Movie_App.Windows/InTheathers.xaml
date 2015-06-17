@@ -122,7 +122,7 @@
 				<WebView x:Name="videoView" HorizontalAlignment="Center" Height="580" Margin="10,10,0,0" VerticalAlignment="Center" Width="1000" ScrollViewer.VerticalScrollBarVisibility="Disabled" ScrollViewer.HorizontalScrollBarVisibility="Disabled" DataContext="{Binding [0].clips.Capacity}" ContentLoading="videoView_ContentLoading" KeyDown="videoView_KeyDown"/>
 			
 			</Grid>
-			<Button Content="Click here to play the trailer" HorizontalAlignment="Left" Margin="897,195,0,0" VerticalAlignment="Top" Click="Button_Click" Height="568" Width="1016" Grid.Row="1"/>
+			<Button Content="Click here to play the trailer" HorizontalAlignment="Left" Margin="897,2,0,0" VerticalAlignment="Top" Click="Button_Click" Height="170" Width="996" Grid.Row="1"/>
 		</Grid>
 	</Viewbox>
 </Page>

@@ -1,6 +1,6 @@
 ﻿using System.Collections.Generic;
 
-namespace Movie_App.DataModel.RottenTomatoes
+namespace Movie_App.DataModel.RottenTomatoesClips
 {
     public class RottenTomatoesClips
     {

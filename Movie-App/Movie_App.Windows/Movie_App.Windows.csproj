@@ -103,6 +103,7 @@
     <Prefer32Bit>true</Prefer32Bit>
   </PropertyGroup>
   <ItemGroup>
+    <Compile Include="DataModel\RottenTomatoesClips\TheaterItem.cs" />
     <Compile Include="SearchPage.xaml.cs">
       <DependentUpon>SearchPage.xaml</DependentUpon>
     </Compile>
@@ -112,7 +113,7 @@
     <Compile Include="Common\SuspensionManager.cs" />
     <Compile Include="DataModel\MovieData.cs" />
     <Compile Include="DataModel\NameStorage.cs" />
-    <Compile Include="DataModel\RottenTomatoesClips\TheaterItem.cs" />
+    <Compile Include="DataModel\RottenTomatoesClips\ScrapeItem.cs" />
     <Compile Include="DataModel\RottenTomatoesClips\TheaterScraper.cs" />
     <Compile Include="DataModel\RottenTomatoesSearch\MoviesDataSourceSearch.cs" />
     <Compile Include="DataModel\RottenTomatoesSearch\GetSearchData.cs" />
@@ -194,6 +195,7 @@
   </ItemGroup>
   <ItemGroup>
     <Folder Include="DataModel\RottenTomatoesDetails\" />
+    <Folder Include="SampleData\" />
   </ItemGroup>
   <PropertyGroup Condition=" '$(VisualStudioVersion)' == '' or '$(VisualStudioVersion)' &lt; '12.0' ">
     <VisualStudioVersion>12.0</VisualStudioVersion>

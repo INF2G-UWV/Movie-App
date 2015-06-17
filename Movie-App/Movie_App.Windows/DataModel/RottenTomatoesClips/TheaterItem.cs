@@ -1,21 +1,35 @@
-﻿using System.Collections.Generic;
+﻿using System;
+using System.Collections.Generic;
+using System.Linq;
+using System.Text;
+using System.Threading.Tasks;
 
 namespace Movie_App.DataModel.RottenTomatoesClips
 {
-    internal class TheaterItem
+    class TheaterItem
     {
-        /// <summary>
-        ///     Constructor
-        /// </summary>
-        public TheaterItem()
+        private List<RottenTomatoesClips> clipList = new List<RottenTomatoesClips>(); 
+        private List<ScrapeItem> scrapeList = new List<ScrapeItem>();
+
+        public List<ScrapeItem> ScrapeList 
         {
-            Time = new List<string>();
+            get
+            {
+                return scrapeList;
+            }
+
+            set { scrapeList = value; }
+           
         }
 
-        ////fields
-        public string Title { get; set; }
-        public string Name { get; set; }
-        public string Address { get; set; }
-        public List<string> Time { get; set; }
+        public List<RottenTomatoesClips> ClipList
+        {
+            get
+            {
+                return clipList;
+            }
+
+            set { clipList = value; }
+        }
     }
 }

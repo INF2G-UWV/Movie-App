@@ -10,9 +10,9 @@ namespace Movie_App.DataModel.RottenTomatoesClips
 {
     internal class TheaterScraper
     {
-        private readonly List<TheaterItem> items = new List<TheaterItem>();
+        private readonly List<ScrapeItem> items = new List<ScrapeItem>();
 
-        public List<TheaterItem> Items
+        public List<ScrapeItem> Items
         {
             get { return items; }
         }
@@ -33,12 +33,12 @@ namespace Movie_App.DataModel.RottenTomatoesClips
                 //See if exists
                 var response = await wc.GetStringAsync(url);
 
-                if (response != "[]")
+                if (response != "[]" || response != "null" )
                 {
                     dynamic rt = JsonConvert.DeserializeObject(response);
                     foreach (var m in rt)
                     {
-                        var biosItem = new TheaterItem();
+                        var biosItem = new ScrapeItem();
 
                         biosItem.Title = (string) m.title;
                         biosItem.Name = (string) m.name;

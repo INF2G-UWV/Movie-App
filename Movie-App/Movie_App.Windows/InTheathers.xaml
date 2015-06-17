@@ -9,10 +9,10 @@
     xmlns:DataModel="using:Movie_App.DataModel"
     xmlns:RottenTomatoesSearch="using:Movie_App.DataModel.RottenTomatoesSearch"
     xmlns:Interactivity="using:Microsoft.Xaml.Interactivity" xmlns:Core="using:Microsoft.Xaml.Interactions.Core"
+    xmlns:RottenTomatoesClips="using:Movie_App.DataModel.RottenTomatoesClips"
     x:Name="pageRoot"
     x:Class="Movie_App.InTheathers"
-    DataContext="{Binding DefaultViewModel, RelativeSource={RelativeSource Mode=Self}}"
-    mc:Ignorable="d">
+    mc:Ignorable="d" d:DataContext="{d:DesignInstance RottenTomatoesClips:MoviesClipsSource}">
 
     <!--
         This grid acts as a root panel for the page that defines two rows:
@@ -78,9 +78,8 @@
 				<TextBlock x:Name="Times" HorizontalAlignment="Left" TextWrapping="Wrap" VerticalAlignment="Top"
 					FontFamily="Century Gothic" FontSize="26.667" FontWeight="Bold" Margin="10,10,0,0" Height="35"
 					Grid.Row="5" Width="215" Text="Times:" Grid.Column="1"/>
-				<ComboBox x:Name="CinameDropDown" ItemsSource="{Binding}" SelectionChanged="ComboBox_SelectionChanged" HorizontalAlignment="Left" VerticalAlignment="Top" Width="465" Grid.Column="2" Margin="10,10,0,0" Grid.Row="3" Height="35">
-					<x:String>Emmen</x:String>
-					<x:String>Klazienaveen</x:String>
+				<ComboBox x:Name="CinameDropDown" ItemsSource="{Binding [0].ScrapeList[0].Name}" SelectionChanged="ComboBox_SelectionChanged" HorizontalAlignment="Left" VerticalAlignment="Top" Width="465" Grid.Column="2" Margin="10,10,0,0" Grid.Row="3" Height="35" DataContext="{Binding [0].ScrapeList[0].Name}">
+				
 				</ComboBox>
 				<TextBlock x:Name="PlaceBinding" HorizontalAlignment="Left" TextWrapping="Wrap" VerticalAlignment="Top"
 					FontFamily="Century Gothic" FontSize="26.667" Margin="10,10,0,0" Height="35"
@@ -116,7 +115,7 @@
 				</Button>
 			</Grid>
 			<Grid x:Name="YouTube_Video" HorizontalAlignment="Left" Height="940" VerticalAlignment="Top" Width="1050" Margin="870,0,0,0" Grid.Row="1">
-				<WebView x:Name="videoView" HorizontalAlignment="Center" Height="580" Margin="10,10,0,0" VerticalAlignment="Center" Width="1000" ScrollViewer.VerticalScrollBarVisibility="Disabled" ScrollViewer.HorizontalScrollBarVisibility="Disabled"/>
+				<WebView x:Name="videoView" HorizontalAlignment="Center" Height="580" Margin="10,10,0,0" VerticalAlignment="Center" Width="1000" ScrollViewer.VerticalScrollBarVisibility="Disabled" ScrollViewer.HorizontalScrollBarVisibility="Disabled" DataContext="{Binding [0].clips.Capacity}"/>
 			
 			</Grid>
 		</Grid>

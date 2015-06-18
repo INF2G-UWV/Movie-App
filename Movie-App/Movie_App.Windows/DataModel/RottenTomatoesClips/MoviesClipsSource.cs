@@ -80,35 +80,50 @@ namespace Movie_App.DataModel.RottenTomatoesClips
 
         private async void GetClipData()
         {
-            var wc = new HttpClient();
-            var response = await wc.GetStringAsync(API_CALL);
-
-            var rt = JsonConvert.DeserializeObject<RottenTomatoesClips>(response);
-            foreach (var m in rt.clips)
+            try
             {
-                var temp = new RottenTomatoesClips();
-                var imageTemp ="";
-                temp.clips.Add(m);
-                for (int i = 0; i < temp.clips.Count; i++)
-                {
-                    imageTemp = temp.clips[i].thumbnail;
-                }
-                var replacement = "";
-                var rgx = "(http://content.internetvideoarchive.com/content/photos/.*/)";
-                NameStorage.PublishId = sep(Regex.Replace(imageTemp, rgx, replacement));
+                var wc = new HttpClient();
+                var response = await wc.GetStringAsync(API_CALL);
 
+                var rt = JsonConvert.DeserializeObject<RottenTomatoesClips>(response);
+                foreach (var m in rt.clips)
+                {
+                    var temp = new RottenTomatoesClips();
+                    var imageTemp = "";
+                    temp.clips.Add(m);
+                    for (int i = 0; i < temp.clips.Count; i++)
+                    {
+                        imageTemp = temp.clips[i].thumbnail;
+                    }
+                    var replacement = "";
+                    var rgx = "(http://content.internetvideoarchive.com/content/photos/.*/)";
+                    NameStorage.PublishId = sep(Regex.Replace(imageTemp, rgx, replacement));
+
+
+                    //// using a temponary variable to store the image source of hte api, so it could be manipulated with regex
+                    //
+                    //var replacement = "http://";
+                    //var rgx = "(http://resizing.flixster.com(.*((54x77)|(54x80)|(54x81)|(52x81)|(51x81)|(53x81))/))";
+                    //temp.PosterOriginal = Regex.Replace(imageTemp, rgx, replacement);
+
+                    rottenTomatoesClipItems.Add(temp);
+                }
+            }
+            catch
+            {
                 
-                //// using a temponary variable to store the image source of hte api, so it could be manipulated with regex
-                //
-                //var replacement = "http://";
-                //var rgx = "(http://resizing.flixster.com(.*((54x77)|(54x80)|(54x81)|(52x81)|(51x81)|(53x81))/))";
-                //temp.PosterOriginal = Regex.Replace(imageTemp, rgx, replacement);
-               
-                rottenTomatoesClipItems.Add(temp);
             }
 
             //scraper.Scrape(Items[0].clips[0].title, "Emmen", 0);
-            GetScrapeData(rottenTomatoesClipItems[0].clips[0].title,"Emmen",0);
+            try
+            {
+                GetScrapeData(rottenTomatoesClipItems[0].clips[0].title, "Emmen", 0);
+            }
+            catch
+            {
+                
+            }
+
         }
 
         public static string sep(string s)
@@ -146,11 +161,20 @@ namespace Movie_App.DataModel.RottenTomatoesClips
         /// <returns>list of strings with the times!</returns>
         private List<string> FormatTime(string time)
         {
-            var timeB = new StringBuilder(time);
-            timeB.Replace("<!--  -->", "");
-            timeB.Replace("&nbsp", "");
-            var timeList = timeB.ToString().Trim().Split(null as char[], StringSplitOptions.RemoveEmptyEntries).ToList();
-            return timeList;
+            try
+            {
+                var timeB = new StringBuilder(time);
+                timeB.Replace("<!--  -->", "");
+                timeB.Replace("&nbsp", "");
+                var timeList =
+                    timeB.ToString().Trim().Split(null as char[], StringSplitOptions.RemoveEmptyEntries).ToList();
+                return timeList;
+            }
+            catch
+            {
+                return null;
+            }
+            
         }
     }
 }

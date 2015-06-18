@@ -111,27 +111,37 @@ namespace Movie_App.DataModel
 
         private async void showErrorMessage()
         {
-            var msg = new MessageDialog
-                ("The service is unavailable or there was a problem with the service.");
-
-            msg.Commands.Add(new UICommand("Try again?"));
-
-            msg.Commands.Add(new UICommand("I'll try again later."));
-
-            msg.DefaultCommandIndex = 0;
-            msg.CancelCommandIndex = 1;
-
-            var results = await msg.ShowAsync();
-
-            if (results.Label == "I'll try again later.")
+            try
             {
-                hasExecutedQuery = true;
-                Results.Clear();
+
+                var msg = new MessageDialog
+                    ("The service is unavailable or there was a problem with the service.");
+
+                msg.Commands.Add(new UICommand("Try again?"));
+
+                msg.Commands.Add(new UICommand("I'll try again later."));
+
+                msg.DefaultCommandIndex = 0;
+                msg.CancelCommandIndex = 1;
+
+                var results = await msg.ShowAsync();
+
+
+
+                if (results.Label == "I'll try again later.")
+                {
+                    hasExecutedQuery = true;
+                    Results.Clear();
+                }
+                else
+                {
+                    hasExecutedQuery = false;
+                    Results.Clear();
+                }
             }
-            else
+            catch
             {
-                hasExecutedQuery = false;
-                Results.Clear();
+                
             }
         }
     }

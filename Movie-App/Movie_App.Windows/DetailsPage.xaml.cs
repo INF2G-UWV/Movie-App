@@ -78,6 +78,7 @@ namespace Movie_App
 
         private async void LoadTrailerData()
         {
+            NameStorage.PublishId = -1;
             var API_CALL =
                 string.Format(
                     "http://api.internetvideoarchive.com/2.0/DataService/EntertainmentPrograms()?$filter=substringof('{0}',Title)&format=json&developerid=14c9d1e0-329a-47d9-a29a-2d8268a67a48",

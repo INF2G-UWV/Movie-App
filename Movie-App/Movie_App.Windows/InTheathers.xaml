@@ -19,107 +19,117 @@
         * Row 0 contains the back button and page title
         * Row 1 contains the rest of the page layout
     -->
-	<Viewbox HorizontalAlignment="Left" VerticalAlignment="Top" Stretch="Fill">
+    <Viewbox HorizontalAlignment="Left" VerticalAlignment="Top" Stretch="Fill">
 
-		<!--
+        <!--
         This grid acts as a root panel for the page that defines two rows:
         * Row 0 contains the back button and page title
         * Row 1 contains the rest of the page layout
     -->
-		<Grid Width="1920" Height="1080" Loaded="Grid_Loaded">
-		
-			<Grid.Background>
-				<ImageBrush Stretch="Fill" ImageSource="Assets/images/background.png"/>
-			</Grid.Background>
-			<Grid.ChildrenTransitions>
-				<TransitionCollection>
-					<EntranceThemeTransition/>
-				</TransitionCollection>
-			</Grid.ChildrenTransitions>
-			<Grid.RowDefinitions>
-				<RowDefinition Height="140"/>
-				<RowDefinition Height="*"/>
-			</Grid.RowDefinitions>
+        <Grid Width="1920" Height="1080" Loaded="Grid_Loaded">
 
-			<!--
+            <Grid.Background>
+                <ImageBrush Stretch="Fill" ImageSource="Assets/images/background.png" />
+            </Grid.Background>
+            <Grid.ChildrenTransitions>
+                <TransitionCollection>
+                    <EntranceThemeTransition />
+                </TransitionCollection>
+            </Grid.ChildrenTransitions>
+            <Grid.RowDefinitions>
+                <RowDefinition Height="140" />
+                <RowDefinition Height="*" />
+            </Grid.RowDefinitions>
+
+            <!--
             TODO: Content should be placed within the following grid 
                   to show details for the current item
         -->
-			<Grid Grid.Row="1" x:Name="contentRegion" Margin="0,0,1050,0">
-				<Grid.RowDefinitions>
-					<RowDefinition Height="100"/>
-					<RowDefinition Height="240"/>
-					<RowDefinition Height="65"/>
-					<RowDefinition Height="65"/>
-					<RowDefinition Height="65"/>
-					<RowDefinition Height="65"/>
-					<RowDefinition Height="225"/>
-					<RowDefinition Height="100"/>
-				</Grid.RowDefinitions>
-				<Grid.ColumnDefinitions>
-					<ColumnDefinition Width="80"/>
-					<ColumnDefinition Width="235"/>
-					<ColumnDefinition Width="485"/>
-					<ColumnDefinition/>
-				</Grid.ColumnDefinitions>
-				<TextBlock x:Name="Place" HorizontalAlignment="Left" TextWrapping="Wrap" VerticalAlignment="Top"
-					FontFamily="Century Gothic" FontSize="26.667" FontWeight="Bold" Margin="10,10,0,0" Height="35"
-					Grid.Row="2" Width="215" Text="Place:" Grid.Column="1"/>
-				<TextBlock x:Name="Cinema" HorizontalAlignment="Left" TextWrapping="Wrap" VerticalAlignment="Top"
-					FontFamily="Century Gothic" FontSize="26.667" FontWeight="Bold" Margin="10,10,0,0" Height="35"
-					Grid.Row="3" Width="215" Text="Cinema:" Grid.Column="1"/>
-				<TextBlock x:Name="Times" HorizontalAlignment="Left" TextWrapping="Wrap" VerticalAlignment="Top"
-					FontFamily="Century Gothic" FontSize="26.667" FontWeight="Bold" Margin="10,17,0,0" Height="35"
-					Grid.Row="4" Width="215" Text="Times:" Grid.Column="1"/>
-				<TextBlock x:Name="PlaceBinding" HorizontalAlignment="Left" TextWrapping="Wrap" VerticalAlignment="Top"
-					FontFamily="Century Gothic" FontSize="26.667" Margin="10,10,0,0" Height="65"
-					Grid.Row="2" Width="545" Grid.Column="2" Text="{Binding [0].ScrapeList[0].Address}" Grid.ColumnSpan="2" Grid.RowSpan="2">
-					<TextBlock.DataContext>
-						<RottenTomatoesClips:MoviesClipsSource/>
-					</TextBlock.DataContext>
-				</TextBlock>
-				<TextBlock x:Name="AddressBinding" HorizontalAlignment="Left" TextWrapping="Wrap" VerticalAlignment="Top"
-					FontFamily="Century Gothic" FontSize="26.667" Margin="10,10,0,0" Height="35"
-					Grid.Row="4" Width="465" Grid.Column="2" Text="{Binding [0].ScrapeList[0].Address}"/>
-				<TextBlock x:Name="TimesBinding" HorizontalAlignment="Left" TextWrapping="Wrap" VerticalAlignment="Top"
-					FontFamily="Century Gothic" FontSize="26.667" Margin="10,17,0,0" Height="35"
-					Grid.Row="4" Width="465" Grid.Column="2" Text="{Binding [0].ScrapeList[0].timeTable}"/>
-				<TextBlock x:Name="PlaceBinding_Copy" HorizontalAlignment="Left" TextWrapping="Wrap" VerticalAlignment="Top"
-					FontFamily="Century Gothic" FontSize="26.667" Margin="10,5,0,0" Height="65"
-					Grid.Row="3" Width="545" Grid.Column="2" Text="{Binding [0].ScrapeList[0].Name}" Grid.ColumnSpan="2" Grid.RowSpan="2">
-					<TextBlock.DataContext>
-						<RottenTomatoesClips:MoviesClipsSource/>
-					</TextBlock.DataContext>
-				</TextBlock>
-			</Grid>
+            <Grid Grid.Row="1" x:Name="contentRegion" Margin="0,0,1050,0">
+                <Grid.RowDefinitions>
+                    <RowDefinition Height="100" />
+                    <RowDefinition Height="240" />
+                    <RowDefinition Height="65" />
+                    <RowDefinition Height="65" />
+                    <RowDefinition Height="65" />
+                    <RowDefinition Height="65" />
+                    <RowDefinition Height="225" />
+                    <RowDefinition Height="100" />
+                </Grid.RowDefinitions>
+                <Grid.ColumnDefinitions>
+                    <ColumnDefinition Width="80" />
+                    <ColumnDefinition Width="235" />
+                    <ColumnDefinition Width="485" />
+                    <ColumnDefinition />
+                </Grid.ColumnDefinitions>
+                <TextBlock x:Name="Place" HorizontalAlignment="Center" TextWrapping="Wrap" VerticalAlignment="Center"
+                           FontFamily="Century Gothic" FontSize="26.667" FontWeight="Bold" Margin="15,23,5,7"
+                           Height="35"
+                           Grid.Row="2" Width="215" Text="Address:" Grid.Column="1" />
+                <TextBlock x:Name="Cinema" HorizontalAlignment="Center" TextWrapping="Wrap" VerticalAlignment="Center"
+                           FontFamily="Century Gothic" FontSize="26.667" FontWeight="Bold" Margin="15,20,5,10"
+                           Height="35"
+                           Grid.Row="3" Width="215" Text="Theater:" Grid.Column="1" />
+                <TextBlock x:Name="Times" HorizontalAlignment="Center" TextWrapping="Wrap" VerticalAlignment="Center"
+                           FontFamily="Century Gothic" FontSize="26.667" FontWeight="Bold" Margin="15,20,5,10"
+                           Height="35"
+                           Grid.Row="4" Width="215" Text="Times:" Grid.Column="1" />
+                <TextBlock x:Name="PlaceValue" HorizontalAlignment="Center" TextWrapping="Wrap"
+                           VerticalAlignment="Center"
+                           FontFamily="Century Gothic" FontSize="21.333" Margin="140,28,0,10"
+                           Grid.Row="2" Width="580" Grid.Column="1" Grid.ColumnSpan="2" />
+                <ComboBox x:Name="CinemaBox" Grid.Column="1" Grid.Row="3" FontFamily="Century Gothic" FontSize="21.333"
+                          Foreground="White" Background="#FF575757" BorderBrush="#FFD4D4D4"
+                          SelectionChanged="CinemaBox_SelectionChanged" VerticalAlignment="Center" Margin="140,20,0,13"
+                          Width="580" Grid.ColumnSpan="2" />
+                <TextBlock x:Name="TimesValue" HorizontalAlignment="Center" TextWrapping="Wrap"
+                           VerticalAlignment="Center"
+                           FontFamily="Century Gothic" FontSize="21.333" Margin="140,25,0,13"
+                           Grid.Row="4" Width="580" Grid.Column="1" Grid.ColumnSpan="2" />
+                <TextBlock x:Name="TheaterUnavailable" HorizontalAlignment="Left" TextWrapping="Wrap"
+                           VerticalAlignment="Center"
+                           FontFamily="Century Gothic" FontSize="26.667" FontWeight="Bold" Margin="0,180,0,0"
+                           Height="60"
+                           Grid.Row="1" Width="780" Grid.Column="1" Grid.ColumnSpan="3" Visibility="Collapsed" />
+                <TextBlock x:Name="SplashText" HorizontalAlignment="Left" Margin="15,199,0,0" Grid.Row="1"
+                           TextWrapping="Wrap" VerticalAlignment="Center" FontFamily="Buxton Sketch" FontSize="32"
+                           FontWeight="Bold" Grid.Column="1" Grid.ColumnSpan="2" Width="602" />
+            </Grid>
 
-			<Grid>
-		
-				<Grid.ColumnDefinitions>
-					<ColumnDefinition Width="120"/>
-					<ColumnDefinition Width="*"/>
-				</Grid.ColumnDefinitions>
-				<Button x:Name="backButton" Margin="39,59,39,0" Command="{Binding NavigationHelper.GoBackCommand, ElementName=pageRoot}"
-					Style="{StaticResource NavigationBackButtonNormalStyle}"
-					VerticalAlignment="Top"
-					AutomationProperties.Name="Back"
-					AutomationProperties.AutomationId="BackButton"
-					AutomationProperties.ItemType="Navigation Button"/>
-				<TextBlock x:Name="pageTitle" Text="Cinema Times" Style="{StaticResource HeaderTextBlockStyle}" Grid.Column="1" 
-					IsHitTestVisible="false" TextWrapping="NoWrap" VerticalAlignment="Bottom" Margin="0,0,30,40"/>
-				<Button Content="Return to Home" HorizontalAlignment="Right" VerticalAlignment="Top" Grid.Column="1" Margin="959,47,100,0" Height="46" Width="236" FontFamily="Letter Gothic Std" FontSize="16">
-					<Interactivity:Interaction.Behaviors>
-						<Core:EventTriggerBehavior EventName="Click">
-							<Core:NavigateToPageAction TargetPage="Movie_App.MainPage"/>
-						</Core:EventTriggerBehavior>
-					</Interactivity:Interaction.Behaviors>
-				</Button>
-			</Grid>
-			<Grid x:Name="YouTube_Video" HorizontalAlignment="Left" Height="940" VerticalAlignment="Top" Width="1050" Margin="870,0,0,0" Grid.Row="1">
-				<WebView x:Name="videoView" HorizontalAlignment="Center" Height="580" Margin="10,10,0,0" VerticalAlignment="Center" Width="1000" ScrollViewer.VerticalScrollBarVisibility="Disabled" ScrollViewer.HorizontalScrollBarVisibility="Disabled" DataContext="{Binding [0].clips.Capacity}" ContentLoading="videoView_ContentLoading" KeyDown="videoView_KeyDown"/>
-			
-			</Grid>
-			<Button Content="Click here to play the trailer" HorizontalAlignment="Left" Margin="897,2,0,0" VerticalAlignment="Top" Click="Button_Click" Height="170" Width="996" Grid.Row="1"/>
-		</Grid>
-	</Viewbox>
+            <Grid>
+
+                <Grid.ColumnDefinitions>
+                    <ColumnDefinition Width="120" />
+                    <ColumnDefinition Width="*" />
+                </Grid.ColumnDefinitions>
+                <Button x:Name="backButton" Margin="39,59,39,0"
+                        Command="{Binding NavigationHelper.GoBackCommand, ElementName=pageRoot}"
+                        Style="{StaticResource NavigationBackButtonNormalStyle}"
+                        VerticalAlignment="Top"
+                        AutomationProperties.Name="Back"
+                        AutomationProperties.AutomationId="BackButton"
+                        AutomationProperties.ItemType="Navigation Button" />
+                <TextBlock x:Name="pageTitle" Text="Cinema Times" Style="{StaticResource HeaderTextBlockStyle}"
+                           Grid.Column="1"
+                           IsHitTestVisible="false" TextWrapping="NoWrap" VerticalAlignment="Bottom" Margin="0,0,30,40" />
+                <Button Content="Return to Home" HorizontalAlignment="Right" VerticalAlignment="Top" Grid.Column="1"
+                        Margin="959,47,100,0" Height="46" Width="236" FontFamily="Letter Gothic Std" FontSize="16">
+                    <Interactivity:Interaction.Behaviors>
+                        <Core:EventTriggerBehavior EventName="Click">
+                            <Core:NavigateToPageAction TargetPage="Movie_App.MainPage" />
+                        </Core:EventTriggerBehavior>
+                    </Interactivity:Interaction.Behaviors>
+                </Button>
+            </Grid>
+            <Grid x:Name="YouTube_Video" HorizontalAlignment="Left" Height="940" VerticalAlignment="Top" Width="1050"
+                  Margin="870,0,0,0" Grid.Row="1">
+                <WebView x:Name="videoView" HorizontalAlignment="Center" Height="580" Margin="10,10,0,0"
+                         VerticalAlignment="Center" Width="1000" ScrollViewer.VerticalScrollBarVisibility="Disabled"
+                         ScrollViewer.HorizontalScrollBarVisibility="Disabled"
+                         DataContext="{Binding [0].clips.Capacity}" ContentLoading="videoView_ContentLoading"
+                         KeyDown="videoView_KeyDown" />
+
+            </Grid>
+        </Grid>
+    </Viewbox>
 </Page>

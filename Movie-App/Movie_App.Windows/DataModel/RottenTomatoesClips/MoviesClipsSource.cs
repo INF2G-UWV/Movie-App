@@ -30,7 +30,7 @@ namespace Movie_App.DataModel.RottenTomatoesClips
             {
                 API_CALL = baseURL + "/movies/770687943/clips.json?apikey=" + apiKey;
             }
-            GetClipData();
+           // GetClipData();
         }
 
 
@@ -97,7 +97,7 @@ namespace Movie_App.DataModel.RottenTomatoesClips
                     }
                     var replacement = "";
                     var rgx = "(http://content.internetvideoarchive.com/content/photos/.*/)";
-                    NameStorage.PublishId = sep(Regex.Replace(imageTemp, rgx, replacement));
+                    //NameStorage.PublishId = sep(Regex.Replace(imageTemp, rgx, replacement));
 
 
                     //// using a temponary variable to store the image source of hte api, so it could be manipulated with regex
@@ -174,7 +174,6 @@ namespace Movie_App.DataModel.RottenTomatoesClips
             {
                 return null;
             }
-            
         }
     }
 }

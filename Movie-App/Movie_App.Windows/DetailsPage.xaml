@@ -363,7 +363,7 @@
 						<rottenTomatoes:DetailsMovieController />
 					</Image.DataContext>
 				</Image>
-				<Button Content="Click here for Cinema times" HorizontalAlignment="Left" VerticalAlignment="Bottom" Margin="7,0,0,25" Height="53" Width="466" FontFamily="Letter Gothic Std" Click="Button_Click" Grid.Column="1" Foreground="White" FontSize="21.333">
+				<Button x:Name="TheaterButton" Content="Click here for Cinema times" HorizontalAlignment="Left" VerticalAlignment="Bottom" Margin="7,0,0,25" Height="53" Width="466" FontFamily="Letter Gothic Std" Click="Button_Click" Grid.Column="1" Foreground="White" FontSize="21.333">
 					<Interactivity:Interaction.Behaviors>
 						<Core:EventTriggerBehavior EventName="Click">
 							<Core:NavigateToPageAction Parameter="{Binding [0].movieId}" TargetPage="Movie_App.InTheathers"/>

@@ -7,7 +7,7 @@
     xmlns:DataModel="using:Movie_App.DataModel"
     xmlns:Interactivity="using:Microsoft.Xaml.Interactivity" xmlns:Core="using:Microsoft.Xaml.Interactions.Core"
     x:Class="Movie_App.MainPage"
-    mc:Ignorable="d" Width="Auto" Height="Auto">
+    mc:Ignorable="d" Width="Auto" Height="Auto" Loaded="Page_Loaded">
 	<Page.Resources>
 		<DataTemplate x:Key="MovieDataTemplate">
 			<Grid Height="110" Width="480" Margin="10" >

@@ -103,6 +103,7 @@
     <Prefer32Bit>true</Prefer32Bit>
   </PropertyGroup>
   <ItemGroup>
+    <Compile Include="DataModel\RottenTomatoesClips\TrailerItem.cs" />
     <Compile Include="DataModel\RottenTomatoesClips\TheaterItem.cs" />
     <Compile Include="ErrorMessage.cs" />
     <Compile Include="SearchPage.xaml.cs">

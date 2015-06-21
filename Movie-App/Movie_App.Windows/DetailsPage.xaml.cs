@@ -1,9 +1,16 @@
 ﻿using System;
+using System.Collections.Generic;
+using System.Linq;
+using System.Net.Http;
+using System.Text;
+using Windows.UI.Xaml;
 using Windows.UI.Xaml.Controls;
 using Windows.UI.Xaml.Navigation;
 using Movie_App.Common;
 using Movie_App.DataModel;
 using Movie_App.DataModel.RottenTomatoes;
+using Movie_App.DataModel.RottenTomatoesClips;
+using Newtonsoft.Json;
 
 // The Item Detail Page item template is documented at http://go.microsoft.com/fwlink/?LinkId=234232
 
@@ -59,9 +66,107 @@ namespace Movie_App
                 navigationParameter = e.PageState["SelectedItem"];
             }
 
+            LoadTrailerData();
+            NameStorage.TheaterList.Clear();
+            TheaterButton.IsEnabled = false;
+            GetScrapeData(NameStorage.MovieTitle, NameStorage.City, 0);
+
             // TODO: Assign a bindable group to this.DefaultViewModel["Group"]
             // TODO: Assign a collection of bindable items to this.DefaultViewModel["Items"]
             // TODO: Assign the selected item to this.flipView.SelectedItem
+        }
+
+        private async void LoadTrailerData()
+        {
+            var API_CALL =
+                string.Format(
+                    "http://api.internetvideoarchive.com/2.0/DataService/EntertainmentPrograms()?$filter=substringof('{0}',Title)&format=json&developerid=14c9d1e0-329a-47d9-a29a-2d8268a67a48",
+                    NameStorage.MovieTitle);
+            var wc = new HttpClient();
+            var response = await wc.GetStringAsync(API_CALL);
+
+            var rt = JsonConvert.DeserializeObject<TrailerItem>(response);
+
+            foreach (var node in rt.value)
+            {
+                try
+                {
+                    if (node.MediaId == 0)
+                    {
+                        NameStorage.PublishId = node.Publishedid;
+                    }
+                }
+                catch
+                {
+                }
+            }
+        }
+
+        private async void GetScrapeData(string movie, string location, int dateoffset)
+        {
+            //Set url
+            var url = string.Format("http://movies.waveshapes.nl/get.php?location={0}&movie={1}&offset={2}",
+                location.ToLower(),
+                movie.ToLower(), dateoffset);
+            var wc = new HttpClient();
+            try
+            {
+                //See if exists
+                var response = await wc.GetStringAsync(url);
+
+                if (response != "[]" || response != "null")
+                {
+                    dynamic rt = JsonConvert.DeserializeObject(response);
+                    foreach (var m in rt)
+                    {
+                        var biosItem = new ScrapeItem();
+
+                        biosItem.Title = (string) m.title;
+                        biosItem.Name = (string) m.name;
+                        biosItem.Address = (string) m.address;
+                        //biosItem.times = m.times;
+                        biosItem.timeTable = (string) m.times;
+                        //for (int i = 0; i < biosItem.Time.Count; i++)
+                        //{
+
+                        //}
+                        //biosItem.timeTable += FormatTime((string)m.times) + "\n\n";
+
+                        biosItem.Time = FormatTime((string) m.times);
+                        // scrapeItems.Add(biosItem);
+                        NameStorage.TheaterList.Add(biosItem);
+                    }
+                    TheaterButton.IsEnabled = true;
+                    //Merge();
+                }
+            }
+            catch (Exception ex)
+            {
+                //Uh Oh! Error! Really not found this time! Normally program would crash and burn!!
+                //MessageBox.Show("Movie not found!", "Search error!", MessageBoxButtons.OK, MessageBoxIcon.Warning);
+            }
+        }
+
+        /// <summary>
+        ///     Format nasty HTML scraped time text to something more usable.
+        /// </summary>
+        /// <param name="time">string with html time text</param>
+        /// <returns>list of strings with the times!</returns>
+        private List<string> FormatTime(string time)
+        {
+            try
+            {
+                var timeB = new StringBuilder(time);
+                timeB.Replace("<!--  -->", "");
+                timeB.Replace("&nbsp", "");
+                var timeList =
+                    timeB.ToString().Trim().Split(null as char[], StringSplitOptions.RemoveEmptyEntries).ToList();
+                return timeList;
+            }
+            catch
+            {
+                return null;
+            }
         }
 
         #region NavigationHelper registration
@@ -70,9 +175,9 @@ namespace Movie_App
         /// NavigationHelper to respond to the page's navigation methods.
         /// 
         /// Page specific logic should be placed in event handlers for the
-        /// <see cref="GridCS.Common.NavigationHelper.LoadState" />
+        /// <see cref="Common.NavigationHelper.LoadState" />
         /// and
-        /// <see cref="GridCS.Common.NavigationHelper.SaveState" />
+        /// <see cref="Common.NavigationHelper.SaveState" />
         /// .
         /// The navigation parameter is available in the LoadState method 
         /// in addition to page state preserved during an earlier session.
@@ -87,32 +192,29 @@ namespace Movie_App
         }
 
         /// <summary>
-        /// Button click to navigate through page and gives parameter through a static variable
+        ///     Button click to navigate through page and gives parameter through a static variable
         /// </summary>
         /// <param name="sender"></param>
         /// <param name="e"></param>
-        private void Button_Click(object sender, Windows.UI.Xaml.RoutedEventArgs e)
+        private void Button_Click(object sender, RoutedEventArgs e)
         {
-
             var buttonIdData = ((Button) e.OriginalSource).DataContext;
 
             foreach (var obj in (DetailsMovieController) buttonIdData)
             {
-                NameStorage.MovieId = (((DetailsMovieData)obj)).MovieId;
+                NameStorage.MovieId = obj.MovieId;
             }
-
-            
         }
 
         /// <summary>
-        /// When the searchBox is submitted it will call the the searchmodel that's bind by BasicPage2.xaml
+        ///     When the searchBox is submitted it will call the the searchmodel that's bind by BasicPage2.xaml
         /// </summary>
         /// <param name="sender"></param>
         /// <param name="args"></param>
-        private void SearchBox_QuerySubmitted(Windows.UI.Xaml.Controls.SearchBox sender, Windows.UI.Xaml.Controls.SearchBoxQuerySubmittedEventArgs args)
+        private void SearchBox_QuerySubmitted(SearchBox sender, SearchBoxQuerySubmittedEventArgs args)
         {
-        	NameStorage.QuerySearch = args.QueryText;
-        	this.Frame.Navigate(typeof(BasicPage2), args.QueryText);
+            NameStorage.QuerySearch = args.QueryText;
+            Frame.Navigate(typeof (BasicPage2), args.QueryText);
         }
 
         #endregion

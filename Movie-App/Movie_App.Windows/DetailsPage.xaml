@@ -338,14 +338,14 @@
 					IsHitTestVisible="false" TextWrapping="NoWrap" VerticalAlignment="Bottom" Margin="0,0,30,40"
 					FontFamily="Letter Gothic Std" Text="{Binding [0].Title}">
 					<TextBlock.DataContext>
-						<rottenTomatoes:MoviesDataSource />
+                        <rottenTomatoes:DetailsMovieController />
 					</TextBlock.DataContext>
 				</TextBlock>
 			</Grid>
 			<Grid x:Name="LargeImage" HorizontalAlignment="Left" Height="940" VerticalAlignment="Top" Width="640"
 				Grid.Row="1">
 				<Grid.DataContext>
-					<rottenTomatoes:MoviesDataSource />
+                    <rottenTomatoes:DetailsMovieController />
 				</Grid.DataContext>
 				<Grid.ColumnDefinitions>
 					<ColumnDefinition Width="70" />
@@ -360,7 +360,7 @@
 				<Image HorizontalAlignment="Left" Height="705" VerticalAlignment="Top" Width="460" Grid.Column="1"
 					Margin="10,10,0,0" Grid.Row="1" Stretch="Fill" Source="{Binding [0].PosterOriginal}">
 					<Image.DataContext>
-						<rottenTomatoes:MoviesDataSource />
+						<rottenTomatoes:DetailsMovieController />
 					</Image.DataContext>
 				</Image>
 				<Button Content="Click here for Cinema times" HorizontalAlignment="Left" VerticalAlignment="Bottom" Margin="7,0,0,25" Height="53" Width="466" FontFamily="Letter Gothic Std" Click="Button_Click" Grid.Column="1" Foreground="White" FontSize="21.333">
@@ -386,7 +386,7 @@
 					<RowDefinition Height="425" />
 				</Grid.RowDefinitions>
 				<Grid.DataContext>
-					<rottenTomatoes:MoviesDataSource />
+                    <rottenTomatoes:DetailsMovieController/>
 				</Grid.DataContext>
 				<TextBlock x:Name="Header" HorizontalAlignment="Left" TextWrapping="Wrap" Text="Details:"
 					VerticalAlignment="Top" FontFamily="Century Gothic" FontSize="48" Margin="10,101,0,0"
@@ -444,7 +444,7 @@
 					<RowDefinition />
 				</Grid.RowDefinitions>
 				<Grid.DataContext>
-					<rottenTomatoes:MoviesDataSource />
+                    <rottenTomatoes:DetailsMovieController />
 				</Grid.DataContext>
 
 				<TextBlock x:Name="Header1" HorizontalAlignment="Left" TextWrapping="Wrap" Text="Actors:"

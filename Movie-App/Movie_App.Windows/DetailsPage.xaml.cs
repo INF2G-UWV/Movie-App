@@ -16,14 +16,12 @@ namespace Movie_App
     public sealed partial class DetailsPage : Page
     {
         private readonly ObservableDictionary defaultViewModel = new ObservableDictionary();
-        private string movieTitle;
 
         public DetailsPage()
         {
             InitializeComponent();
             NavigationHelper = new NavigationHelper(this);
             NavigationHelper.LoadState += navigationHelper_LoadState;
-            movieTitle = "";
         }
 
         /// <summary>
@@ -60,16 +58,10 @@ namespace Movie_App
             {
                 navigationParameter = e.PageState["SelectedItem"];
             }
-            movieTitle = e.NavigationParameter.ToString();
 
             // TODO: Assign a bindable group to this.DefaultViewModel["Group"]
             // TODO: Assign a collection of bindable items to this.DefaultViewModel["Items"]
             // TODO: Assign the selected item to this.flipView.SelectedItem
-        }
-
-        public string getMoveTitle()
-        {
-            return movieTitle;
         }
 
         #region NavigationHelper registration
@@ -94,19 +86,29 @@ namespace Movie_App
             NavigationHelper.OnNavigatedFrom(e);
         }
 
+        /// <summary>
+        /// Button click to navigate through page and gives parameter through a static variable
+        /// </summary>
+        /// <param name="sender"></param>
+        /// <param name="e"></param>
         private void Button_Click(object sender, Windows.UI.Xaml.RoutedEventArgs e)
         {
 
             var buttonIdData = ((Button) e.OriginalSource).DataContext;
 
-            foreach (var obj in (MoviesDataSource) buttonIdData)
+            foreach (var obj in (DetailsMovieController) buttonIdData)
             {
-                NameStorage.MovieId = (((RottenTomatoes)obj)).MovieId;
+                NameStorage.MovieId = (((DetailsMovieData)obj)).MovieId;
             }
 
             
         }
 
+        /// <summary>
+        /// When the searchBox is submitted it will call the the searchmodel that's bind by BasicPage2.xaml
+        /// </summary>
+        /// <param name="sender"></param>
+        /// <param name="args"></param>
         private void SearchBox_QuerySubmitted(Windows.UI.Xaml.Controls.SearchBox sender, Windows.UI.Xaml.Controls.SearchBoxQuerySubmittedEventArgs args)
         {
         	NameStorage.QuerySearch = args.QueryText;

@@ -10,18 +10,18 @@ using Newtonsoft.Json;
 
 namespace Movie_App.DataModel.RottenTomatoesSearch
 {
-    public class MoviesDataSourceSearch
+    public class SearchController
     {
         /// <summary>
         ///     Constant fields
         /// </summary>
         private bool hasExecutedQuery;
 
-        public ObservableCollection<GetSearchData> results = new ObservableCollection<GetSearchData>();
+        public ObservableCollection<SearchMovieData> results = new ObservableCollection<SearchMovieData>();
         public Uri Uri { get; set; }
         // Executes a query to obtain information about movies.
         // This property also stores the movies in a collection class.
-        public ObservableCollection<GetSearchData> Results
+        public ObservableCollection<SearchMovieData> Results
         {
             get
             {
@@ -92,7 +92,7 @@ namespace Movie_App.DataModel.RottenTomatoesSearch
 
                     // Create a Moviedata object by using movie information and add 
                     // that object to a collection.
-                    results.Add(new GetSearchData(image, title, year));
+                    results.Add(new SearchMovieData(image, title, year));
                 }
 
                 hasExecutedQuery = true;
@@ -103,7 +103,9 @@ namespace Movie_App.DataModel.RottenTomatoesSearch
                 showErrorMessage();
             }
         }
-
+        /// <summary>
+        /// Error message when exeception is caught
+        /// </summary>
         private async void showErrorMessage()
         {
             var msg = new MessageDialog

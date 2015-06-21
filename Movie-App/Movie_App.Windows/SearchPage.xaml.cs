@@ -103,10 +103,15 @@ namespace Movie_App
             navigationHelper.OnNavigatedFrom(e);
         }
 
+        /// <summary>
+        /// When searchbutton is clicked assign the button data to the movetitle static variable
+        /// </summary>
+        /// <param name="sender"></param>
+        /// <param name="args"></param>
         private void searchButton_Click(object sender, Windows.UI.Xaml.RoutedEventArgs e)
         {
             var buttonData = ((Button)e.OriginalSource).DataContext;
-            NameStorage.MovieTitle = ((GetSearchData)buttonData).Title;
+            NameStorage.MovieTitle = ((SearchMovieData)buttonData).Title;
         }
 
         #endregion

@@ -109,6 +109,9 @@ namespace Movie_App.DataModel
             }
         }
 
+        /// <summary>
+        /// Error message when exeception is caught
+        /// </summary>
         private async void showErrorMessage()
         {
             try

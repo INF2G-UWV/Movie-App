@@ -2,9 +2,12 @@
 
 namespace Movie_App.DataModel.RottenTomatoes
 {
-    public class RottenTomatoes
+    public class DetailsMovieData
     {
 
+        /// <summary>
+        /// Methods accessors and mutators of detailspage
+        /// </summary>
         public IEnumerable<Movie> movies { get; set; }
         public IEnumerable<AbridgedCast> abridgedCast { get; set; }
         public string PosterOriginal { get; set; }

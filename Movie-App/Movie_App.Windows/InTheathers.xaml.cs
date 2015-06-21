@@ -31,7 +31,6 @@ namespace Movie_App
     {
         private NavigationHelper navigationHelper;
         private ObservableDictionary defaultViewModel = new ObservableDictionary();
-        private string MovieIdentity;
 
         /// <summary>
         /// This can be changed to a strongly typed view model.
@@ -76,13 +75,15 @@ namespace Movie_App
                 navigationParameter = e.PageState["SelectedItem"];
             }
 
-            MovieIdentity = e.NavigationParameter.ToString();
 
             // TODO: Assign a bindable group to this.DefaultViewModel["Group"]
             // TODO: Assign a collection of bindable items to this.DefaultViewModel["Items"]
             // TODO: Assign the selected item to this.flipView.SelectedItem
         }
 
+        /// <summary>
+        /// Loading Iframe with a trailervideo
+        /// </summary>
         private void loadIframe()
         {
             var str = string.Format(@"<body style='background-image:url(http://movies.waveshapes.nl/bg.jpg)'><iframe width='960' height='540' src='http://www.videodetective.com/embed/video/?publishedid=" + NameStorage.PublishId + "&amp;options=false&amp;autostart=true&amp;playlist=none&amp;width=960&amp;height=540' runat='server' frameborder='0' scrolling='no'></iframe>");
@@ -120,6 +121,11 @@ namespace Movie_App
             //loadIframe();
 		}
 
+        /// <summary>
+        /// After button is click call the loadFrame function
+        /// </summary>
+        /// <param name="sender"></param>
+        /// <param name="e"></param>
 		private void Button_Click(object sender, Windows.UI.Xaml.RoutedEventArgs e)
 		{
 			loadIframe();

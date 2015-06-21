@@ -5,7 +5,7 @@ using Newtonsoft.Json;
 
 namespace Movie_App.DataModel.RottenTomatoes
 {
-    internal class MoviesDataSource : ObservableCollection<RottenTomatoes>
+    internal class DetailsMovieController : ObservableCollection<DetailsMovieData>
     {
         /// <summary>
         /// Constant fields
@@ -17,7 +17,7 @@ namespace Movie_App.DataModel.RottenTomatoes
         /// <summary>
         /// Constructor to set a dynamic variable in de link
         /// </summary>
-        public MoviesDataSource()
+        public DetailsMovieController()
         {
             if (NameStorage.MovieTitle != null)
             {
@@ -45,7 +45,7 @@ namespace Movie_App.DataModel.RottenTomatoes
             dynamic rt = JsonConvert.DeserializeObject(response);
             foreach (var m in rt.movies)
             {
-                var temp = new RottenTomatoes();
+                var temp = new DetailsMovieData();
                 temp.Title = m.title;
                 temp.Runtime = m.runtime.ToString();
                 temp.ReleaseDatesTheater = m.release_dates.theater;
@@ -53,8 +53,7 @@ namespace Movie_App.DataModel.RottenTomatoes
                 temp.RatingsAudience = m.ratings.audience_score.ToString();
                 temp.MovieId = m.id;
                 
-
-                //temp.NameActor = m.abridged_cast.name; (kan geen 'name' vinden)
+                //Looping through a list object and return the string accessor
                 for (var i = 0; i < m.abridged_cast.Count; i++)
                 {
                     temp.NameActor += m.abridged_cast[i].name + "\n\n";

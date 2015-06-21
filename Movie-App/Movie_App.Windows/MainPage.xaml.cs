@@ -16,12 +16,23 @@ namespace Movie_App
             InitializeComponent();
         }
 
+
+        /// <summary>
+        /// After button is clicked assign the title to a static variable
+        /// </summary>
+        /// <param name="sender"></param>
+        /// <param name="e"></param>
         private void Button_Click(object sender, RoutedEventArgs e)
         {
             var buttonData = ((Button) e.OriginalSource).DataContext;
             NameStorage.MovieTitle = ((MovieData) buttonData).Title;
         }
 
+        /// <summary>
+        /// If selected index of the listview, assign the same index to the flipview slider
+        /// </summary>
+        /// <param name="sender"></param>
+        /// <param name="e"></param>
         private void movieListview_SelectionChanged(object sender, SelectionChangedEventArgs e)
         {
             MoviesView.SelectedIndex = movieListview.SelectedIndex;
@@ -32,6 +43,11 @@ namespace Movie_App
             
         }
 
+        /// <summary>
+        /// If selected index of the flipview slider, assign the same index to the listview
+        /// </summary>
+        /// <param name="sender"></param>
+        /// <param name="e"></param>
         private void MoviesView_SelectionChanged(object sender, SelectionChangedEventArgs e)
         {
             movieListview.SelectedIndex = MoviesView.SelectedIndex;
@@ -48,6 +64,11 @@ namespace Movie_App
             
         }
 
+        /// <summary>
+        /// When the searchBoxTemp is submitted it will call the the searchmodel that's bind by BasicPage2.xaml
+        /// </summary>
+        /// <param name="sender"></param>
+        /// <param name="args"></param>
         private void searchBoxTemp_QuerySubmitted(Windows.UI.Xaml.Controls.SearchBox sender, Windows.UI.Xaml.Controls.SearchBoxQuerySubmittedEventArgs args)
         {
             NameStorage.QuerySearch = args.QueryText;

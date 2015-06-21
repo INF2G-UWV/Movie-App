@@ -104,6 +104,7 @@
   </PropertyGroup>
   <ItemGroup>
     <Compile Include="DataModel\RottenTomatoesClips\TheaterItem.cs" />
+    <Compile Include="ErrorMessage.cs" />
     <Compile Include="SearchPage.xaml.cs">
       <DependentUpon>SearchPage.xaml</DependentUpon>
     </Compile>
@@ -115,14 +116,14 @@
     <Compile Include="DataModel\NameStorage.cs" />
     <Compile Include="DataModel\RottenTomatoesClips\ScrapeItem.cs" />
     <Compile Include="DataModel\RottenTomatoesClips\TheaterScraper.cs" />
-    <Compile Include="DataModel\RottenTomatoesSearch\MoviesDataSourceSearch.cs" />
-    <Compile Include="DataModel\RottenTomatoesSearch\GetSearchData.cs" />
+    <Compile Include="DataModel\RottenTomatoesSearch\SearchController.cs" />
+    <Compile Include="DataModel\RottenTomatoesSearch\SearchMovieData.cs" />
     <Compile Include="DataModel\RottenTomatoesClips\MoviesClipsSource.cs" />
     <Compile Include="DataModel\RottenTomatoesClips\RottenTomatoesClips.cs" />
     <Compile Include="DataModel\Query.cs" />
     <Compile Include="DataModel\RottenTomatoesSearch\SearchModel.cs" />
-    <Compile Include="DataModel\RottenTomatoes\MoviesDataSource.cs" />
-    <Compile Include="DataModel\RottenTomatoes\RottenTomatoes.cs" />
+    <Compile Include="DataModel\RottenTomatoes\DetailsMovieController.cs" />
+    <Compile Include="DataModel\RottenTomatoes\DetailsMovieData.cs" />
     <Compile Include="DataModel\ViewModel.cs" />
     <Compile Include="DetailsPage.xaml.cs">
       <DependentUpon>DetailsPage.xaml</DependentUpon>
@@ -193,10 +194,7 @@
       <Private>True</Private>
     </Reference>
   </ItemGroup>
-  <ItemGroup>
-    <Folder Include="DataModel\RottenTomatoesDetails\" />
-    <Folder Include="SampleData\" />
-  </ItemGroup>
+  <ItemGroup />
   <PropertyGroup Condition=" '$(VisualStudioVersion)' == '' or '$(VisualStudioVersion)' &lt; '12.0' ">
     <VisualStudioVersion>12.0</VisualStudioVersion>
   </PropertyGroup>

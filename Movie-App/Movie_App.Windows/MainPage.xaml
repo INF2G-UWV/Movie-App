@@ -328,9 +328,9 @@
                    VerticalAlignment="Top" Margin="10,10,0,0" Height="305" Width="277" />
             <TextBlock x:Name="Title" HorizontalAlignment="Left" TextWrapping="Wrap" Text="MOVIE-APP"
                        VerticalAlignment="Top" Margin="360,84,0,0" FontSize="96" FontFamily="Letter Gothic Std"
-                       Height="93" />
+                       Height="93" Visibility="Collapsed" />
             <TextBlock x:Name="Slogan" HorizontalAlignment="Left" TextWrapping="Wrap" Text="Your source for movies!"
-                       VerticalAlignment="Top" FontSize="42.667" Margin="411,182,0,0" FontFamily="Buxton Sketch" />
+                       VerticalAlignment="Top" FontSize="42.667" Margin="411,169,0,0" FontFamily="Buxton Sketch" />
             <FlipView x:Name="MoviesView" HorizontalAlignment="Left" VerticalAlignment="Top" Height="749"
                       Margin="408,317,0,0" Width="1504" ItemTemplate="{StaticResource MovieDataTemplate5}"
                       ItemsSource="{Binding Query.Results}" Background="{x:Null}" Foreground="White"
@@ -344,6 +344,7 @@
                        VerticalAlignment="Top" Margin="1581,60,0,0" Height="45" Width="329"
                        QueryChanged="SearchBox_QueryChanged_1" QuerySubmitted="searchBoxTemp_QuerySubmitted"
                        SearchHistoryEnabled="False" />
+            <Image Margin="365,65,1080,898" Source="Assets/images/movieme.png" Stretch="Fill" />
         </Grid>
     </Viewbox>
 </Page>

@@ -5,11 +5,11 @@ using System.Runtime.InteropServices;
 // set of attributes. Change these attribute values to modify the information
 // associated with an assembly.
 
-[assembly: AssemblyTitle("Movie_App.Windows")]
-[assembly: AssemblyDescription("")]
+[assembly: AssemblyTitle("Movie.Me")]
+[assembly: AssemblyDescription("Windows Store App to browse a gallery of movies")]
 [assembly: AssemblyConfiguration("")]
-[assembly: AssemblyCompany("")]
-[assembly: AssemblyProduct("Movie_App.Windows")]
+[assembly: AssemblyCompany("INF2E - Stenden")]
+[assembly: AssemblyProduct("Movie.Me")]
 [assembly: AssemblyCopyright("Copyright ©  2015")]
 [assembly: AssemblyTrademark("")]
 [assembly: AssemblyCulture("")]

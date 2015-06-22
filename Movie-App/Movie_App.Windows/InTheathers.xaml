@@ -136,6 +136,7 @@
                        Height="540" Visibility="Collapsed" />
 
             </Grid>
+            <Image Margin="1688,876,10,10" Grid.Row="1" Source="Assets/images/movieme.png" Stretch="Fill" />
         </Grid>
     </Viewbox>
 </Page>

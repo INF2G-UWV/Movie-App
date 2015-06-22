@@ -162,14 +162,13 @@ namespace Movie_App
         /// <param name="dateoffset">Offset for date</param>
         private async void GetTheaterData(string movie, string location, int dateoffset)
         {
-            //Set url
-            var url = string.Format("http://movies.waveshapes.nl/get.php?location={0}&movie={1}&offset={2}",
-                location.ToLower(),
-                movie.ToLower(), dateoffset);
-            var wc = new HttpClient();
             try
             {
-                //See if exists
+                //Set url
+                var url = string.Format("http://movies.waveshapes.nl/get.php?location={0}&movie={1}&offset={2}",
+                    location.ToLower(),
+                    movie.ToLower(), dateoffset);
+                var wc = new HttpClient();
                 var response = await wc.GetStringAsync(url);
 
                 //If response is not empty

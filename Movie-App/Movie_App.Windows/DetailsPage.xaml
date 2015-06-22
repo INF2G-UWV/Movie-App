@@ -471,6 +471,7 @@
                            FontFamily="Century Gothic"
                            FontSize="26.667" Grid.Row="1" />
             </Grid>
+            <Image Margin="1688,876,10,10" Grid.Row="1" Source="Assets/images/movieme.png" Stretch="Fill" />
 
             <!-- Back button and page title -->
         </Grid>

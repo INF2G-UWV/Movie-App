@@ -2,6 +2,9 @@
 
 namespace Movie_App.DataUnits
 {
+    /// <summary>
+    ///     This class holds the information of a more detailed movie dataset
+    /// </summary>
     public class DetailsMovieData
     {
         /// <summary>

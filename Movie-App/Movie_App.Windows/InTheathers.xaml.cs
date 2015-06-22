@@ -10,13 +10,15 @@ using Movie_App.DataUnits;
 namespace Movie_App
 {
     /// <summary>
-    ///     A page that displays details for a single item within a group while allowing gestures to
-    ///     flip through other items belonging to the same group.
+    ///     Page that shows theater information and trailer.
     /// </summary>
     public sealed partial class InTheathers : Page
     {
         private readonly ObservableDictionary defaultViewModel = new ObservableDictionary();
 
+        /// <summary>
+        ///     Constructor of InTheaters
+        /// </summary>
         public InTheathers()
         {
             InitializeComponent();
@@ -65,17 +67,21 @@ namespace Movie_App
         /// </summary>
         private void LoadIframe()
         {
+            //Check if PublishId is valid
             if (DataStorage.PublishId > 0)
             {
+                //Construct url
                 var str =
                     string.Format(
                         @"<body style='background-image:url(http://movies.waveshapes.nl/bg.jpg)'><iframe width='960' height='540' src='http://www.videodetective.com/embed/video/?publishedid=" +
                         DataStorage.PublishId +
                         "&amp;options=false&amp;autostart=true&amp;playlist=none&amp;width=960&amp;height=540' runat='server' frameborder='0' scrolling='no'></iframe>");
+                //Navigate to trailer
                 videoView.NavigateToString(str);
             }
             else
             {
+                //There is no trailer, show replacement image instead
                 videoView.Visibility = Visibility.Collapsed;
                 NoTrailerImg.Visibility = Visibility.Visible;
             }
@@ -115,6 +121,7 @@ namespace Movie_App
                 TimesValue.Visibility = Visibility.Collapsed;
                 TheaterUnavailable.Text = string.Format("This movie is currently not playing in any theaters near {0}!",
                     DataStorage.City);
+                TheaterClosedImage.Visibility = Visibility.Visible;
             }
         }
 
@@ -155,13 +162,24 @@ namespace Movie_App
             LoadTheaterData();
         }
 
-
+        /// <summary>
+        ///     When videoView content is loading
+        /// </summary>
+        /// <param name="sender">sender</param>
+        /// <param name="args">parameter</param>
         private void videoView_ContentLoading(WebView sender, WebViewContentLoadingEventArgs args)
         {
+            //Empty
         }
 
+        /// <summary>
+        ///     When a key is down in videoView
+        /// </summary>
+        /// <param name="sender">sender</param>
+        /// <param name="e">parameter</param>
         private void videoView_KeyDown(object sender, KeyRoutedEventArgs e)
         {
+            //Empty
         }
 
         /// <summary>
@@ -193,7 +211,11 @@ namespace Movie_App
             }
         }
 
-
+        /// <summary>
+        ///     If user clicks ReturnButton, clear and stop videoView.
+        /// </summary>
+        /// <param name="sender">sender</param>
+        /// <param name="e">parameter</param>
         private void ReturnButton_Click(object sender, RoutedEventArgs e)
         {
             const string str = @"<body style='background-image:url(http://movies.waveshapes.nl/bg.jpg)'>";
@@ -201,7 +223,11 @@ namespace Movie_App
             videoView.Stop();
         }
 
-
+        /// <summary>
+        ///     If user clicks BackButton, clear and stop videoView.
+        /// </summary>
+        /// <param name="sender">sender</param>
+        /// <param name="e">parameter</param>
         private void BackButton_Click_1(object sender, RoutedEventArgs e)
         {
             const string str = @"<body style='background-image:url(http://movies.waveshapes.nl/bg.jpg)'>";

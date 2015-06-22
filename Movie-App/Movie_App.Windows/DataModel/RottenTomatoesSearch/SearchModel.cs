@@ -3,15 +3,19 @@ using Movie_App.DataUnits;
 
 namespace Movie_App.DataModel.RottenTomatoesSearch
 {
-    // Provides an object that returns movie data. You can bind to this class in the designer.
-    // For example, by referencing this class in the ItemSource property of a GridView control. 
+    /// <summary>
+    ///     Initializes the fetching of user invoked search
+    /// </summary>
     public class SearchModel
     {
         // A Rotten Tomatoes API key is required
         private static readonly string apikey = "xjndv3dfyfn2bzxvwmuqj8gz";
         private static readonly string baseUrl = "http://api.rottentomatoes.com/api/public/v1.0";
         private readonly SearchController search = new SearchController();
-        // Property that returns a collection of MovieData objects. 
+
+        /// <summary>
+        ///     Property that returns a collection of MovieData objects.
+        /// </summary>
         public SearchController Search
         {
             get

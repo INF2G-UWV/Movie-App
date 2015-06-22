@@ -448,7 +448,7 @@
                            Margin="10,10,0,0" Grid.Row="4" Width="410" Height="45" />
                 <TextBlock x:Name="SummaryBinding" HorizontalAlignment="Left" TextWrapping="Wrap"
                            Text="{Binding [0].Synopsis}"
-                           VerticalAlignment="Top" FontFamily="Century Gothic" FontSize="26.667" Margin="10,50,0,-70"
+                           VerticalAlignment="Top" FontFamily="Century Gothic" FontSize="21.333" Margin="10,50,0,-70"
                            Grid.Row="5" Width="620" Height="445" Grid.ColumnSpan="2" TextAlignment="Justify" />
 
 

@@ -23,6 +23,9 @@ namespace Movie_App
     {
         private readonly ObservableDictionary defaultViewModel = new ObservableDictionary();
 
+        /// <summary>
+        ///     Constructor of DetailsPage
+        /// </summary>
         public DetailsPage()
         {
             InitializeComponent();
@@ -65,10 +68,11 @@ namespace Movie_App
                 navigationParameter = e.PageState["SelectedItem"];
             }
 
+            //Load all data
             LoadTrailerData();
             DataStorage.TheaterList.Clear();
             TheaterButton.IsEnabled = false;
-            GetScrapeData(DataStorage.MovieTitle, DataStorage.City, 0);
+            GetTheaterData(DataStorage.MovieTitle, DataStorage.City, 0);
         }
 
         /// <summary>
@@ -77,29 +81,60 @@ namespace Movie_App
         /// </summary>
         private async void LoadTrailerData()
         {
+            //Initialize variables
+            var isCallSuccesfull = true;
             DataStorage.PublishId = -1;
-            var API_CALL = string.Format(
-                "http://api.internetvideoarchive.com/2.0/DataService/EntertainmentPrograms()?$filter=substringof('{0}',Title)&format=json&developerid=14c9d1e0-329a-47d9-a29a-2d8268a67a48",
-                TitleParse(DataStorage.MovieTitle));
-
+            var response = "";
+            var API_CALL = "";
             var wc = new HttpClient();
-            var response = await wc.GetStringAsync(API_CALL);
 
-            var rt = JsonConvert.DeserializeObject<TrailerItem>(response);
-
-            foreach (var node in rt.value)
+            //Try to get trailer data normally
+            try
             {
-                try
+                API_CALL = string.Format(
+                    "http://api.internetvideoarchive.com/2.0/DataService/EntertainmentPrograms()?$filter=substringof('{0}',Title)&format=json&developerid=14c9d1e0-329a-47d9-a29a-2d8268a67a48",
+                    DataStorage.MovieTitle);
+                response = await wc.GetStringAsync(API_CALL);
+            }
+            catch
+            {
+                isCallSuccesfull = false;
+            }
+
+            //Try to get trailer data with filtered movietitle parameter
+            if (!isCallSuccesfull)
+            {
+                API_CALL = string.Format(
+                    "http://api.internetvideoarchive.com/2.0/DataService/EntertainmentPrograms()?$filter=substringof('{0}',Title)&format=json&developerid=14c9d1e0-329a-47d9-a29a-2d8268a67a48",
+                    TitleParse(DataStorage.MovieTitle));
+                response = await wc.GetStringAsync(API_CALL);
+            }
+
+            //If the response isn't empty
+            if (response != null)
+            {
+                //Deserialize
+                var rt = JsonConvert.DeserializeObject<TrailerItem>(response);
+
+                //Loop and add PublishId
+                foreach (var node in rt.value)
                 {
-                    if (node.MediaId == 0)
+                    try
                     {
-                        DataStorage.PublishId = node.Publishedid;
+                        if (node.MediaId == 0)
+                        {
+                            DataStorage.PublishId = node.Publishedid;
+                        }
+                    }
+                    catch
+                    {
+                        ErrorMessage.Show("Communication error", "Error retrieving trailer information!", "Ok");
                     }
                 }
-                catch
-                {
-                    ErrorMessage.Show("Communication error", "Error retrieving trailer information!", "Ok");
-                }
+            }
+            else
+            {
+                ErrorMessage.Show("Communication error", "Error retrieving trailer information!", "Ok");
             }
         }
 
@@ -125,7 +160,7 @@ namespace Movie_App
         /// <param name="movie">Movietitle</param>
         /// <param name="location">Cityname</param>
         /// <param name="dateoffset">Offset for date</param>
-        private async void GetScrapeData(string movie, string location, int dateoffset)
+        private async void GetTheaterData(string movie, string location, int dateoffset)
         {
             //Set url
             var url = string.Format("http://movies.waveshapes.nl/get.php?location={0}&movie={1}&offset={2}",
@@ -144,7 +179,7 @@ namespace Movie_App
                     dynamic rt = JsonConvert.DeserializeObject(response);
                     foreach (var m in rt)
                     {
-                        var theaterItem = new ScrapeItem();
+                        var theaterItem = new TheaterItem();
                         theaterItem.Title = (string) m.title;
                         theaterItem.Name = (string) m.name;
                         theaterItem.Address = (string) m.address;

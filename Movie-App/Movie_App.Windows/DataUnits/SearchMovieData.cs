@@ -1,9 +1,12 @@
 ﻿namespace Movie_App.DataUnits
 {
+    /// <summary>
+    ///     This class holds the SearchMovieData data for Json serialization
+    /// </summary>
     public class SearchMovieData
     {
         /// <summary>
-        ///     Constructor
+        ///     Constructor of SearchMovieData
         /// </summary>
         /// <param name="image">string image</param>
         /// <param name="title">string title</param>

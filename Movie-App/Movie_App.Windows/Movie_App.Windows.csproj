@@ -114,7 +114,7 @@
     <Compile Include="Common\SuspensionManager.cs" />
     <Compile Include="DataUnits\MovieData.cs" />
     <Compile Include="DataUnits\DataStorage.cs" />
-    <Compile Include="DataUnits\ScrapeItem.cs" />
+    <Compile Include="DataUnits\TheaterItem.cs" />
     <Compile Include="DataModel\RottenTomatoesSearch\SearchController.cs" />
     <Compile Include="DataUnits\SearchMovieData.cs" />
     <Compile Include="DataModel\InTheaters\MoviesClipsSource.cs" />
@@ -153,6 +153,7 @@
       <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
     </Content>
     <Content Include="Assets\images\notrailer.png" />
+    <Content Include="Assets\images\theaterclosed.png" />
     <Content Include="Assets\Logo.scale-100.png" />
     <Content Include="Assets\SmallLogo.scale-100.png" />
     <Content Include="Assets\SplashScreen.scale-100.png" />

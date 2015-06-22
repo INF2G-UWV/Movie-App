@@ -11,12 +11,19 @@ using Newtonsoft.Json;
 
 namespace Movie_App.DataModel
 {
+    /// <summary>
+    ///     Fetches the data for the main movie page
+    /// </summary>
     public class Query
     {
         private bool hasExecutedQuery;
         // A collection class used to store a list of MovieData objects.
         public ObservableCollection<MovieData> results = new ObservableCollection<MovieData>();
 
+        /// <summary>
+        ///     Constructor
+        /// </summary>
+        /// <param name="uri">uri - url</param>
         public Query(Uri uri)
         {
             Uri = uri;

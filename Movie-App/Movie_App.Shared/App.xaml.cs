@@ -69,7 +69,7 @@ namespace Movie_App
             if (rootFrame.Content == null)
             {
 #if WINDOWS_PHONE_APP
-    // Removes the turnstile navigation for startup.
+                // Removes the turnstile navigation for startup.
                 if (rootFrame.ContentTransitions != null)
                 {
                     transitions = new TransitionCollection();
@@ -97,11 +97,11 @@ namespace Movie_App
         }
 
 #if WINDOWS_PHONE_APP
-    /// <summary>
-    ///     Restores the content transitions after the app has launched.
-    /// </summary>
-    /// <param name="sender">The object where the handler is attached.</param>
-    /// <param name="e">Details about the navigation event.</param>
+        /// <summary>
+        ///     Restores the content transitions after the app has launched.
+        /// </summary>
+        /// <param name="sender">The object where the handler is attached.</param>
+        /// <param name="e">Details about the navigation event.</param>
         private void RootFrame_FirstNavigated(object sender, NavigationEventArgs e)
         {
             var rootFrame = sender as Frame;

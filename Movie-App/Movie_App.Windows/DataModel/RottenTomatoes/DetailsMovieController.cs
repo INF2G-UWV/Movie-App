@@ -6,6 +6,9 @@ using Newtonsoft.Json;
 
 namespace Movie_App.DataModel.RottenTomatoes
 {
+    /// <summary>
+    ///     Controller of DetailsPage
+    /// </summary>
     internal class DetailsMovieController : ObservableCollection<DetailsMovieData>
     {
         /// <summary>
@@ -17,7 +20,7 @@ namespace Movie_App.DataModel.RottenTomatoes
         private readonly string API_CALL;
 
         /// <summary>
-        ///     Constructor to set a dynamic variable in de link
+        ///     Constructor to set a dynamic variable in the link
         /// </summary>
         public DetailsMovieController()
         {
@@ -25,10 +28,6 @@ namespace Movie_App.DataModel.RottenTomatoes
             {
                 API_CALL = BaseUrl + "/movies.json?apikey=" + ApiKey + "&q=" + DataStorage.MovieTitle + "&page_limit=1";
             }
-            //else if(NameStorage.QuerySearch != null)
-            //{
-            //    API_CALL = baseURL + "/movies.json?apikey=" + apiKey + "&q=" + NameStorage.QuerySearch + "&page_limit=1";
-            //}
             else
             {
                 API_CALL = BaseUrl + "/movies.json?apikey=" + ApiKey + "&q=terminator&page_limit=1";
@@ -37,14 +36,16 @@ namespace Movie_App.DataModel.RottenTomatoes
         }
 
         /// <summary>
-        ///     This function loads data from the calling RottenTomatoes database, It serialize the to an object.
-        ///     So it could be used on the page.
+        ///     This function loads the data by calling the RottenTomatoes database,
+        ///     It serializes the data to an object so it could be used on the page.
         /// </summary>
         private async void LoadData()
         {
+            //Fields
             var wc = new HttpClient();
             var response = await wc.GetStringAsync(API_CALL);
 
+            //Deserialize and iterate through it to fetch invididual items
             dynamic rt = JsonConvert.DeserializeObject(response);
             foreach (var m in rt.movies)
             {
@@ -61,7 +62,7 @@ namespace Movie_App.DataModel.RottenTomatoes
                 {
                     temp.NameActor += m.abridged_cast[i].name + "\n\n";
                 }
-                // using a temponary variable to store the image source of hte api, so it could be manipulated with regex
+                //Using a temporary variable to store the image url of the api, to allow regex manipulation
                 var imageTemp = m.posters.original;
                 const string replacement = "http://";
                 const string rgx =

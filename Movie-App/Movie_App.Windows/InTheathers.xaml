@@ -88,12 +88,14 @@
                            Grid.Row="4" Width="580" Grid.Column="1" Grid.ColumnSpan="2" />
                 <TextBlock x:Name="TheaterUnavailable" HorizontalAlignment="Left" TextWrapping="Wrap"
                            VerticalAlignment="Center"
-                           FontFamily="Century Gothic" FontSize="21.333" FontWeight="Bold" Margin="0,180,0,0"
+                           FontFamily="Century Gothic" FontSize="21.333" FontWeight="Bold" Margin="10,0,0,180"
                            Height="60"
                            Grid.Row="1" Width="780" Grid.Column="1" Grid.ColumnSpan="3" Visibility="Collapsed" />
                 <TextBlock x:Name="SplashText" HorizontalAlignment="Left" Margin="15,199,0,0" Grid.Row="1"
                            TextWrapping="Wrap" VerticalAlignment="Center" FontFamily="Buxton Sketch" FontSize="32"
                            FontWeight="Bold" Grid.Column="1" Grid.ColumnSpan="2" Width="602" />
+                <Image x:Name="TheaterClosedImage" Grid.ColumnSpan="4" Margin="70,87,0,95" Grid.Row="1"
+                       Grid.RowSpan="6" Source="Assets/images/theaterclosed.png" Stretch="Fill" Visibility="Collapsed" />
             </Grid>
 
             <Grid x:Name="grid">

@@ -11,6 +11,9 @@ using Newtonsoft.Json;
 
 namespace Movie_App.DataModel.RottenTomatoesSearch
 {
+    /// <summary>
+    ///     Controller of the search functionality
+    /// </summary>
     public class SearchController
     {
         /// <summary>
@@ -20,8 +23,11 @@ namespace Movie_App.DataModel.RottenTomatoesSearch
 
         public ObservableCollection<SearchMovieData> results = new ObservableCollection<SearchMovieData>();
         public Uri Uri { get; set; }
-        // Executes a query to obtain information about movies.
-        // This property also stores the movies in a collection class.
+
+        /// <summary>
+        ///     Executes a query to obtain information about movies.
+        ///     This property also stores the movies in a collection class.
+        /// </summary>
         public ObservableCollection<SearchMovieData> Results
         {
             get

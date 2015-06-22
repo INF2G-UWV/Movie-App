@@ -14,6 +14,9 @@ namespace Movie_App
     {
         private readonly ObservableDictionary defaultViewModel = new ObservableDictionary();
 
+        /// <summary>
+        ///     Constructor of SearchPage
+        /// </summary>
         public SearchPage()
         {
             InitializeComponent();
@@ -51,6 +54,7 @@ namespace Movie_App
         /// </param>
         private void navigationHelper_LoadState(object sender, LoadStateEventArgs e)
         {
+            //Empty
         }
 
         /// <summary>
@@ -65,6 +69,7 @@ namespace Movie_App
         /// </param>
         private void navigationHelper_SaveState(object sender, SaveStateEventArgs e)
         {
+            //Empty
         }
 
         #region NavigationHelper registration

@@ -3,7 +3,10 @@ using Movie_App.DataUnits;
 
 namespace Movie_App.DataModel.InTheaters
 {
-    internal class MoviesClipsSource : ObservableCollection<ScrapeItem>
+    /// <summary>
+    ///     DataSource class of MovieClips
+    /// </summary>
+    internal class MoviesClipsSource : ObservableCollection<TheaterItem>
     {
     }
 }

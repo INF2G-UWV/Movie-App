@@ -2,6 +2,9 @@
 
 namespace Movie_App.DataUnits
 {
+    /// <summary>
+    ///     This class holds the TrailerItem data for Json serialization
+    /// </summary>
     public class TrailerItem
     {
         public List<Value> value { get; set; }

@@ -42,8 +42,8 @@ namespace Movie_App
         /// <summary>
         ///     After button is clicked assign the title to a static variable
         /// </summary>
-        /// <param name="sender"></param>
-        /// <param name="e"></param>
+        /// <param name="sender">sender</param>
+        /// <param name="e">parameter</param>
         private void Button_Click(object sender, RoutedEventArgs e)
         {
             var buttonData = ((Button) e.OriginalSource).DataContext;
@@ -53,8 +53,8 @@ namespace Movie_App
         /// <summary>
         ///     If selected index of the listview, assign the same index to the flipview slider
         /// </summary>
-        /// <param name="sender"></param>
-        /// <param name="e"></param>
+        /// <param name="sender">sender</param>
+        /// <param name="e">parameter</param>
         private void movieListview_SelectionChanged(object sender, SelectionChangedEventArgs e)
         {
             MoviesView.SelectedIndex = movieListview.SelectedIndex;
@@ -70,15 +70,21 @@ namespace Movie_App
             movieListview.SelectedIndex = MoviesView.SelectedIndex;
         }
 
+        /// <summary>
+        ///     SearchBox query changed
+        /// </summary>
+        /// <param name="sender">sender</param>
+        /// <param name="args">argument</param>
         private void SearchBox_QueryChanged_1(SearchBox sender, SearchBoxQueryChangedEventArgs args)
         {
+            //Empty
         }
 
         /// <summary>
         ///     When the searchBoxTemp is submitted it will call the the searchmodel that's bind by BasicPage2.xaml
         /// </summary>
-        /// <param name="sender"></param>
-        /// <param name="args"></param>
+        /// <param name="sender">sender</param>
+        /// <param name="args">argument</param>
         private void searchBoxTemp_QuerySubmitted(SearchBox sender, SearchBoxQuerySubmittedEventArgs args)
         {
             DataStorage.QuerySearch = args.QueryText;

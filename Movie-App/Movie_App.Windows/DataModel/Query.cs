@@ -6,6 +6,7 @@ using System.Linq;
 using System.Net.Http;
 using System.Text.RegularExpressions;
 using Windows.UI.Popups;
+using Movie_App.DataUnits;
 using Newtonsoft.Json;
 
 namespace Movie_App.DataModel
@@ -88,12 +89,13 @@ namespace Movie_App.DataModel
                     string summary = movie.synopsis;
                     string imageTemp = movie.posters.profile;
                     const string replacement = "http://";
-                    const string rgx = "(http://resizing.flixster.com(.*((54x77)|(54x80)|(54x81)|(52x81)|(51x81)|(53x81))/))";
+                    const string rgx =
+                        "(http://resizing.flixster.com(.*((54x77)|(54x80)|(54x81)|(52x81)|(51x81)|(53x81))/))";
                     var image = Regex.Replace(imageTemp, rgx, replacement);
                     string runtime = movie.runtime;
                     string year = movie.year;
                     string rating = movie.mpaa_rating;
-                   
+
 
                     // Create a Moviedata object by using movie information and add 
                     // that object to a collection.
@@ -110,13 +112,12 @@ namespace Movie_App.DataModel
         }
 
         /// <summary>
-        /// Error message when exeception is caught
+        ///     Error message when exeception is caught
         /// </summary>
         private async void showErrorMessage()
         {
             try
             {
-
                 var msg = new MessageDialog
                     ("The service is unavailable or there was a problem with the service.");
 
@@ -128,7 +129,6 @@ namespace Movie_App.DataModel
                 msg.CancelCommandIndex = 1;
 
                 var results = await msg.ShowAsync();
-
 
 
                 if (results.Label == "I'll try again later.")
@@ -144,7 +144,6 @@ namespace Movie_App.DataModel
             }
             catch
             {
-                
             }
         }
     }

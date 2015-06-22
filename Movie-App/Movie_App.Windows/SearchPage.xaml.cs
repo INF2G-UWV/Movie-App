@@ -1,83 +1,68 @@
-﻿using Movie_App.Common;
-using Movie_App.DataModel;
-using Movie_App.DataModel.RottenTomatoesSearch;
-using System;
-using System.Collections.Generic;
-using System.IO;
-using System.Linq;
-using System.Runtime.InteropServices.WindowsRuntime;
-using Windows.Foundation;
-using Windows.Foundation.Collections;
+﻿using System;
 using Windows.UI.Xaml;
 using Windows.UI.Xaml.Controls;
-using Windows.UI.Xaml.Controls.Primitives;
-using Windows.UI.Xaml.Data;
-using Windows.UI.Xaml.Input;
-using Windows.UI.Xaml.Media;
 using Windows.UI.Xaml.Navigation;
-
-// The Basic Page item template is documented at http://go.microsoft.com/fwlink/?LinkId=234237
+using Movie_App.Common;
+using Movie_App.DataUnits;
 
 namespace Movie_App
 {
     /// <summary>
-    /// A basic page that provides characteristics common to most applications.
+    ///     A basic page that provides characteristics common to most applications.
     /// </summary>
-    public sealed partial class BasicPage2 : Page
+    public sealed partial class SearchPage : Page
     {
+        private readonly ObservableDictionary defaultViewModel = new ObservableDictionary();
 
-        private NavigationHelper navigationHelper;
-        private ObservableDictionary defaultViewModel = new ObservableDictionary();
+        public SearchPage()
+        {
+            InitializeComponent();
+            NavigationHelper = new NavigationHelper(this);
+            NavigationHelper.LoadState += navigationHelper_LoadState;
+            NavigationHelper.SaveState += navigationHelper_SaveState;
+        }
 
         /// <summary>
-        /// This can be changed to a strongly typed view model.
+        ///     This can be changed to a strongly typed view model.
         /// </summary>
         public ObservableDictionary DefaultViewModel
         {
-            get { return this.defaultViewModel; }
+            get { return defaultViewModel; }
         }
 
         /// <summary>
-        /// NavigationHelper is used on each page to aid in navigation and 
-        /// process lifetime management
+        ///     NavigationHelper is used on each page to aid in navigation and
+        ///     process lifetime management
         /// </summary>
-        public NavigationHelper NavigationHelper
-        {
-            get { return this.navigationHelper; }
-        }
-
-
-        public BasicPage2()
-        {
-            this.InitializeComponent();
-            this.navigationHelper = new NavigationHelper(this);
-            this.navigationHelper.LoadState += navigationHelper_LoadState;
-            this.navigationHelper.SaveState += navigationHelper_SaveState;
-        }
+        public NavigationHelper NavigationHelper { get; private set; }
 
         /// <summary>
-        /// Populates the page with content passed during navigation. Any saved state is also
-        /// provided when recreating a page from a prior session.
+        ///     Populates the page with content passed during navigation. Any saved state is also
+        ///     provided when recreating a page from a prior session.
         /// </summary>
         /// <param name="sender">
-        /// The source of the event; typically <see cref="NavigationHelper"/>
+        ///     The source of the event; typically <see cref="NavigationHelper" />
         /// </param>
-        /// <param name="e">Event data that provides both the navigation parameter passed to
-        /// <see cref="Frame.Navigate(Type, Object)"/> when this page was initially requested and
-        /// a dictionary of state preserved by this page during an earlier
-        /// session. The state will be null the first time a page is visited.</param>
+        /// <param name="e">
+        ///     Event data that provides both the navigation parameter passed to
+        ///     <see cref="Frame.Navigate(Type, Object)" /> when this page was initially requested and
+        ///     a dictionary of state preserved by this page during an earlier
+        ///     session. The state will be null the first time a page is visited.
+        /// </param>
         private void navigationHelper_LoadState(object sender, LoadStateEventArgs e)
         {
         }
 
         /// <summary>
-        /// Preserves state associated with this page in case the application is suspended or the
-        /// page is discarded from the navigation cache.  Values must conform to the serialization
-        /// requirements of <see cref="SuspensionManager.SessionState"/>.
+        ///     Preserves state associated with this page in case the application is suspended or the
+        ///     page is discarded from the navigation cache.  Values must conform to the serialization
+        ///     requirements of <see cref="SuspensionManager.SessionState" />.
         /// </summary>
-        /// <param name="sender">The source of the event; typically <see cref="NavigationHelper"/></param>
-        /// <param name="e">Event data that provides an empty dictionary to be populated with
-        /// serializable state.</param>
+        /// <param name="sender">The source of the event; typically <see cref="NavigationHelper" /></param>
+        /// <param name="e">
+        ///     Event data that provides an empty dictionary to be populated with
+        ///     serializable state.
+        /// </param>
         private void navigationHelper_SaveState(object sender, SaveStateEventArgs e)
         {
         }
@@ -87,31 +72,32 @@ namespace Movie_App
         /// The methods provided in this section are simply used to allow
         /// NavigationHelper to respond to the page's navigation methods.
         /// 
-        /// Page specific logic should be placed in event handlers for the  
-        /// <see cref="GridCS.Common.NavigationHelper.LoadState"/>
-        /// and <see cref="GridCS.Common.NavigationHelper.SaveState"/>.
+        /// Page specific logic should be placed in event handlers for the
+        /// <see cref="GridCS.Common.NavigationHelper.LoadState" />
+        /// and
+        /// <see cref="GridCS.Common.NavigationHelper.SaveState" />
+        /// .
         /// The navigation parameter is available in the LoadState method 
         /// in addition to page state preserved during an earlier session.
-
         protected override void OnNavigatedTo(NavigationEventArgs e)
         {
-            navigationHelper.OnNavigatedTo(e);
+            NavigationHelper.OnNavigatedTo(e);
         }
 
         protected override void OnNavigatedFrom(NavigationEventArgs e)
         {
-            navigationHelper.OnNavigatedFrom(e);
+            NavigationHelper.OnNavigatedFrom(e);
         }
 
         /// <summary>
-        /// When searchbutton is clicked assign the button data to the movetitle static variable
+        ///     When searchbutton is clicked assign the button data to the movetitle static variable
         /// </summary>
         /// <param name="sender"></param>
         /// <param name="args"></param>
-        private void searchButton_Click(object sender, Windows.UI.Xaml.RoutedEventArgs e)
+        private void searchButton_Click(object sender, RoutedEventArgs e)
         {
-            var buttonData = ((Button)e.OriginalSource).DataContext;
-            NameStorage.MovieTitle = ((SearchMovieData)buttonData).Title;
+            var buttonData = ((Button) e.OriginalSource).DataContext;
+            DataStorage.MovieTitle = ((SearchMovieData) buttonData).Title;
         }
 
         #endregion

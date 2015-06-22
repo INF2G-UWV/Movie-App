@@ -9,10 +9,10 @@
     xmlns:DataModel="using:Movie_App.DataModel"
     xmlns:RottenTomatoesSearch="using:Movie_App.DataModel.RottenTomatoesSearch"
     xmlns:Interactivity="using:Microsoft.Xaml.Interactivity" xmlns:Core="using:Microsoft.Xaml.Interactions.Core"
-    xmlns:RottenTomatoesClips="using:Movie_App.DataModel.RottenTomatoesClips"
+    xmlns:inTheaters="using:Movie_App.DataModel.InTheaters"
     x:Name="pageRoot"
     x:Class="Movie_App.InTheathers"
-    mc:Ignorable="d" d:DataContext="{d:DesignInstance RottenTomatoesClips:MoviesClipsSource}">
+    mc:Ignorable="d" d:DataContext="{d:DesignInstance inTheaters:MoviesClipsSource}">
 
     <!--
         This grid acts as a root panel for the page that defines two rows:
@@ -88,7 +88,7 @@
                            Grid.Row="4" Width="580" Grid.Column="1" Grid.ColumnSpan="2" />
                 <TextBlock x:Name="TheaterUnavailable" HorizontalAlignment="Left" TextWrapping="Wrap"
                            VerticalAlignment="Center"
-                           FontFamily="Century Gothic" FontSize="26.667" FontWeight="Bold" Margin="0,180,0,0"
+                           FontFamily="Century Gothic" FontSize="21.333" FontWeight="Bold" Margin="0,180,0,0"
                            Height="60"
                            Grid.Row="1" Width="780" Grid.Column="1" Grid.ColumnSpan="3" Visibility="Collapsed" />
                 <TextBlock x:Name="SplashText" HorizontalAlignment="Left" Margin="15,199,0,0" Grid.Row="1"
@@ -96,24 +96,26 @@
                            FontWeight="Bold" Grid.Column="1" Grid.ColumnSpan="2" Width="602" />
             </Grid>
 
-            <Grid>
+            <Grid x:Name="grid">
 
                 <Grid.ColumnDefinitions>
                     <ColumnDefinition Width="120" />
                     <ColumnDefinition Width="*" />
                 </Grid.ColumnDefinitions>
-                <Button x:Name="backButton" Margin="39,59,39,0"
+                <Button x:Name="BackButton" Margin="39,59,39,0"
                         Command="{Binding NavigationHelper.GoBackCommand, ElementName=pageRoot}"
                         Style="{StaticResource NavigationBackButtonNormalStyle}"
                         VerticalAlignment="Top"
                         AutomationProperties.Name="Back"
                         AutomationProperties.AutomationId="BackButton"
-                        AutomationProperties.ItemType="Navigation Button" />
-                <TextBlock x:Name="pageTitle" Text="Cinema Times" Style="{StaticResource HeaderTextBlockStyle}"
+                        AutomationProperties.ItemType="Navigation Button" Click="BackButton_Click_1" />
+                <TextBlock x:Name="pageTitle" Text="Theater Times" Style="{StaticResource HeaderTextBlockStyle}"
                            Grid.Column="1"
                            IsHitTestVisible="false" TextWrapping="NoWrap" VerticalAlignment="Bottom" Margin="0,0,30,40" />
-                <Button Content="Return to Home" HorizontalAlignment="Right" VerticalAlignment="Top" Grid.Column="1"
-                        Margin="959,47,100,0" Height="46" Width="236" FontFamily="Letter Gothic Std" FontSize="16">
+                <Button x:Name="ReturnButton" Content="Return to Home" HorizontalAlignment="Right"
+                        VerticalAlignment="Top" Grid.Column="1"
+                        Margin="959,47,100,0" Height="46" Width="236" FontFamily="Letter Gothic Std" FontSize="16"
+                        Click="ReturnButton_Click">
                     <Interactivity:Interaction.Behaviors>
                         <Core:EventTriggerBehavior EventName="Click">
                             <Core:NavigateToPageAction TargetPage="Movie_App.MainPage" />
@@ -121,13 +123,15 @@
                     </Interactivity:Interaction.Behaviors>
                 </Button>
             </Grid>
-            <Grid x:Name="YouTube_Video" HorizontalAlignment="Left" Height="940" VerticalAlignment="Top" Width="1050"
+            <Grid x:Name="TrailerGrid" HorizontalAlignment="Left" Height="940" VerticalAlignment="Top" Width="1050"
                   Margin="870,0,0,0" Grid.Row="1">
                 <WebView x:Name="videoView" HorizontalAlignment="Center" Height="580" Margin="10,10,0,0"
                          VerticalAlignment="Center" Width="1000" ScrollViewer.VerticalScrollBarVisibility="Disabled"
                          ScrollViewer.HorizontalScrollBarVisibility="Disabled"
                          DataContext="{Binding [0].clips.Capacity}" ContentLoading="videoView_ContentLoading"
-                         KeyDown="videoView_KeyDown" />
+                         KeyDown="videoView_KeyDown" DefaultBackgroundColor="{Binding Background, ElementName=grid}" />
+                <Image x:Name="NoTrailerImg" Margin="30,204,60,196" Source="Assets/images/notrailer.png" Width="960"
+                       Height="540" Visibility="Collapsed" />
 
             </Grid>
         </Grid>

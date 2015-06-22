@@ -1,4 +1,4 @@
-﻿namespace Movie_App.DataModel
+﻿namespace Movie_App.DataUnits
 {
     // This class represents a movie. It contains properties the describe the movie.
     public class MovieData

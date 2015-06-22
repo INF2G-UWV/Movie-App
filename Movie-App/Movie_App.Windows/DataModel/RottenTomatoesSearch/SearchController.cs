@@ -6,6 +6,7 @@ using System.Linq;
 using System.Net.Http;
 using System.Text.RegularExpressions;
 using Windows.UI.Popups;
+using Movie_App.DataUnits;
 using Newtonsoft.Json;
 
 namespace Movie_App.DataModel.RottenTomatoesSearch
@@ -75,7 +76,6 @@ namespace Movie_App.DataModel.RottenTomatoesSearch
                 // each item in the stream.
                 dynamic myObj = JsonConvert.DeserializeObject(responseText);
                 dynamic movies = myObj.movies;
-                dynamic total = myObj.total;
 
                 // Iterate through the collection of JSON objects to obtain information
                 // each movie in the collection.
@@ -103,8 +103,9 @@ namespace Movie_App.DataModel.RottenTomatoesSearch
                 showErrorMessage();
             }
         }
+
         /// <summary>
-        /// Error message when exeception is caught
+        ///     Error message when exeception is caught
         /// </summary>
         private async void showErrorMessage()
         {

@@ -1,14 +1,14 @@
 ﻿using System.Collections.Generic;
 
-namespace Movie_App.DataModel.RottenTomatoes
+namespace Movie_App.DataUnits
 {
     public class DetailsMovieData
     {
-
         /// <summary>
-        /// Methods accessors and mutators of detailspage
+        ///     Methods accessors and mutators of detailspage
         /// </summary>
         public IEnumerable<Movie> movies { get; set; }
+
         public IEnumerable<AbridgedCast> abridgedCast { get; set; }
         public string PosterOriginal { get; set; }
         public string Title { get; set; }
@@ -83,7 +83,7 @@ namespace Movie_App.DataModel.RottenTomatoes
         }
 
         /// <summary>
-        /// Serialize from JSON2CSHARP.com
+        ///     Serialize from JSON2CSHARP.com
         /// </summary>
         public class RootObject
         {

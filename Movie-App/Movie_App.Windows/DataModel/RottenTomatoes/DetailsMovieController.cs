@@ -1,6 +1,7 @@
 ﻿using System.Collections.ObjectModel;
 using System.Net.Http;
 using System.Text.RegularExpressions;
+using Movie_App.DataUnits;
 using Newtonsoft.Json;
 
 namespace Movie_App.DataModel.RottenTomatoes
@@ -8,20 +9,21 @@ namespace Movie_App.DataModel.RottenTomatoes
     internal class DetailsMovieController : ObservableCollection<DetailsMovieData>
     {
         /// <summary>
-        /// Constant fields
+        ///     Constant fields
         /// </summary>
-        private const string apiKey = "xjndv3dfyfn2bzxvwmuqj8gz";
-        private const string baseURL = "http://api.rottentomatoes.com/api/public/v1.0";
+        private const string ApiKey = "xjndv3dfyfn2bzxvwmuqj8gz";
+
+        private const string BaseUrl = "http://api.rottentomatoes.com/api/public/v1.0";
         private readonly string API_CALL;
 
         /// <summary>
-        /// Constructor to set a dynamic variable in de link
+        ///     Constructor to set a dynamic variable in de link
         /// </summary>
         public DetailsMovieController()
         {
-            if (NameStorage.MovieTitle != null)
+            if (DataStorage.MovieTitle != null)
             {
-                API_CALL = baseURL + "/movies.json?apikey=" + apiKey + "&q=" + NameStorage.MovieTitle + "&page_limit=1";
+                API_CALL = BaseUrl + "/movies.json?apikey=" + ApiKey + "&q=" + DataStorage.MovieTitle + "&page_limit=1";
             }
             //else if(NameStorage.QuerySearch != null)
             //{
@@ -29,13 +31,14 @@ namespace Movie_App.DataModel.RottenTomatoes
             //}
             else
             {
-                API_CALL = baseURL + "/movies.json?apikey=" + apiKey + "&q=terminator&page_limit=1";
+                API_CALL = BaseUrl + "/movies.json?apikey=" + ApiKey + "&q=terminator&page_limit=1";
             }
             LoadData();
         }
+
         /// <summary>
-        /// This function loads data from the calling RottenTomatoes database, It serialize the to an object.
-        /// So it could be used on the page.
+        ///     This function loads data from the calling RottenTomatoes database, It serialize the to an object.
+        ///     So it could be used on the page.
         /// </summary>
         private async void LoadData()
         {
@@ -52,7 +55,7 @@ namespace Movie_App.DataModel.RottenTomatoes
                 temp.Synopsis = m.synopsis;
                 temp.RatingsAudience = m.ratings.audience_score.ToString();
                 temp.MovieId = m.id;
-                
+
                 //Looping through a list object and return the string accessor
                 for (var i = 0; i < m.abridged_cast.Count; i++)
                 {
@@ -60,9 +63,10 @@ namespace Movie_App.DataModel.RottenTomatoes
                 }
                 // using a temponary variable to store the image source of hte api, so it could be manipulated with regex
                 var imageTemp = m.posters.original;
-                var replacement = "http://";
-                var rgx = "(http://resizing.flixster.com(.*((54x77)|(54x80)|(54x81)|(52x81)|(51x81)|(53x81))/))";
-                temp.PosterOriginal = Regex.Replace((string) imageTemp, (string) rgx, (string) replacement);
+                const string replacement = "http://";
+                const string rgx =
+                    "(http://resizing.flixster.com(.*((54x77)|(54x80)|(54x81)|(52x81)|(51x81)|(53x81))/))";
+                temp.PosterOriginal = Regex.Replace((string) imageTemp, rgx, replacement);
 
                 Add(temp);
             }

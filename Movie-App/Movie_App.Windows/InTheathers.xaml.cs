@@ -5,9 +5,7 @@ using Windows.UI.Xaml.Controls;
 using Windows.UI.Xaml.Input;
 using Windows.UI.Xaml.Navigation;
 using Movie_App.Common;
-using Movie_App.DataModel;
-
-// The Item Detail Page item template is documented at http://go.microsoft.com/fwlink/?LinkId=234232
+using Movie_App.DataUnits;
 
 namespace Movie_App
 {
@@ -60,51 +58,53 @@ namespace Movie_App
             {
                 navigationParameter = e.PageState["SelectedItem"];
             }
-
-
-            // TODO: Assign a bindable group to this.DefaultViewModel["Group"]
-            // TODO: Assign a collection of bindable items to this.DefaultViewModel["Items"]
-            // TODO: Assign the selected item to this.flipView.SelectedItem
         }
 
         /// <summary>
-        ///     Loading Iframe with a trailervideo
+        ///     Load the videoView with a trailer.
         /// </summary>
         private void LoadIframe()
         {
-            if (NameStorage.PublishId > 0)
+            if (DataStorage.PublishId > 0)
             {
                 var str =
                     string.Format(
                         @"<body style='background-image:url(http://movies.waveshapes.nl/bg.jpg)'><iframe width='960' height='540' src='http://www.videodetective.com/embed/video/?publishedid=" +
-                        NameStorage.PublishId +
+                        DataStorage.PublishId +
                         "&amp;options=false&amp;autostart=true&amp;playlist=none&amp;width=960&amp;height=540' runat='server' frameborder='0' scrolling='no'></iframe>");
                 videoView.NavigateToString(str);
             }
             else
             {
-                var str =
-                    @"<body style='background-image:url(http://movies.waveshapes.nl/bg.jpg)'>";
-                videoView.NavigateToString(str);
+                videoView.Visibility = Visibility.Collapsed;
+                NoTrailerImg.Visibility = Visibility.Visible;
             }
         }
 
+        /// <summary>
+        ///     Load the theaterdata into the interface.
+        /// </summary>
         public void LoadTheaterData()
         {
-            if (NameStorage.TheaterList.Count > 0)
+            //Check if not empty
+            if (DataStorage.TheaterList.Count > 0)
             {
-                foreach (var item in NameStorage.TheaterList)
+                foreach (var item in DataStorage.TheaterList)
                 {
+                    //If item not null
                     if (item.Name != null)
                     {
                         CinemaBox.Items.Add(item.Name);
                     }
                 }
-                SplashText.Text = string.Format("Currently playing near {0} today:", NameStorage.City);
+                //Display text
+                SplashText.Text = string.Format("Currently playing near {0} today:", DataStorage.City);
+                //Autoselect first item in CinemaBox
                 CinemaBox.SelectedIndex = 0;
             }
             else
             {
+                //When no theater data is found, hide all the irrelevant elements and display text.
                 TheaterUnavailable.Visibility = Visibility.Visible;
                 SplashText.Visibility = Visibility.Collapsed;
                 Place.Visibility = Visibility.Collapsed;
@@ -113,8 +113,8 @@ namespace Movie_App
                 CinemaBox.Visibility = Visibility.Collapsed;
                 PlaceValue.Visibility = Visibility.Collapsed;
                 TimesValue.Visibility = Visibility.Collapsed;
-                TheaterUnavailable.Text = string.Format("This movie is currently not playing in any theaters in {0}!",
-                    NameStorage.City);
+                TheaterUnavailable.Text = string.Format("This movie is currently not playing in any theaters near {0}!",
+                    DataStorage.City);
             }
         }
 
@@ -135,16 +135,20 @@ namespace Movie_App
             NavigationHelper.OnNavigatedTo(e);
         }
 
+        /// <summary>
+        ///     Get where is navigated from
+        /// </summary>
+        /// <param name="e">parameter</param>
         protected override void OnNavigatedFrom(NavigationEventArgs e)
         {
             NavigationHelper.OnNavigatedFrom(e);
         }
 
-        private void ComboBox_SelectionChanged(object sender, SelectionChangedEventArgs e)
-        {
-            // Add code to perform some action here.
-        }
-
+        /// <summary>
+        ///     Execute when Grid is loaded.
+        /// </summary>
+        /// <param name="sender">sender</param>
+        /// <param name="e">parameter</param>
         private void Grid_Loaded(object sender, RoutedEventArgs e)
         {
             LoadIframe();
@@ -152,44 +156,57 @@ namespace Movie_App
         }
 
 
-        /// <summary>
-        ///     After button is click call the loadFrame function
-        /// </summary>
-        /// <param name="sender"></param>
-        /// <param name="e"></param>
-        private void Button_Click(object sender, RoutedEventArgs e)
-        {
-            //loadIframe();
-        }
-
         private void videoView_ContentLoading(WebView sender, WebViewContentLoadingEventArgs args)
         {
-            // TODO: Add event handler implementation here.
         }
 
         private void videoView_KeyDown(object sender, KeyRoutedEventArgs e)
         {
-            //loadIframe();
         }
 
+        /// <summary>
+        ///     Executes when selection is changed in CinemaBox.
+        /// </summary>
+        /// <param name="sender">sender</param>
+        /// <param name="e">parameter</param>
         private void CinemaBox_SelectionChanged(object sender, SelectionChangedEventArgs e)
         {
+            //If selectedvalue is not negative
             if (CinemaBox.SelectedIndex >= 0)
             {
-                if (NameStorage.TheaterList[CinemaBox.SelectedIndex].Address != null)
+                //If address value is not null, add to PlaceValue.
+                if (DataStorage.TheaterList[CinemaBox.SelectedIndex].Address != null)
                 {
-                    PlaceValue.Text = NameStorage.TheaterList[CinemaBox.SelectedIndex].Address;
+                    PlaceValue.Text = DataStorage.TheaterList[CinemaBox.SelectedIndex].Address;
                 }
-                if (NameStorage.TheaterList[CinemaBox.SelectedIndex].timeTable.Any())
+
+                //If any movietimes exist in list, add to TimesValue.
+                if (DataStorage.TheaterList[CinemaBox.SelectedIndex].Time.Any())
                 {
                     var timeString = "";
-                    foreach (var timeItem in NameStorage.TheaterList[CinemaBox.SelectedIndex].Time)
+                    foreach (var timeItem in DataStorage.TheaterList[CinemaBox.SelectedIndex].Time)
                     {
                         timeString += timeItem + "  ";
                     }
                     TimesValue.Text = timeString;
                 }
             }
+        }
+
+
+        private void ReturnButton_Click(object sender, RoutedEventArgs e)
+        {
+            const string str = @"<body style='background-image:url(http://movies.waveshapes.nl/bg.jpg)'>";
+            videoView.NavigateToString(str);
+            videoView.Stop();
+        }
+
+
+        private void BackButton_Click_1(object sender, RoutedEventArgs e)
+        {
+            const string str = @"<body style='background-image:url(http://movies.waveshapes.nl/bg.jpg)'>";
+            videoView.NavigateToString(str);
+            videoView.Stop();
         }
 
         #endregion

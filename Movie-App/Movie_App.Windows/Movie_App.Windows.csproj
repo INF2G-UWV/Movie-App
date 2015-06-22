@@ -103,9 +103,8 @@
     <Prefer32Bit>true</Prefer32Bit>
   </PropertyGroup>
   <ItemGroup>
-    <Compile Include="DataModel\RottenTomatoesClips\TrailerItem.cs" />
-    <Compile Include="DataModel\RottenTomatoesClips\TheaterItem.cs" />
-    <Compile Include="ErrorMessage.cs" />
+    <Compile Include="DataUnits\TrailerItem.cs" />
+    <Compile Include="Util\ErrorMessage.cs" />
     <Compile Include="SearchPage.xaml.cs">
       <DependentUpon>SearchPage.xaml</DependentUpon>
     </Compile>
@@ -113,18 +112,16 @@
     <Compile Include="Common\ObservableDictionary.cs" />
     <Compile Include="Common\RelayCommand.cs" />
     <Compile Include="Common\SuspensionManager.cs" />
-    <Compile Include="DataModel\MovieData.cs" />
-    <Compile Include="DataModel\NameStorage.cs" />
-    <Compile Include="DataModel\RottenTomatoesClips\ScrapeItem.cs" />
-    <Compile Include="DataModel\RottenTomatoesClips\TheaterScraper.cs" />
+    <Compile Include="DataUnits\MovieData.cs" />
+    <Compile Include="DataUnits\DataStorage.cs" />
+    <Compile Include="DataUnits\ScrapeItem.cs" />
     <Compile Include="DataModel\RottenTomatoesSearch\SearchController.cs" />
-    <Compile Include="DataModel\RottenTomatoesSearch\SearchMovieData.cs" />
-    <Compile Include="DataModel\RottenTomatoesClips\MoviesClipsSource.cs" />
-    <Compile Include="DataModel\RottenTomatoesClips\RottenTomatoesClips.cs" />
+    <Compile Include="DataUnits\SearchMovieData.cs" />
+    <Compile Include="DataModel\InTheaters\MoviesClipsSource.cs" />
     <Compile Include="DataModel\Query.cs" />
     <Compile Include="DataModel\RottenTomatoesSearch\SearchModel.cs" />
     <Compile Include="DataModel\RottenTomatoes\DetailsMovieController.cs" />
-    <Compile Include="DataModel\RottenTomatoes\DetailsMovieData.cs" />
+    <Compile Include="DataUnits\DetailsMovieData.cs" />
     <Compile Include="DataModel\ViewModel.cs" />
     <Compile Include="DetailsPage.xaml.cs">
       <DependentUpon>DetailsPage.xaml</DependentUpon>
@@ -155,6 +152,7 @@
     <Content Include="Assets\images\logo_text_overlay.png">
       <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
     </Content>
+    <Content Include="Assets\images\notrailer.png" />
     <Content Include="Assets\Logo.scale-100.png" />
     <Content Include="Assets\SmallLogo.scale-100.png" />
     <Content Include="Assets\SplashScreen.scale-100.png" />
@@ -186,10 +184,6 @@
     <SDKReference Include="BehaviorsXamlSDKManaged, Version=12.0" />
   </ItemGroup>
   <ItemGroup>
-    <Reference Include="HtmlAgilityPack, Version=1.4.8.0, Culture=neutral, processorArchitecture=MSIL">
-      <HintPath>..\..\packages\HtmlAgilityPack.1.4.9\lib\NetCore45\HtmlAgilityPack.dll</HintPath>
-      <Private>True</Private>
-    </Reference>
     <Reference Include="Newtonsoft.Json, Version=6.0.0.0, Culture=neutral, PublicKeyToken=30ad4fe6b2a6aeed, processorArchitecture=MSIL">
       <HintPath>..\..\packages\Newtonsoft.Json.6.0.8\lib\netcore45\Newtonsoft.Json.dll</HintPath>
       <Private>True</Private>

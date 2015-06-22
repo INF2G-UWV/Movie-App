@@ -1,9 +1,9 @@
-﻿namespace Movie_App.DataModel.RottenTomatoesSearch
+﻿namespace Movie_App.DataUnits
 {
     public class SearchMovieData
     {
         /// <summary>
-        /// Constructor
+        ///     Constructor
         /// </summary>
         /// <param name="image">string image</param>
         /// <param name="title">string title</param>
@@ -16,9 +16,10 @@
         }
 
         /// <summary>
-        /// Methods accessors and mutators
+        ///     Methods accessors and mutators
         /// </summary>
         public string Title { get; set; }
+
         public string Image { get; set; }
         public string Year { get; set; }
     }

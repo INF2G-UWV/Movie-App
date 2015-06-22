@@ -3,16 +3,15 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Net.Http;
 using System.Text;
+using System.Text.RegularExpressions;
 using Windows.UI.Xaml;
 using Windows.UI.Xaml.Controls;
 using Windows.UI.Xaml.Navigation;
 using Movie_App.Common;
-using Movie_App.DataModel;
 using Movie_App.DataModel.RottenTomatoes;
-using Movie_App.DataModel.RottenTomatoesClips;
+using Movie_App.DataUnits;
+using Movie_App.Util;
 using Newtonsoft.Json;
-
-// The Item Detail Page item template is documented at http://go.microsoft.com/fwlink/?LinkId=234232
 
 namespace Movie_App
 {
@@ -67,22 +66,22 @@ namespace Movie_App
             }
 
             LoadTrailerData();
-            NameStorage.TheaterList.Clear();
+            DataStorage.TheaterList.Clear();
             TheaterButton.IsEnabled = false;
-            GetScrapeData(NameStorage.MovieTitle, NameStorage.City, 0);
-
-            // TODO: Assign a bindable group to this.DefaultViewModel["Group"]
-            // TODO: Assign a collection of bindable items to this.DefaultViewModel["Items"]
-            // TODO: Assign the selected item to this.flipView.SelectedItem
+            GetScrapeData(DataStorage.MovieTitle, DataStorage.City, 0);
         }
 
+        /// <summary>
+        ///     Loads trailer data in storage.
+        ///     Uses Internet Video Archiva ODATA API to fetch trailer PublishId.
+        /// </summary>
         private async void LoadTrailerData()
         {
-            NameStorage.PublishId = -1;
-            var API_CALL =
-                string.Format(
-                    "http://api.internetvideoarchive.com/2.0/DataService/EntertainmentPrograms()?$filter=substringof('{0}',Title)&format=json&developerid=14c9d1e0-329a-47d9-a29a-2d8268a67a48",
-                    NameStorage.MovieTitle);
+            DataStorage.PublishId = -1;
+            var API_CALL = string.Format(
+                "http://api.internetvideoarchive.com/2.0/DataService/EntertainmentPrograms()?$filter=substringof('{0}',Title)&format=json&developerid=14c9d1e0-329a-47d9-a29a-2d8268a67a48",
+                TitleParse(DataStorage.MovieTitle));
+
             var wc = new HttpClient();
             var response = await wc.GetStringAsync(API_CALL);
 
@@ -94,15 +93,38 @@ namespace Movie_App
                 {
                     if (node.MediaId == 0)
                     {
-                        NameStorage.PublishId = node.Publishedid;
+                        DataStorage.PublishId = node.Publishedid;
                     }
                 }
                 catch
                 {
+                    ErrorMessage.Show("Communication error", "Error retrieving trailer information!", "Ok");
                 }
             }
         }
 
+        /// <summary>
+        ///     Removes all non-alphanumeric characters from title (string).
+        /// </summary>
+        /// <param name="input">input string</param>
+        /// <returns>parsed string</returns>
+        private static string TitleParse(string input)
+        {
+            var rgx = new Regex("[^a-zA-Z0-9 -]");
+            return rgx.Replace(input, "");
+        }
+
+        /// <summary>
+        ///     Fetches movietheater information for current title.
+        ///     Checks if Title is currently playing,
+        ///     and adds adress, theatername and showtimes to storage.
+        ///     The dateoffset is used to select the date of the requested title and showtimes.
+        ///     Zero (0) is the current date (today) and every single increment will advance the date by one day.
+        ///     Conversely, every single decrement (negative value) will move the date back by one day.
+        /// </summary>
+        /// <param name="movie">Movietitle</param>
+        /// <param name="location">Cityname</param>
+        /// <param name="dateoffset">Offset for date</param>
         private async void GetScrapeData(string movie, string location, int dateoffset)
         {
             //Set url
@@ -115,36 +137,26 @@ namespace Movie_App
                 //See if exists
                 var response = await wc.GetStringAsync(url);
 
+                //If response is not empty
                 if (response != "[]" || response != "null")
                 {
+                    //Deserialize Json response and loop through elements
                     dynamic rt = JsonConvert.DeserializeObject(response);
                     foreach (var m in rt)
                     {
-                        var biosItem = new ScrapeItem();
-
-                        biosItem.Title = (string) m.title;
-                        biosItem.Name = (string) m.name;
-                        biosItem.Address = (string) m.address;
-                        //biosItem.times = m.times;
-                        biosItem.timeTable = (string) m.times;
-                        //for (int i = 0; i < biosItem.Time.Count; i++)
-                        //{
-
-                        //}
-                        //biosItem.timeTable += FormatTime((string)m.times) + "\n\n";
-
-                        biosItem.Time = FormatTime((string) m.times);
-                        // scrapeItems.Add(biosItem);
-                        NameStorage.TheaterList.Add(biosItem);
+                        var theaterItem = new ScrapeItem();
+                        theaterItem.Title = (string) m.title;
+                        theaterItem.Name = (string) m.name;
+                        theaterItem.Address = (string) m.address;
+                        theaterItem.Time = FormatTime((string) m.times);
+                        DataStorage.TheaterList.Add(theaterItem);
                     }
                     TheaterButton.IsEnabled = true;
-                    //Merge();
                 }
             }
-            catch (Exception ex)
+            catch
             {
-                //Uh Oh! Error! Really not found this time! Normally program would crash and burn!!
-                //MessageBox.Show("Movie not found!", "Search error!", MessageBoxButtons.OK, MessageBoxIcon.Warning);
+                ErrorMessage.Show("Communcation error!", "Error retrieving theater information!", "Ok");
             }
         }
 
@@ -152,8 +164,8 @@ namespace Movie_App
         ///     Format nasty HTML scraped time text to something more usable.
         /// </summary>
         /// <param name="time">string with html time text</param>
-        /// <returns>list of strings with the times!</returns>
-        private List<string> FormatTime(string time)
+        /// <returns>list of strings with the times</returns>
+        private static List<string> FormatTime(string time)
         {
             try
             {
@@ -203,7 +215,7 @@ namespace Movie_App
 
             foreach (var obj in (DetailsMovieController) buttonIdData)
             {
-                NameStorage.MovieId = obj.MovieId;
+                DataStorage.MovieId = obj.MovieId;
             }
         }
 
@@ -214,8 +226,8 @@ namespace Movie_App
         /// <param name="args"></param>
         private void SearchBox_QuerySubmitted(SearchBox sender, SearchBoxQuerySubmittedEventArgs args)
         {
-            NameStorage.QuerySearch = args.QueryText;
-            Frame.Navigate(typeof (BasicPage2), args.QueryText);
+            DataStorage.QuerySearch = args.QueryText;
+            Frame.Navigate(typeof (SearchPage), args.QueryText);
         }
 
         #endregion

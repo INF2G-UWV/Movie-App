@@ -8,7 +8,7 @@
     xmlns:RottenTomatoesSearch="using:Movie_App.DataModel.RottenTomatoesSearch"
     xmlns:Interactivity="using:Microsoft.Xaml.Interactivity" xmlns:Core="using:Microsoft.Xaml.Interactions.Core"
     x:Name="pageRoot"
-    x:Class="Movie_App.BasicPage2"
+    x:Class="Movie_App.SearchPage"
     DataContext="{Binding DefaultViewModel, RelativeSource={RelativeSource Mode=Self}}"
     mc:Ignorable="d">
 
@@ -16,21 +16,23 @@
         <!-- TODO: Delete this line if the key AppName is declared in App.xaml -->
         <x:String x:Key="AppName">My Application</x:String>
         <DataTemplate x:Key="GetSearchDataTemplate">
-        	<Grid Height="276" Width="185" Margin="10" >
-        		<Grid.ColumnDefinitions>
-        			<ColumnDefinition Width="Auto"/>
-        		</Grid.ColumnDefinitions>
-        		<Border Background="{StaticResource ListViewItemPlaceholderBackgroundThemeBrush}" Margin="0,0,225,0">
-        			<Image Source="{Binding Image}" Stretch="Fill"/>
-        		</Border>
-        		<Button x:Name="searchButton" Content="{Binding Title}" HorizontalAlignment="Left" VerticalAlignment="Top" Height="256" Width="165" Click="searchButton_Click" Opacity="0" Margin="10,10,0,0">
-        			<Interactivity:Interaction.Behaviors>
-        				<Core:EventTriggerBehavior EventName="Click">
-        					<Core:NavigateToPageAction Parameter="{Binding Title}" TargetPage="Movie_App.DetailsPage"/>
-        				</Core:EventTriggerBehavior>
-        			</Interactivity:Interaction.Behaviors>
-        		</Button>
-        	</Grid>
+            <Grid Height="276" Width="185" Margin="10">
+                <Grid.ColumnDefinitions>
+                    <ColumnDefinition Width="Auto" />
+                </Grid.ColumnDefinitions>
+                <Border Background="{StaticResource ListViewItemPlaceholderBackgroundThemeBrush}" Margin="0,0,225,0">
+                    <Image Source="{Binding Image}" Stretch="Fill" />
+                </Border>
+                <Button x:Name="searchButton" Content="{Binding Title}" HorizontalAlignment="Left"
+                        VerticalAlignment="Top" Height="256" Width="165" Click="searchButton_Click" Opacity="0"
+                        Margin="10,10,0,0">
+                    <Interactivity:Interaction.Behaviors>
+                        <Core:EventTriggerBehavior EventName="Click">
+                            <Core:NavigateToPageAction Parameter="{Binding Title}" TargetPage="Movie_App.DetailsPage" />
+                        </Core:EventTriggerBehavior>
+                    </Interactivity:Interaction.Behaviors>
+                </Button>
+            </Grid>
         </DataTemplate>
     </Page.Resources>
 
@@ -39,54 +41,58 @@
         * Row 0 contains the back button and page title
         * Row 1 contains the rest of the page layout
     -->
-	<Viewbox HorizontalAlignment="Left" VerticalAlignment="Top" Stretch="Fill">
+    <Viewbox HorizontalAlignment="Left" VerticalAlignment="Top" Stretch="Fill">
 
-		<!--
+        <!--
         This grid acts as a root panel for the page that defines two rows:
         * Row 0 contains the back button and page title
         * Row 1 contains the rest of the page layout
     -->
-		<Grid Width="1920" Height="1080">
-			<Grid.Background>
-				<ImageBrush Stretch="Fill" ImageSource="Assets/images/background.png"/>
-			</Grid.Background>
-			<Grid.ChildrenTransitions>
-				<TransitionCollection>
-					<EntranceThemeTransition/>
-				</TransitionCollection>
-			</Grid.ChildrenTransitions>
-			<Grid.RowDefinitions>
-				<RowDefinition Height="140"/>
-				<RowDefinition Height="*"/>
-			</Grid.RowDefinitions>
+        <Grid Width="1920" Height="1080">
+            <Grid.Background>
+                <ImageBrush Stretch="Fill" ImageSource="Assets/images/background.png" />
+            </Grid.Background>
+            <Grid.ChildrenTransitions>
+                <TransitionCollection>
+                    <EntranceThemeTransition />
+                </TransitionCollection>
+            </Grid.ChildrenTransitions>
+            <Grid.RowDefinitions>
+                <RowDefinition Height="140" />
+                <RowDefinition Height="*" />
+            </Grid.RowDefinitions>
 
-			<Grid.DataContext>
-				<RottenTomatoesSearch:SearchModel/>
-			</Grid.DataContext>
+            <Grid.DataContext>
+                <RottenTomatoesSearch:SearchModel />
+            </Grid.DataContext>
 
-			<!-- Back button and page title -->
-			<Grid>
-				<Grid.ColumnDefinitions>
-					<ColumnDefinition Width="120"/>
-					<ColumnDefinition Width="*"/>
-				</Grid.ColumnDefinitions>
-				<Button x:Name="backButton" Margin="39,59,39,0" Command="{Binding NavigationHelper.GoBackCommand, ElementName=pageRoot}"
-					Style="{StaticResource NavigationBackButtonNormalStyle}"
-					VerticalAlignment="Top"
-					AutomationProperties.Name="Back"
-					AutomationProperties.AutomationId="BackButton"
-					AutomationProperties.ItemType="Navigation Button"/>
-				<TextBlock x:Name="pageTitle" Style="{StaticResource HeaderTextBlockStyle}" Grid.Column="1" 
-					IsHitTestVisible="false" TextWrapping="NoWrap" VerticalAlignment="Center" Margin="0,0,30.429,1" Text="Search Results"/>
-				<Button Content="Return to Home" HorizontalAlignment="Right" VerticalAlignment="Top" Grid.Column="1" Margin="959,47,100,0" Height="46" Width="236" FontFamily="Letter Gothic Std" FontSize="16">
-					<Interactivity:Interaction.Behaviors>
-						<Core:EventTriggerBehavior EventName="Click">
-							<Core:NavigateToPageAction TargetPage="Movie_App.MainPage"/>
-						</Core:EventTriggerBehavior>
-					</Interactivity:Interaction.Behaviors>
-				</Button>
-			</Grid>
-			<GridView x:Name="searchGridView" ItemTemplate="{StaticResource GetSearchDataTemplate}" ItemsSource="{Binding Search.Results}" IsSwipeEnabled="False" Grid.Row="1" SelectionMode="Single"/>
-		</Grid>
-	</Viewbox>
+            <!-- Back button and page title -->
+            <Grid>
+                <Grid.ColumnDefinitions>
+                    <ColumnDefinition Width="120" />
+                    <ColumnDefinition Width="*" />
+                </Grid.ColumnDefinitions>
+                <Button x:Name="backButton" Margin="39,59,39,0"
+                        Command="{Binding NavigationHelper.GoBackCommand, ElementName=pageRoot}"
+                        Style="{StaticResource NavigationBackButtonNormalStyle}"
+                        VerticalAlignment="Top"
+                        AutomationProperties.Name="Back"
+                        AutomationProperties.AutomationId="BackButton"
+                        AutomationProperties.ItemType="Navigation Button" />
+                <TextBlock x:Name="pageTitle" Style="{StaticResource HeaderTextBlockStyle}" Grid.Column="1"
+                           IsHitTestVisible="false" TextWrapping="NoWrap" VerticalAlignment="Center"
+                           Margin="0,0,30.429,1" Text="Search Results" />
+                <Button Content="Return to Home" HorizontalAlignment="Right" VerticalAlignment="Top" Grid.Column="1"
+                        Margin="959,47,100,0" Height="46" Width="236" FontFamily="Letter Gothic Std" FontSize="16">
+                    <Interactivity:Interaction.Behaviors>
+                        <Core:EventTriggerBehavior EventName="Click">
+                            <Core:NavigateToPageAction TargetPage="Movie_App.MainPage" />
+                        </Core:EventTriggerBehavior>
+                    </Interactivity:Interaction.Behaviors>
+                </Button>
+            </Grid>
+            <GridView x:Name="searchGridView" ItemTemplate="{StaticResource GetSearchDataTemplate}"
+                      ItemsSource="{Binding Search.Results}" IsSwipeEnabled="False" Grid.Row="1" SelectionMode="Single" />
+        </Grid>
+    </Viewbox>
 </Page>

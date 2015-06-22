@@ -1,11 +1,10 @@
 ﻿using System.Collections.Generic;
-using Movie_App.DataModel.RottenTomatoesClips;
 
-namespace Movie_App.DataModel
+namespace Movie_App.DataUnits
 {
-    public static class NameStorage
+    public static class DataStorage
     {
-        static NameStorage()
+        static DataStorage()
         {
             TheaterList = new List<ScrapeItem>();
             City = "Emmen";

@@ -1,15 +1,14 @@
 ﻿using System.Net.Http;
 using Windows.UI.Xaml;
 using Windows.UI.Xaml.Controls;
-using Movie_App.DataModel;
+using Movie_App.DataUnits;
+using Movie_App.Util;
 using Newtonsoft.Json;
-
-// The Blank Page item template is documented at http://go.microsoft.com/fwlink/?LinkId=234238
 
 namespace Movie_App
 {
     /// <summary>
-    ///     An empty page that can be used on its own or navigated to within a Frame.
+    ///     Main page of Movie-App.
     /// </summary>
     public sealed partial class MainPage : Page
     {
@@ -19,22 +18,24 @@ namespace Movie_App
         }
 
         /// <summary>
-        ///     Gets the current location using the freegeoip service.
+        ///     Gets the current location in Json format using the telize service.
         /// </summary>
         public async void GetLocation()
         {
             try
             {
-                var API_CALL = "http://www.telize.com/geoip";
+                const string API_CALL = "http://www.telize.com/geoip";
                 var wc = new HttpClient();
                 var response = await wc.GetStringAsync(API_CALL);
 
                 dynamic rt = JsonConvert.DeserializeObject(response);
 
-                NameStorage.City = (string) rt.city;
+                //Store cityname in storage
+                DataStorage.City = (string) rt.city;
             }
             catch
             {
+                ErrorMessage.Show("Communication error!", "Could not Fetch location data!", "Ok");
             }
         }
 
@@ -46,7 +47,7 @@ namespace Movie_App
         private void Button_Click(object sender, RoutedEventArgs e)
         {
             var buttonData = ((Button) e.OriginalSource).DataContext;
-            NameStorage.MovieTitle = ((MovieData) buttonData).Title;
+            DataStorage.MovieTitle = ((MovieData) buttonData).Title;
         }
 
         /// <summary>
@@ -59,10 +60,6 @@ namespace Movie_App
             MoviesView.SelectedIndex = movieListview.SelectedIndex;
         }
 
-        private void SearchBox_SizeChanged(object sender, SizeChangedEventArgs e)
-        {
-        }
-
         /// <summary>
         ///     If selected index of the flipview slider, assign the same index to the listview
         /// </summary>
@@ -71,10 +68,6 @@ namespace Movie_App
         private void MoviesView_SelectionChanged(object sender, SelectionChangedEventArgs e)
         {
             movieListview.SelectedIndex = MoviesView.SelectedIndex;
-        }
-
-        private void SearchBox_QueryChanged(SearchBox sender, SearchBoxQueryChangedEventArgs args)
-        {
         }
 
         private void SearchBox_QueryChanged_1(SearchBox sender, SearchBoxQueryChangedEventArgs args)
@@ -88,14 +81,18 @@ namespace Movie_App
         /// <param name="args"></param>
         private void searchBoxTemp_QuerySubmitted(SearchBox sender, SearchBoxQuerySubmittedEventArgs args)
         {
-            NameStorage.QuerySearch = args.QueryText;
-            Frame.Navigate(typeof (BasicPage2), args.QueryText);
+            DataStorage.QuerySearch = args.QueryText;
+            Frame.Navigate(typeof (SearchPage), args.QueryText);
         }
 
+        /// <summary>
+        ///     Executes when page is loaded,
+        /// </summary>
+        /// <param name="sender">sender</param>
+        /// <param name="e">parameter</param>
         private void Page_Loaded(object sender, RoutedEventArgs e)
         {
             GetLocation();
-            // TODO: Add event handler implementation here.
         }
     }
 }

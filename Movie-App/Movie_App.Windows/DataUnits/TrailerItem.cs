@@ -1,9 +1,11 @@
 ﻿using System.Collections.Generic;
 
-namespace Movie_App.DataModel.RottenTomatoesClips
+namespace Movie_App.DataUnits
 {
     public class TrailerItem
     {
+        public List<Value> value { get; set; }
+
         public class Value
         {
             public int Publishedid { get; set; }
@@ -45,9 +47,5 @@ namespace Movie_App.DataModel.RottenTomatoesClips
             public int Rank30Day { get; set; }
             public int RankAllTime { get; set; }
         }
-
-          
-            public List<Value> value { get; set; }
-        
     }
 }

@@ -1,4 +1,5 @@
 ﻿using System;
+using Movie_App.DataUnits;
 
 namespace Movie_App.DataModel.RottenTomatoesSearch
 {
@@ -15,9 +16,9 @@ namespace Movie_App.DataModel.RottenTomatoesSearch
         {
             get
             {
-                if (NameStorage.QuerySearch != null)
+                if (DataStorage.QuerySearch != null)
                 {
-                    search.Uri = new Uri(baseUrl + "/movies.json?apikey=" + apikey + "&q=" + NameStorage.QuerySearch);
+                    search.Uri = new Uri(baseUrl + "/movies.json?apikey=" + apikey + "&q=" + DataStorage.QuerySearch);
                 }
                 else
                 {
